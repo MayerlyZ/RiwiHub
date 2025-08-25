@@ -1,752 +1,490 @@
 <!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="Viewport" content="with=divice+with, initial-scale=1.0">
-    <title>RiwiHub </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiwiHub</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="./css/lightslider.css">
+    
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
+    <script src="./js/jquery.js"></script>
+    
+    <script src="./js/lightslider.js"></script>
 
-    <link rel="stylesheet" href="css/style.css">
-    <!--light-slider-css-->
-    <link rel="stylesheet" type="text/css" href="css/lightslider.css">
-    <!--jQuery------------------>
-    <script src="js/JQuery.js"></script>
-    <!--lighr-slider-js-->
-    <script src="js/lightslider.js"></script>
-    <!--icono de -->
-    <link rel="shortcut icon" href="images/imgpral.png">
-    <!--uso de iconos de  FontAwesome--------------->
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js"></script>
+    <link rel="shortcut icon" href="./images/logopestaña.png">
 </head>
-<body>
-    <nav> 
-        <!--link de redes sociales y numeros de telefono----------------->
-        <div class="social-call">
-            <!--link redes sociales--->
-            <div class="social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+<body class="font-poppins">
+    <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
+        <div class="h-10 border-b border-gray-100 flex justify-center items-center">
+            <div class="flex">
+                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-instagram"></i></a>
             </div>
-                <!--numero de telefono------>
-            <div class="phone">
+            <div class="text-gray-700 ml-8 text-sm">
                 <span>La tienda de los coders</span>
             </div>
         </div>
-            <!--barra de menus---------------------------------------->
-        <div class="navigation">
-            <!--logo------------>
-            <a href="#" class="logo"><img src="images/logopral.png" alt="Logo"></a>
-            <!--icono del menu----------------->
-            <div class="toggle"></div>
-                <!--menu----------------->
-            <ul class="menu">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Tienda</a></li>
-                <li><a href="#">Tecnologia</a>
-             <!-- sale lable---->
-                <span class="sale-lable">Tokens</span>
+        
+        <div class="flex justify-between items-center px-12 h-20">
+            <a href="#" class="logo">
+                <img src="images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
+            </a>
+            
+            <ul class="flex space-x-8 md:flex hidden">
+                <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Inicio</a>
+                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Nosotros</span>
                 </li>
-                <li><a href="#">Mercado</a></li>
-                <li><a href="#">Servicios</a></li>
+                <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tienda</a>
+                </li>
+                <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tecnologia</a>
+                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Tokens</span>
+                </li>
+                <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Snacks</a>
+                </li>
+                <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Servicios</a>
+                </li>
+                 <li class="relative p-2">
+                    <a href="#" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Varios</a>
+                </li>
             </ul>
 
-            <!--menu derecha----------->
-            <div class="right-menu">
-
-                <!--buscar producto-->
-                <a href="javascript:void(0);" class="search">
+            <div class="flex space-x-4">
+                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
                     <i class="fas fa-search"></i>
                 </a>
-
-                <!--usuario-->
-                <a href="javascript:void(0);" class="user">
+                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
                     <i class="far fa-user"></i>
                 </a>
-
-                <!-- carrito de compra-->
-                <a href="#">
+                <a href="#" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
                     <i class="fas fa-shopping-cart">
-
-                    <!--numero de productos selecionados-->
-                        <span class="num-cart-product">0</span>
-                
+                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
                     </i>
-                
                 </a>
-
             </div>
+            <div class="md:hidden">
+                <button class="menu-toggle text-xl text-gray-700">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
+            <ul class="flex flex-col">
+                <li><a href="#" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Inicio</a></li>
+                <li><a href="#" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tienda</a></li>
+                <li><a href="#" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tecnologia</a></li>
+                <li><a href="#" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Mercado</a></li>
+                <li><a href="#" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!--barra de buscador----------------------------------->
-    <div class="search-bar">
-    
-        <!--entrada de busqueda------->
-        <div class="search-input">
-            <input type="text" placeholder="Search For Product" name="search"/>
-            <!--cancel-btn--->
-            <a href="javascript:void(0);" class="search-cancel">
+    <div class="search-bar fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-xl flex justify-center z-50 hidden transition-all duration-300 ease-in-out">
+        <div class="w-11/12 border-b-2 border-gray-500 flex justify-center items-center h-[100px] mt-5">
+            <input type="text" placeholder="Search For Product" name="search" class="w-full p-8 border-none outline-none text-4xl mx-5 placeholder-gray-400"/>
+            <a href="javascript:void(0);" class="search-cancel-icon text-gray-700 text-4xl pr-10 hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
-
         </div>
     </div>
-
-    <!--Inicio de sesion y registro------------------------------------------>
-    <div class="form">
-        <!--login----------------------->
-        <div class="login-form">
-
-            <!--cancel-btn-->
-            <a href="javascript:void(0);" class="form-calcel">
-                <ic class="fas fa-times"></i>
-            </a>
-            <!--encabezado-------------------------->
-            <strong>Iniciar Sesión</strong>
-            <!--Inputs------------------------------------->
-            <form action="">
-                <input type="email" placeholder="Example@gmail.com" name="email" required>
-                <input type="password" placeholder="password" name="password" required>
-                <!--submit--------------------->
-                <input type="submit" value="log In">
-            </form>
-
-            <!--olvidastes la contraseña o registrate-btn-->
-            <div class="form-btns">
-                <a href="#" class="forget">Olvidastes tu Comtraseña</a>
-                <a href="javascript:void(0);" class="sign-up-btn">Crear Cuenta</a>
-            </div>
-        </div>
-
-        <!--registrate-->
-        <div class="sign-up-form">
-
-            <!--cancel-btn-->
-            <a href="javascript:void(0);" class="form-calcel">
-                <ic class="fas fa-times"></i>
-            </a>
-            <!--heading-------------------------->
-            <strong>Registrarse</strong>
-            <!--Inputs------------------------------------->
-            <form action="">
-                <input type="text" placeholder="full name" name="fullname" required>
-                <input type="email" placeholder="Example@gmail.com" name="email" required>
-                <input type="password" placeholder="password" name="password" required>
-                <!--submit--------------------->
-                <input type="submit" value="sign-up">
-            </form>
-
-            <!--olvidastes la contraseña o registrate-btn-->
-            <div class="form-btns">
-                <a href="javascript:void(0);" class="Already-acount">Already have Acount</a>
-            </div>
-        </div>
-
-    </div>
-
-    <!--full-slider-->
-
-    <ul id="adaptive" class="cs-hidden">
-        <!--box 1----------------------------->
-        <li class="item-a">
-            <!--box------------------------->
-            <div class="full-slider-box f-slider-1" >
-                <!--slider-text-container------------------>
-                <div class="slider-text-container">
-                    <div class="f-slider-text">
-                        <span>oferta limitada</span>
-                        <strong>30% de descuento </br>Con <font>código promocional </font></strong>
-                        <a href="#" class="f-slider-btn">Compra Ahora</a>
-                    </div>
-        
-                </div>
-            </div>
-        </li>
-        <!--box 2----------------------------->
-        <li class="item-a">
-            <!--box------------------------->
-            <div class="full-slider-box f-slider-2" >
-                <!--slider-text-container------------------>
-                <div class="slider-text-container">
-                    <div class="f-slider-text">
-                        <span>Oferta Limitada</span>
-                        <strong>30% de descuento </br>Con <font>código promocional</font></strong>
-                        <a href="#" class="f-slider-btn">Compra Ahora</a>
-                    </div>
-        
-                </div>
-            </div>
-        </li>
-        <!--box 3----------------------------->
-        <li class="item-a">
-            <!--box------------------------->
-            <div class="full-slider-box f-slider-3" >
-                <!--slider-text-container------------------>
-                <div class="slider-text-container">
-                    <div class="f-slider-text">
-                        <span>Oferta Limitada</span>
-                        <strong>30% de descuento </br>con <font>código promocional</font></strong>
-                        <a href="#" class="f-slider-btn">Compra Ahora</a>
-                    </div>
-        
-                </div>
-            </div>
-        </li>
-        <li class="item-a">
-            <!--box------------------------->
-            <div class="full-slider-box f-slider-4" >
-                <!--slider-text-container------------------>
-                <div class="slider-text-container">
-                    <div class="f-slider-text">
-                        <span>Oferta Limitada</span>
-                        <strong>30% de descuento </br>con <font>código promocional</font></strong>
-                        <a href="#" class="f-slider-btn">Compra Ahora</a>
-                    </div>
-        
-                </div>
-            </div>
-        </li>
-        
-
-    </ul>
-
-    <!--featured-categories------------------------->
-    <div class="feature-heading">
-        <h2>Categorias</h2>
-    </div>
-
-    <ul id="autoWidth" class="cs-hidden">
-        <!--1------------------------------>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_1.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Polos</span>
-        </li>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_2.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Pantalones</span>
-        </li>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_3.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Shorts</span>
-        </li>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_4.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Medias</span>
-        </li>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_5.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Carteras</span>
-        </li>
-        <li class="item">
-            <!--feature-box-------------->
-            <div class="feature-box">
-                <a href="#"><img src="images/feature_6.jpg"></a>
-            </div>
-            <!--text--------------------------------->
-            <span>Accesorios</span>
-        </li>
-    </ul>
-    <!--new-arrival-------------------------->
-    <section class="new-arrival">
-        <div class="arrival-heading">
-            <strong>Nueva Llegada</strong>
-            <p>Ofrecemos su nuevo diseño de ropa de moda.</p>
-        </div>
-
-        <!--product-container-->
-        <div class="product-container">
-
-            <!--product-box-1-->
-            <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-1.png">
-                </div>
-
-
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Polo</a>
-                    <span class="p-price">S/.22.00</span>
-                </div>
-            </div>
-             <!--product-box-2-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-2.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Camisa</a>
-                    <span class="p-price">S/.42.00</span>
-                </div>
-            </div>
-             <!--product-box-3-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-3.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-             <!--product-box-4-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-4.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-             <!--product-box-5-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-5.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-             <!--product-box-6-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-6.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-             <!--product-box-7-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-7.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-             <!--product-box-8-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <img src="images/p-8.png">
-                </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
     
-
-    <!--sale--------------------------------------->
-
-    <section class="sale">
-        <!--sale-box 1-->
-        <div class="sale-box">
-            <!--img-->
-            <img src="images/sale-1.jpg">
-            <!--text-->
-            <a href="#">
-                <div class="sale-text">
-                    <strong>Bolso con estampado de rosas</strong>
-                    <span>Sale 25% de descuento</span>
-                </div>
+    <div class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div class="login-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
+            <a href="javascript:void(0);" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
             </a>
-
+            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Iniciar Sesión</strong>
+            <form action="" class="w-full flex flex-col justify-center items-center">
+                <input type="email" placeholder="Example@gmail.com" name="email" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
+                <input type="password" placeholder="password" name="password" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
+                <input type="submit" value="log In" class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
+            </form>
+            <div class="w-11/12 flex justify-between items-center mt-3">
+                <a href="#" class="text-gray-500 text-sm hover:text-teal-500">Olvidaste tu Contraseña</a>
+                <a href="javascript:void(0);" class="text-gray-500 text-sm border-b border-gray-500 leading-4 sign-up-btn hover:text-teal-500">Crear Cuenta</a>
+            </div>
         </div>
 
-         <!--sale-box 2-->
-         <div class="sale-box">
-            <!--img-->
-            <img src="images/sale-2.jpg">
-            <!--text-->
-            <a href="#">
-                <div class="sale-text">
-                    <strong>Bolso con estampado de rosas</strong>
-                    <span>Sale 25% de descuento</span>
-                </div>
+        <div class="sign-up-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
+            <a href="javascript:void(0);" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
             </a>
-
+            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Registrarse</strong>
+            <form action="" class="w-full flex flex-col justify-center items-center">
+                <input type="text" placeholder="full name" name="fullname" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
+                <input type="email" placeholder="Example@gmail.com" name="email" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
+                <input type="password" placeholder="password" name="password" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
+                <input type="submit" value="sign-up" class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
+            </form>
+            <div class="w-11/12 mt-3 text-center">
+                <a href="javascript:void(0);" class="already-account-btn text-gray-500 text-sm hover:text-teal-500">Already have Acount</a>
+            </div>
         </div>
-         <!--sale-box 3-->
-         <div class="sale-box">
-            <!--img-->
-            <img src="images/sale-3.jpg">
-            <!--text-->
-            <a href="#">
-                <div class="sale-text">
-                    <strong>Bolso con estampado de rosas</strong>
-                    <span>Sale 25% de descuento</span>
-                </div>
-            </a>
+    </div>
+    
+    <ul id="adaptive" class="cs-hidden mt-20">
+    <li class="item-a">
+        <div class="full-slider-box h-[65vh] bg-cover bg-repeat bg-center flex justify-center items-center" style="background-image: url('images/bannersnacks.png');">
+            <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                <span class="uppercase tracking-widest font-medium text-lg text-white-400">oferta limitada en Snacks</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font class="text-teal-500">código promocional</font></strong>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
+            </div>
+        </div>
+    </li>
+    <li class="item-a">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('images/banner3.png');">
+            <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
+                <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
+            </div>
+        </div>
+    </li>
+    <li class="item-a">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('images/servicios.png');">
+            <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en servicios</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <font class="text-teal-500">código promocional</font></strong>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Compra Ahora</a>
+            </div>
+        </div>
+    </li>
+    <li class="item-a">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('images/varios.png');">
+            <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <font class="text-teal-500">código promocional</font></strong>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Compra Ahora</a>
+            </div>
+        </div>
+    </li>
+</ul>
 
+    <div class="flex justify-center items-center mt-10">
+        <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
+    </div>
+    
+    <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_1.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600 position:center"> Snacks <br> Saludables</span>
+        </li>
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_2.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600">Dulces y chocolates</span>
+        </li>
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_3.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600">Salados y fritos</span>
+        </li>
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_4.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600">Medias</span>
+        </li>
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_5.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600">Carteras</span>
+        </li>
+        <li class="item flex flex-col justify-center items-center mx-5">
+            <div class="w-40 h-40 rounded-lg overflow-hidden">
+                <a href="#"><img src="images/feature_6.jpg" class="w-full h-full object-cover object-center"></a>
+            </div>
+            <span class="text-base font-semibold mt-1 text-gray-600">Accesorios</span>
+        </li>
+    </ul>
+
+    <section class="new-arrival flex flex-col justify-center items-center">
+        <div class="arrival-heading flex flex-col justify-center items-center">
+            <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nueva Llegada</strong>
+            <p class="text-gray-500 mt-2 text-sm">Ofrecemos nuevos diseños y mayor comodidad.</p>
+        </div>
+        
+        <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/tecnologia/tairpods.jpg" class="w-full h-full object-contain object-center rounded-4xl">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Audifonos Inhalambricos</a>
+                    <span class="text-xl text-gray-800 font-normal">$60.000</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/tecnologia/tari_audi.jpg" class="w-full h-full object-contain object-center rounded-4xl">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Diadema</a>
+                    <span class="text-xl text-gray-800 font-normal">$90.000</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/tecnologia/tauriculares.jpg" class="w-full h-full object-contain object-center rounded-4xl">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Audifonos</a>
+                    <span class="text-xl text-gray-800 font-normal">$30.000</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/tecnologia/testacion.jpg" class="w-full h-full object-contain object-center rounded-4xl" >
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Estacion tecnologia</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/p-5.png" class="w-full h-full object-contain object-center">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/p-6.png" class="w-full h-full object-contain object-center">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/p-7.png" class="w-full h-full object-contain object-center">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
+                </div>
+            </div>
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/p-8.png" class="w-full h-full object-contain object-center">
+                </div>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="new-arrival">
-        <div class="arrival-heading">
-            <strong>Elementos destacados</strong>
-            <p>Ofrecemos su nuevo diseño de ropa de moda.</p>
+    <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
+        <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5]">
+            <img src="images/sale-1.jpg" class="w-full h-full object-cover object-right">
+            <a href="#">
+                <div class="absolute left-[20%] top-1/2 transform -translate-x-[20%] -translate-y-1/2 flex flex-col">
+                    <strong class="text-lg font-medium w-4/5 leading-tight text-gray-800">Bolso con estampado de rosas</strong>
+                    <span class="text-gray-800">Sale 25% de descuento</span>
+                </div>
+            </a>
         </div>
+        <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5]">
+            <img src="images/sale-2.jpg" class="w-full h-full object-cover object-right">
+            <a href="#">
+                <div class="absolute left-[20%] top-1/2 transform -translate-x-[20%] -translate-y-1/2 flex flex-col">
+                    <strong class="text-lg font-medium w-4/5 leading-tight text-gray-800">Bolso con estampado de rosas</strong>
+                    <span class="text-gray-800">Sale 25% de descuento</span>
+                </div>
+            </a>
+        </div>
+        <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5]">
+            <img src="images/sale-3.jpg" class="w-full h-full object-cover object-right">
+            <a href="#">
+                <div class="absolute left-[20%] top-1/2 transform -translate-x-[20%] -translate-y-1/2 flex flex-col">
+                    <strong class="text-lg font-medium w-4/5 leading-tight text-gray-800">Bolso con estampado de rosas</strong>
+                    <span class="text-gray-800">Sale 25% de descuento</span>
+                </div>
+            </a>
+        </div>
+    </section>
 
-        <!--product-container-->
-        <div class="product-container">
-
-            <!--product-box-1-->
-            <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
+    <section class="new-arrival flex flex-col justify-center items-center">
+        <div class="arrival-heading flex flex-col justify-center items-center">
+            <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Elementos destacados</strong>
+            <p class="text-gray-500 mt-2 text-sm">Ofrecemos su nuevo diseño de ropa de moda.</p>
+        </div>
+        <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
-                    <img src="images/p-9.png">
+                    <img src="images/p-9.png" class="w-full h-full object-contain object-center">
                 </div>
-
-
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
                 </div>
             </div>
-             <!--product-box-2-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
-                    <img src="images/p-10.jpg">
+                    <img src="images/p-10.jpg" class="w-full h-full object-contain object-center">
                 </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
                 </div>
             </div>
-             <!--product-box-3-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
-                    <img src="images/p-11.jpg">
+                    <img src="images/p-11.jpg" class="w-full h-full object-contain object-center">
                 </div>
-
-                
-                <!--details-->
-                <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
+                    <a href="#" class="text-gray-700">Drawstring T-Shirt</a>
+                    <span class="text-xl text-gray-800 font-normal">$22.00</span>
                 </div>
             </div>
-             <!--product-box-4-->
-             <div class="product-box">
-                
-                <!--img-------->
-                <div class="product-img">
-                    <!--add-cart-->
-                    <a href="#" class="add-cart">
+            <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
+                    <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
-                    <img src="images/p-4.png">
+                    <img src="images/p-4.png" class="w-full h-full object-contain object-center">
                 </div>
-            </div>
-
-        </section>
-
-        <!--banner-sale-------------------------->
-    
-        <!--box------------------------->
-        <div class="banner-box f-slider-3" >
-            <!--slider-text-container------------------>
-            <div class="banner-text-container">
-                <div class="banner-text">
-                    <span>oferta Limitada</span>
-                    <strong>30% de descuento </br>con <font>código promocional</font></strong>
-                    <a href="#" class="banner-btn">Comprar Ahora</a>
-                </div>
-    
             </div>
         </div>
-
-        <!--services-------------------------------->
-
-        <section class="services">
-            <!--services-box-1--------------->
-            <div class="services-box">
-                <i class="fas fa-shipping-fast"></i>
-                <span>Free Shipping</span>
-                <p>Envío gratuito para todos los pedidos de Perú</p>
-            </div>
-            <!--services-box-2--------------->
-            <div class="services-box">
-                <i class="fas fa-headphones-alt"></i>
-                <span>Soporte 24/7</span>
-                <p>Nosotras apoyamos las 24 horas del dia</p>
-            </div>
-            <!--services-box-3--------------->
-            <div class="services-box">
-                <i class="fas fa-sync"></i>
-                <span>100% devolución de dinero</span>
-                <p>Tienes 30 días para devolver</p>
-            </div>
-        </section>
-
-<!--footer-->
-
-<footer id="footer" class="section footer">
-    <div class="container">
-        <div class="footer__top">
-            <div class="footer-top__box">
-                <h3>EXTRAS</h3>
-                <a href="#">Marcas</a>
-                <a href="#">Certificados de regalo</a>
-                <a href="#">Afiliate</a>
-                <a href="#">Especiales</a>
-                <a href="#">Mapa del Sitio</a>
-            </div>
-            <div class="footer-top__box">
-                <h3>INFORMACION</h3>
-                <a href="#">Sobre Nosotros</a>
-                <a href="#">Politica de Provacidad</a>
-                <a href="#">Terminos & Condiciones</a>
-                <a href="#">Contacta con nosotros</a>
-                <a href="#">Mapa del Sitio</a>
-            </div>
-            <div class="footer-top__box">
-                <h3>Mi Cuenta</h3>
-                <a href="#">Mi Cuenta</a>
-                <a href="#">Historial de pedidos</a>
-                <a href="#">Lista de Deseos</a>
-                <a href="#">Boletin informativo</a>
-                <a href="#">Devoluciones</a>
-            </div>
-            <div class="footer-top__box">
-                <h3>CONTACT US</h3>
-                <div>
-                    <span>
-                        <i class="fas fa-map-marker-alt"></i>
-                    </span>
-                    San Juan de Lurigancho, Lima, Perú
-                </div>
-                <div>
-                    <span>
-                        <i class="fas fa-envelope"></i>
-                    </span>
-                    ventasshopping@gmail.com
-                </div>
-                <div>
-                    <span>
-                        <i class="fas fa-phone"></i>
-                    </span>
-                    973054121
-                </div>
-                <div>
-                    <span>
-                        <i class="fas fa-paper-plane"></i>
-                    </span>
-                    Peru, Lima
-                </div>
-            </div>
+    </section>
+    
+<div class="banner-box h-[40vh] bg-cover bg-no-repeat bg-center my-5" style="background-image: url('images/banner2.jpg');">
+    <div class="banner-text-container w-4/5 h-full flex items-center mx-auto">
+        <div class="banner-text flex flex-col">
+            <span class="uppercase tracking-widest text-lg font-medium text-gray-600">oferta Limitada</span>
+            <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <font class="text-teal-500">código promocional</font></strong>
+            <a href="#" class="banner-btn w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
         </div>
     </div>
-    </div>
-</footer>
-
-
-
-
-
-    <!--script-->
-    <script type="text/javascript">
+</div>
     
-    /*----- For search nar*/
+    <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
+        <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <i class="fas fa-shipping-fast text-teal-500 text-4xl m-4"></i>
+            <span class="text-gray-700 font-semibold tracking-wider text-base">Free Shipping</span>
+            <p class="text-gray-500 my-0 text-sm">Domicilio en toda la sede de Riwi</p>
+        </div>
+        <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <i class="fas fa-headphones-alt text-teal-500 text-4xl m-4"></i>
+            <span class="text-gray-700 font-semibold tracking-wider text-base">Soporte entre semana</span>
+            <p class="text-gray-500 my-0 text-sm">Brindamos soporte toda la semana</p>
+        </div>
+        <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <i class="fas fa-sync text-teal-500 text-4xl m-4"></i>
+            <span class="text-gray-700 font-semibold tracking-wider text-base">-------------</span>
+            <p class="text-gray-500 my-0 text-sm">algooooo</p>
+        </div>
+    </section>
 
-    $(document).on('click','.search', function(){
-        $('.search-bar').addClass('search-bar-active')
-        
-    });
+    <footer id="footer" class="section footer p-10 bg-[#b5b3b3] text-gray-800 border-t border-gray-100 mt-5">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="footer-top__box">
+                    <h3 class="text-xl font-normal mb-4">EXTRAS</h3>
+                    <a href="#" class="block text-gray-800 text-base">Marcas</a>
+                    <a href="#" class="block text-gray-800 text-base">Certificados de regalo</a>
+                    <a href="#" class="block text-gray-800 text-base">Suscribete</a>
+                    <a href="#" class="block text-gray-800 text-base">Especiales</a>
+                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
+                </div>
+                <div class="footer-top__box">
+                    <h3 class="text-xl font-normal mb-4">INFORMACION</h3>
+                    <a href="#" class="block text-gray-800 text-base">Sobre Nosotros</a>
+                    <a href="#" class="block text-gray-800 text-base">Politica de Privacidad</a>
+                    <a href="#" class="block text-gray-800 text-base">Terminos & Condiciones</a>
+                    <a href="#" class="block text-gray-800 text-base">Contactanos</a>
+                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
+                </div>
+                <div class="footer-top__box">
+                    <h3 class="text-xl font-normal mb-4">Mi Cuenta</h3>
+                    <a href="#" class="block text-gray-800 text-base">Mi Cuenta</a>
+                    <a href="#" class="block text-gray-800 text-base">Historial de pedidos</a>
+                    <a href="#" class="block text-gray-800 text-base">Lista de Deseos</a>
+                    <a href="#" class="block text-gray-800 text-base">Boletin informativo</a>
+                    <a href="#" class="block text-gray-800 text-base">Devoluciones</a>
+                </div>
+                <div class="footer-top__box">
+                    <h3 class="text-xl font-normal mb-4">CONTACT US</h3>
+                    <div class="flex items-center text-gray-800 text-base">
+                        <span class="mr-4"><i class="fas fa-map-marker-alt"></i></span>
+                        Medellin, Colombia
+                    </div>
+                    <div class="flex items-center text-gray-800 text-base">
+                        <span class="mr-4"><i class="fas fa-envelope"></i></span>
+                        riwihub@gmail.com
+                    </div>
+                    <div class="flex items-center text-gray-800 text-base">
+                        <span class="mr-4"><i class="fas fa-phone"></i></span>
+                        123456778
+                    </div>
+                    <div class="flex items-center text-gray-800 text-base">
+                        <span class="mr-4"><i class="fas fa-paper-plane"></i></span>
+                        Medellin, Colombia
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    $(document).on('click','.search-cancel', function(){
-        $('.search-bar').removeClass('search-bar-active')
-        
-    });
-
-    /*--login sign-up-form..............................*/
-
-    $(document).on('click','.user,.Already-acount', function(){
-        $('.form').addClass('login-active').removeClass('sign-up-active')
-        
-    });
-
-    $(document).on('click','.sign-up-btn', function(){
-        $('.form').addClass('sign-up-active').removeClass('login-active')
-        
-    });
-
-    $(document).on('click','.form-calcel', function(){
-        $('.form').removeClass('login-active').removeClass('sign-up-active')
-        
-    });
-
-    /*full-slider-scrip-----------------------*/
-    $(document).ready(function() {
-    $('#adaptive').lightSlider({
-        adaptiveHeight:true,
-        auto:true,
-        item:1,
-        slideMargin:0,
-        loop:true
-    });
-});
-    /*Feature-slider-----------------------*/
-
-    $(document).ready(function(){
-    $('#autoWidth').lightSlider({
-        autoWidth:true,
-        loop:true,
-        onSliderLoad: function(){
-            $('#autoWidth').removeClass('cS-hidden')
-        }
-        
-    });
-
-    });
-
-    /*----for-fix-menu-when-scroll*/
-
-    $(window).scroll(function(){
-        if($(document).scrollTop() > 50){
-            $('.navigation').addClass('fix-nav')
-
-        }
-        else{
-            $('.navigation').removeClass('fix-nav')
-        }
-    });
-
-    /*for-responsive-menu*/
-    $(document).ready(function(){
-        $('.toggle').click(function(){
-            $('.toggle').toggleClass('active')
-            $('.navigation').toggleClass('active')
-
-        })
-    }
-    )
-
-
-    </script>
-    <script src="app.js"></script>
+    <script src="./js/app.js"></script>
 
 </body>
 </html>
