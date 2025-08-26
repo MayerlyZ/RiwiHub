@@ -27,6 +27,11 @@ const User = sequelize.define(
       type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0,
     },
+    role: {
+      type: DataTypes.ENUM('admin', 'seller', 'buyer'),
+      allowNull: false,
+      defaultValue: 'buyer',
+    },
     created_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

@@ -1,11 +1,12 @@
-import e from "express";
-import { addItemToCart, removeItemFromCart, getCartContents } from "../controllers/cartController";
+import express from "express";
+import { addItemToCart, removeItemFromCart, getCartContents } from "../controllers/cartController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
+import authorizeRoles from "../middlewares/roleMiddleware.js";
 
-const router = e.Router();
+const router = express.Router();
 
-router.post("/add", authMiddleware, addItemToCart);
-router.delete("/remove/:id", authMiddleware, removeItemFromCart);
-router.get("/", authMiddleware, getCartContents);
+router.post("/add", authMiddleware, authorizeRoles("buyer", "admin"), addItemToCart);
+router.delete("/remove/:id", authMiddleware, authorizeRoles("buyer", "admin"), removeItemFromCart);
+router.get("/", authMiddleware, authorizeRoles("buyer", "admin"), getCartContents);
 
 export default router;

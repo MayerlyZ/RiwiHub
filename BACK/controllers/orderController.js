@@ -1,4 +1,4 @@
-import Order from "../models/order";
+import Order from "../models/order.js";
 import { isPositiveNumber, isInEnum } from "../utils/validators.js";
 
 // Get all orders

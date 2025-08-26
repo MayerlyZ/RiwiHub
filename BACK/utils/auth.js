@@ -14,6 +14,6 @@ export const validatePassword = async (password, hashedPassword) => {
 
 // metodo para generar un token JWT
 export const generateAuthToken = (user) => {
-  const payload = { id: user.user_id };
+  const payload = { id: user.user_id, role: user.role };
   return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
