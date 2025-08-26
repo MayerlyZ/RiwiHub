@@ -1,7 +1,7 @@
 import e from "express";
 import {getAllItems, getItemById, createItem, updateItem, deleteItem } from "../controllers/itemController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
-
+//
 const router = e.Router();
 
 router.get("/", authMiddleware, getAllItems);

@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import { validatePassword, generateAuthToken } from "../utils/auth.js";
 import { isNonEmptyString, isValidEmail, isPositiveNumber } from "../utils/validators.js";
 
@@ -13,7 +13,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// Get user by ID
+// Get user by ID.
 export const getUserById = async (req, res) => {
   const { id } = req.params;
   try {

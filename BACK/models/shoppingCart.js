@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-
+//
 const ShoppingCart = sequelize.define("ShoppingCart", {
   cart_id: {
     type: DataTypes.INTEGER,
