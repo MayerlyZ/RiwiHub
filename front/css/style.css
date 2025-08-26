@@ -37,3 +37,28 @@ a {
     .category-item-container:hover img {
         transform: scale(1.1);
     }
+
+  .rounded-4xl {
+            border-radius: 30px;
+        }
+        .main-content-padding {
+            padding-top: 100px;
+        }
+        .category-item-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .category-item-container:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        .category-item-container img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .category-item-container:hover img {
+            transform: scale(1.1);
+        }

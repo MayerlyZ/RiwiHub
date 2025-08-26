@@ -19,15 +19,6 @@
 
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
-    <style>
-        .rounded-4xl {
-            border-radius: 30px;
-        }
-        /* Nueva clase para el espaciado del banner principal */
-        .main-content-padding {
-            padding-top: 100px; /* Ajusta este valor según la altura de tu navbar */
-        }
-    </style>
 </head>
 <body class="font-poppins">
 <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
@@ -167,10 +158,10 @@
             </div>
         </li>
     </ul>
-<<<<<<< HEAD
+
         <br>
         <br>
-=======
+
 
         <div class="flex justify-center items-center mt-10">
             <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
@@ -215,7 +206,6 @@
             </li>
         </ul>
 
->>>>>>> fa7d100 (agrego imagenes al home)
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
 
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
@@ -361,7 +351,7 @@
          <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
         </div>
 
-<<<<<<< HEAD
+
 <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
     <li class="item flex flex-col justify-center items-center mx-5">
         <div class="category-item-container">
@@ -412,6 +402,58 @@
         <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
     </li>
 </ul>
+
+        <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="javascript:void(0);" onclick="showSection('snacks-view')">
+                        <img src="front/images/tecnologia/saludable.png" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center"> Snacks <br> Saludables</span>
+            </li>
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                        <img src="front/images/feature_2.jpg" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600">Accesorios</span>
+            </li>
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                        <img src="front/images/tecnologia/dulces.png" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Servicios de Conduccion</span>
+            </li>
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                        <img src="front/images/tecnologia/nube.png" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Consigue tu pagina web</span>
+            </li>
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                        <img src="front/images/tecnologia/servicios_varios.png" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Tecnologia</span>
+            </li>
+            <li class="item flex flex-col justify-center items-center mx-5">
+                <div class="category-item-container">
+                    <a href="#">
+                        <img src="front/images/feature_6.jpg" class="w-full h-full object-cover object-center">
+                    </a>
+                </div>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
+            </li>
+        </ul>
+
         <section class="new-arrival flex flex-col justify-center items-center hover:cursor-pointer ">
             <div class="arrival-heading flex flex-col justify-center items-center">
                 <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Elementos destacados</strong>
@@ -477,7 +519,7 @@
                 </div>
             </div>
         </div>
-=======
+
         
         <div class="relative h-[40vh] my-5">
         <!-- Imagen de fondo -->
@@ -505,7 +547,7 @@
         </div>
 
             
->>>>>>> fa7d100 (agrego imagenes al home)
+
         <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
             <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
                 <i class="fas fa-shipping-fast text-teal-500 text-4xl m-4"></i>
@@ -525,10 +567,8 @@
         </section>
     </div>
 
-<!--``Vista Tecnologia
-     --------------->
-    <div id="tecnologia-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/tecnologiabanner.png');">
+    <div id="tecnologia-view" class="main-view hidden main-content-padding">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/tecnologiabanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                 <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
@@ -542,96 +582,136 @@
             </div>
             
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/audifonos-removebg-preview.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Diadema</a>
                         <span class="text-xl text-gray-800 font-normal">$60.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="./front/images/tecnologia/camara.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Camara</a>
                         <span class="text-xl text-gray-800 font-normal">$800.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/mouse.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Mouse</a>
                         <span class="text-xl text-gray-800 font-normal">$30.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/torre.png" class="w-full h-full object-contain object-center rounded-4xl" >
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Chasis Negra</a>
                         <span class="text-xl text-gray-800 font-normal">$400.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/inalambricos.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Airpods Negros</a>
                         <span class="text-xl text-gray-800 font-normal">$70.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/silla.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Silla Gamer Roja</a>
                         <span class="text-xl text-gray-800 font-normal">$500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/cfel.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Iphone 14 Pro Max</a>
                         <span class="text-xl text-gray-800 font-normal">$3.500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <img src="front/images/tecnologia/teclado.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Teclado Mecanico</a>
@@ -642,10 +722,8 @@
         </section>
     </div>
 
-<!--``Vista Snacks
-     --------------->
-    <div id="snacks-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/snacksbanner.png');">
+    <div id="snacks-view" class="main-view hidden main-content-padding">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/snacksbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en Snacks</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font class="text-teal text-orange-700">código promocional</font></strong>
@@ -658,27 +736,42 @@
                 <p class="text-gray-500 mt-2 text-sm">Prueba los mejores bocadillos del mercado.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/snack-1.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Galletas</a>
                         <span class="text-xl text-gray-800 font-normal">$5.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/snack-2.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Chocolatina</a>
                         <span class="text-xl text-gray-800 font-normal">$3.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/snack-3.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Gomitas</a>
@@ -689,10 +782,8 @@
         </section>
     </div>
 
-<!--``Vista Servicios
-     --------------->
-    <div id="servicios-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/serviciosbanner.png');">
+    <div id="servicios-view" class="main-view hidden main-content-padding">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/serviciosbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en servicios</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span style="color: #1f4070;">código promocional</span></strong>
@@ -705,18 +796,28 @@
                 <p class="text-gray-500 mt-2 text-sm">Servicios de alta calidad para tu negocio.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/nube.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Diseño Web</a>
                         <span class="text-xl text-gray-800 font-normal">$500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/audifonos-removebg-preview.png" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Desarrollo Móvil</a>
@@ -727,10 +828,8 @@
         </section>
     </div>
 
-<!--Vista Varios     --------------->
-
-    <div id="varios-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/varios.png');">
+    <div id="varios-view" class="main-view hidden main-content-padding">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/varios.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en producctos varios</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <br>con <span style="color: #022c66;">código promocional</span></strong>
@@ -743,18 +842,28 @@
                 <p class="text-gray-500 mt-2 text-sm">Explora una variedad de productos únicos.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/tairpods.jpg" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Producto 1</a>
                         <span class="text-xl text-gray-800 font-normal">$10.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnologia/tauriculares.jpg" class="w-full h-full object-contain object-center rounded-4xl">
+                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                                Ver Producto
+                            </a>
+                        </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
                         <a href="#" class="text-gray-700">Producto 2</a>
@@ -765,7 +874,7 @@
         </section>
     </div>
 
-    <footer id="footer" class="section p-10 bg-white text-gray-600">
+    <footer id="footer" class="section p-10 bg-white text-gray-600 w-full text-center border-gray-700 my-4">
     <div class="container mx-auto flex flex-col items-center">
         <div class="footer-links flex space-x-6 text-gray-400 mb-6">
             <a href="#" class="hover:text-black transition-colors duration-200">About</a>
