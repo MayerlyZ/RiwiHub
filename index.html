@@ -14,15 +14,18 @@
 
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
-    <script src="./front/js/spa.js"></script>
     <script src="./front/js/app.js"></script>
+    <script src="./front/js/spa.js"></script>
 
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
     <style>
-        /* Estilo personalizado para el border-radius de 30px */
         .rounded-4xl {
             border-radius: 30px;
+        }
+        /* Nueva clase para el espaciado del banner principal */
+        .main-content-padding {
+            padding-top: 100px; /* Ajusta este valor según la altura de tu navbar */
         }
     </style>
 </head>
@@ -98,7 +101,6 @@
             </ul>
         </div>
     </nav>
-
     <div class="search-bar fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-xl flex justify-center z-50 hidden transition-all duration-300 ease-in-out">
         <div class="w-11/12 border-b-2 border-gray-500 flex justify-center items-center h-[100px] mt-5">
             <input type="text" placeholder="Search For Product" name="search" class="w-full p-8 border-none outline-none text-4xl mx-5 placeholder-gray-400"/>
@@ -142,8 +144,8 @@
         </div>
     </div>
     
-    <div id="inicio-view" class="main-view">
-        <ul id="adaptive" class="cs-hidden mt-20">
+    <div id="inicio-view" class="main-view main-content-padding">
+        <ul id="adaptive" class="cs-hidden">
         <li class="item-a">
             <div class="full-slider-box h-[65vh] bg-cover bg-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/snacksbanner.png');">
                 <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
@@ -181,50 +183,8 @@
             </div>
         </li>
     </ul>
-
-        <div class="flex justify-center items-center mt-10">
-            <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
-        </div>
-        
-        <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view')"><img src="front/images/tecnologia/saludable.png" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 position:center text-center"> Snacks <br> Saludables</span>
-            </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"><img src="front/images/feature_2.jpg" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600">Accesorios</span>
-            </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')"><img src="front/images/tecnologia/dulces.png" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Servicios de Conduccion</span>
-            </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')"><img src="front/images/tecnologia/nube.png" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Consigue tu pagina web</span>
-            </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"><img src="front/images/tecnologia/servicios_varios.png" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Tecnologia</span>
-            </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="#"><img src="front/images/feature_6.jpg" class="w-full h-full object-cover object-center"></a>
-                </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
-            </li>
-        </ul>
-
+        <br>
+        <br>
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5]">
                 <img src="front/images/sale-1.jpg" class="w-full h-full object-cover object-right">
@@ -254,7 +214,62 @@
                 </a>
             </div>
         </section>
+        
+    
+        <div class="flex justify-center items-center mt-10">
+         <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
+        </div>
 
+<ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="javascript:void(0);" onclick="showSection('snacks-view')">
+                <img src="front/images/tecnologia/saludable.png" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600 text-center"> Snacks <br> Saludables</span>
+    </li>
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                <img src="front/images/feature_2.jpg" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600">Accesorios</span>
+    </li>
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                <img src="front/images/tecnologia/dulces.png" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600 text-center">Servicios de Conduccion</span>
+    </li>
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                <img src="front/images/tecnologia/nube.png" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600 text-center">Consigue tu pagina web</span>
+    </li>
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                <img src="front/images/tecnologia/servicios_varios.png" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600 text-center">Tecnologia</span>
+    </li>
+    <li class="item flex flex-col justify-center items-center mx-5">
+        <div class="category-item-container">
+            <a href="#">
+                <img src="front/images/feature_6.jpg" class="w-full h-full object-cover object-center">
+            </a>
+        </div>
+        <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
+    </li>
+</ul>
         <section class="new-arrival flex flex-col justify-center items-center">
             <div class="arrival-heading flex flex-col justify-center items-center">
                 <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Elementos destacados</strong>
@@ -311,17 +326,15 @@
                 </div>
             </div>
         </section>
-        
         <div class="banner-box h-[40vh] bg-cover bg-no-repeat bg-center my-5" style="background-image: url('front/images/banner2.jpg');">
             <div class="banner-text-container w-4/5 h-full flex items-center mx-auto">
                 <div class="banner-text flex flex-col">
                     <span class="uppercase tracking-widest text-lg font-medium text-gray-600">oferta Limitada</span>
-                    <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">Recarga desde <br>con <font class="text-teal-500">$10.000</font></strong>
+                    <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">Recarga desde <br> <font class="text-teal-500">$10.000</font></strong>
                     <a href="#" class="banner-btn w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Recarga Ahora</a>
                 </div>
             </div>
         </div>
-            
         <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
             <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
                 <i class="fas fa-shipping-fast text-teal-500 text-4xl m-4"></i>
@@ -341,8 +354,10 @@
         </section>
     </div>
 
+<!--``Vista Tecnologia
+     --------------->
     <div id="tecnologia-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/tecnologiabanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/tecnologiabanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                 <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
@@ -456,8 +471,10 @@
         </section>
     </div>
 
+<!--``Vista Snacks
+     --------------->
     <div id="snacks-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/snacksbanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/snacksbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en Snacks</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font class="text-teal text-orange-700">código promocional</font></strong>
@@ -501,8 +518,10 @@
         </section>
     </div>
 
+<!--``Vista Servicios
+     --------------->
     <div id="servicios-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/serviciosbanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/serviciosbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en servicios</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span style="color: #1f4070;">código promocional</span></strong>
@@ -537,8 +556,10 @@
         </section>
     </div>
 
+<!--Vista Varios     --------------->
+
     <div id="varios-view" class="main-view hidden">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/varios.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center pt-20" style="background-image: url('./front/images/varios.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en producctos varios</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <br>con <span style="color: #022c66;">código promocional</span></strong>
@@ -585,7 +606,7 @@
                     <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
                 </div>
                 <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">INFORMACION</h3>
+                    <h3 class="text-xl font-normal mb-4">INFORMACIÓN</h3>
                     <a href="#" class="block text-gray-800 text-base">Sobre Nosotros</a>
                     <a href="#" class="block text-gray-800 text-base">Politica de Privacidad</a>
                     <a href="#" class="block text-gray-800 text-base">Terminos & Condiciones</a>
@@ -593,7 +614,7 @@
                     <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
                 </div>
                 <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">Mi Cuenta</h3>
+                    <h3 class="text-xl font-normal mb-4">MI CUENTA</h3>
                     <a href="#" class="block text-gray-800 text-base">Mi Cuenta</a>
                     <a href="#" class="block text-gray-800 text-base">Historial de pedidos</a>
                     <a href="#" class="block text-gray-800 text-base">Lista de Deseos</a>
@@ -601,7 +622,7 @@
                     <a href="#" class="block text-gray-800 text-base">Devoluciones</a>
                 </div>
                 <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">CONTACT US</h3>
+                    <h3 class="text-xl font-normal mb-4">CONTACTANOS</h3>
                     <div class="flex items-center text-gray-800 text-base">
                         <span class="mr-4"><i class="fas fa-map-marker-alt"></i></span>
                         Medellin, Colombia
@@ -622,6 +643,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>
