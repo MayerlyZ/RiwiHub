@@ -4,7 +4,7 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = e.Router();
 
-// Rutas públicas
+// Rutas públicas.
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 

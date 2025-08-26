@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-
+//
 const OrderItem = sequelize.define("OrderItem", {
   order_item_id: {
     type: DataTypes.INTEGER,
