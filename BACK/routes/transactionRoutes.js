@@ -3,7 +3,7 @@ import { getAllTransactions, getTransactionById, createTransaction, updateTransa
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = e.Router();
-
+//
 router.get("/", authMiddleware, getAllTransactions);
 router.get("/:id", authMiddleware, getTransactionById);
 router.post("/", authMiddleware, createTransaction);

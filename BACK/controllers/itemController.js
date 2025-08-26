@@ -2,7 +2,7 @@ import Item from "../models/item.js";
 import { isNonEmptyString, isPositiveNumber, isInEnum } from "../utils/validators.js";
 import { isNonEmptyString, isPositiveNumber } from "../utils/validators.js";
 
-// Get all items
+// Get all items.
 export const getAllItems = async (req, res) => {
   try {
     const items = await Item.findAll();

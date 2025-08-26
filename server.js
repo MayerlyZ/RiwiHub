@@ -44,8 +44,9 @@ sequelize.authenticate()
   .then(() => console.log("✅ Conectado a la base de datos"))
   .catch(err => console.error("❌ Error al conectar:", err));
 
-// Iniciar servidor
+// Iniciar servidor.
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+

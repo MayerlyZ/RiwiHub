@@ -1,7 +1,7 @@
 // cartController
 import Cart from '../models/cartItem.js';
 
-//añadir item al carrito
+//añadir item al carrito.
 import { isPositiveNumber } from "../utils/validators.js";
 export const addItemToCart = async (req, res) => {
   const { userId, productId, quantity } = req.body;

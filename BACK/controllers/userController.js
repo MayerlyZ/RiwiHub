@@ -13,7 +13,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// Get user by ID
+// Get user by ID.
 export const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
