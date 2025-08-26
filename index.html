@@ -30,77 +30,61 @@
     </style>
 </head>
 <body class="font-poppins">
-    <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
-        <div class="h-10 border-b border-gray-100 flex justify-center items-center">
-            <div class="flex">
-                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="mx-1 text-gray-700 text-sm hover:text-[#705ffc] transition-colors"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="text-gray-700 ml-8 text-sm">
-                <span>La tienda de los coders</span>
-            </div>
-        </div>
+<nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
+    <div class="flex justify-between items-center px-12 h-20 bg-white">
+        <a href="#" class="logo">
+            <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
+        </a>
         
-        <div class="flex justify-between items-center px-12 h-20">
-            <a href="#" class="logo">
-                <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
-            </a>
-            
-            <ul class="flex space-x-8 md:flex hidden">
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Inicio</a>
-                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Nosotros</span>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tienda</a>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tecnologia</a>
-                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Tokens</span>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Snacks</a>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Servicios</a>
-                </li>
-                 <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('varios-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Varios</a>
-                </li>
-            </ul>
+        <ul class="flex space-x-2 p-2 rounded-full border border-gray-300 bg-white">
+            <li>
+                <a href="javascript:void(0);" onclick="showSection('inicio-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Inicio</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Tecnología</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" onclick="showSection('snacks-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Snacks</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" onclick="showSection('servicios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Servicios</a>
+            </li>
+             <li>
+                <a href="javascript:void(0);" onclick="showSection('varios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Varios</a>
+            </li>
+        </ul>
 
-            <div class="flex space-x-4">
-                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-                    <i class="far fa-user"></i>
-                </a>
-                <a href="#" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                    <i class="fas fa-shopping-cart">
-                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
-                    </i>
-                </a>
-            </div>
-            <div class="md:hidden">
-                <button class="menu-toggle text-xl text-gray-700">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+        <div class="flex space-x-4 items-center">
+            <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
+                <i class="fas fa-search"></i>
+            </a>
+            <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
+                <i class="far fa-user"></i>
+            </a>
+            <a href="#" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
+                <i class="fas fa-shopping-cart">
+                    <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
+                </i>
+            </a>
         </div>
         
-        <div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
-            <ul class="flex flex-col">
-                <li><a href="javascript:void(0);" onclick="showSection('inicio-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Inicio</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('inicio-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tienda</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tecnologia</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('snacks-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Snacks</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('servicios-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
-            </ul>
+        <div class="md:hidden">
+            <button class="menu-toggle text-xl text-gray-700">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
+    <ul class="flex flex-col">
+        <li><a href="javascript:void(0);" onclick="showSection('inicio-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Inicio</a></li>
+        <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tecnologia</a></li>
+        <li><a href="javascript:void(0);" onclick="showSection('snacks-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Snacks</a></li>
+        <li><a href="javascript:void(0);" onclick="showSection('servicios-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
+        <li><a href="javascript:void(0);" onclick="showSection('varios-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Varios</a></li>
+    </ul>
+</div>
     <div class="search-bar fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-xl flex justify-center z-50 hidden transition-all duration-300 ease-in-out">
         <div class="w-11/12 border-b-2 border-gray-500 flex justify-center items-center h-[100px] mt-5">
             <input type="text" placeholder="Search For Product" name="search" class="w-full p-8 border-none outline-none text-4xl mx-5 placeholder-gray-400"/>
@@ -270,13 +254,13 @@
         <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
     </li>
 </ul>
-        <section class="new-arrival flex flex-col justify-center items-center">
+        <section class="new-arrival flex flex-col justify-center items-center hover:cursor-pointer ">
             <div class="arrival-heading flex flex-col justify-center items-center">
                 <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Elementos destacados</strong>
                 <p class="text-gray-500 mt-2 text-sm">Ofrecemos una alta variedad de emprendimientos</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5]">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
@@ -361,7 +345,7 @@
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                 <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                 <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
-                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-orange-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-blue-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
             </div>
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
@@ -594,54 +578,30 @@
         </section>
     </div>
 
-    <footer id="footer" class="section footer p-10 bg-[#b5b3b3] text-gray-800 border-t border-gray-100 mt-5">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">EXTRAS</h3>
-                    <a href="#" class="block text-gray-800 text-base">Marcas</a>
-                    <a href="#" class="block text-gray-800 text-base">Certificados de regalo</a>
-                    <a href="#" class="block text-gray-800 text-base">Suscribete</a>
-                    <a href="#" class="block text-gray-800 text-base">Especiales</a>
-                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">INFORMACIÓN</h3>
-                    <a href="#" class="block text-gray-800 text-base">Sobre Nosotros</a>
-                    <a href="#" class="block text-gray-800 text-base">Politica de Privacidad</a>
-                    <a href="#" class="block text-gray-800 text-base">Terminos & Condiciones</a>
-                    <a href="#" class="block text-gray-800 text-base">Contactanos</a>
-                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">MI CUENTA</h3>
-                    <a href="#" class="block text-gray-800 text-base">Mi Cuenta</a>
-                    <a href="#" class="block text-gray-800 text-base">Historial de pedidos</a>
-                    <a href="#" class="block text-gray-800 text-base">Lista de Deseos</a>
-                    <a href="#" class="block text-gray-800 text-base">Boletin informativo</a>
-                    <a href="#" class="block text-gray-800 text-base">Devoluciones</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">CONTACTANOS</h3>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-map-marker-alt"></i></span>
-                        Medellin, Colombia
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-envelope"></i></span>
-                        riwihub@gmail.com
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-phone"></i></span>
-                        123456778
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-paper-plane"></i></span>
-                        Medellin, Colombia
-                    </div>
-                </div>
-            </div>
+    <footer id="footer" class="section p-10 bg-white text-gray-600">
+    <div class="container mx-auto flex flex-col items-center">
+        <div class="footer-links flex space-x-6 text-gray-400 mb-6">
+            <a href="#" class="hover:text-black transition-colors duration-200">About</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Blog</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Jobs</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Press</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Accessibility</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Partners</a>
         </div>
-    </footer>
+        
+        <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
+        </div>
+        
+        <div class="w-full text-center">
+            <hr class="border-gray-700 my-4">
+            <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
