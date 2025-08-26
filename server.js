@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import sequelize from "./BACK/config/db.js";
 import cors from "cors";
 
+
 // Importar rutas
 import userRoutes from "./BACK/routes/userRoutes.js";
 import categoryRoutes from "./BACK/routes/categoryRoutes.js";
 import cartRoutes from "./BACK/routes/cartRoutes.js";
 import orderRoutes from "./BACK/routes/orderRoutes.js";
 import transactionRoutes from "./BACK/routes/transactionRoutes.js";
+import createAssociations from "./BACK/models/associations.js";
 
 // Middlewares
 import errorMiddleware from "./BACK/middlewares/errorMiddleware.js";
@@ -18,6 +20,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Relaciones
+createAssociations()
 
 // Rutas
 app.use("/api/users", userRoutes);

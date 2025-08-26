@@ -1,5 +1,5 @@
 import e from "express";
-import { getAllOrders, getOrderById, createOrder,updateOrder, deleteOrder } from "../controllers/orderController";
+import { getAllOrders, getOrderById, createOrder,updateOrder, deleteOrder } from "../controllers/orderController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = e.Router();

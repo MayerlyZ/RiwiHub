@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import { validatePassword, generateAuthToken } from "../utils/auth.js";
 import { isNonEmptyString, isValidEmail, isPositiveNumber } from "../utils/validators.js";
 
