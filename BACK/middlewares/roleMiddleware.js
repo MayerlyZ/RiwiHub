@@ -1,4 +1,3 @@
-// BACK/middlewares/roleMiddleware.js
 
 export default function authorizeRoles(...allowedRoles) {
   return (req, res, next) => {
