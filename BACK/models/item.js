@@ -19,6 +19,10 @@ const Item = sequelize.define("Item", {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
+  token_price: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
   stock: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
@@ -44,4 +48,4 @@ const Item = sequelize.define("Item", {
   timestamps: false, // No usar createdAt/updatedAt automáticos
 });
 
-export default Item;
+export default Item; 
