@@ -10,7 +10,7 @@ import OrderItem from "./orderItem.js";
 
 export default function createAssociations() {
   // =========================
-  // USERS.
+  // USERS
   // =========================
   User.hasMany(TokenTransaction, { foreignKey: "user_id", as: "transactions" });
   TokenTransaction.belongsTo(User, { foreignKey: "user_id", as: "user" });

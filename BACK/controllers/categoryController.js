@@ -1,7 +1,7 @@
 import Category from "../models/category.js";
 import { isNonEmptyString, isPositiveNumber } from "../utils/validators.js";
 
-// Obtener todas las categorías.
+// Obtener todas las categorías
 export const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.findAll();
