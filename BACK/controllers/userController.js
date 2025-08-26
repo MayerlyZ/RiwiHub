@@ -30,7 +30,7 @@ export const getUserById = async (req, res) => {
 
 // Create a new user
 export const createUser = async (req, res) => {
-  const { name, email, password, wallet_balance } = req.body;
+  const { name, email, password, wallet_balance, role } = req.body;
   // Validaciones
   if (!isNonEmptyString(name)) {
     return res.status(400).json({ error: "El nombre es requerido y debe ser un string válido." });
@@ -50,6 +50,7 @@ export const createUser = async (req, res) => {
       email,
       password,
       wallet_balance,
+      role, // Si no se envía, Sequelize usará el valor por defecto
     });
     res.status(201).json(newUser);
   } catch (error) {
@@ -61,7 +62,7 @@ export const createUser = async (req, res) => {
 // Update a user
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, password, wallet_balance } = req.body;
+  const { name, email, password, wallet_balance, role } = req.body;
   // Validaciones (solo si los campos vienen en el body)
   if (name !== undefined && !isNonEmptyString(name)) {
     return res.status(400).json({ error: "El nombre debe ser un string válido." });
@@ -77,7 +78,7 @@ export const updateUser = async (req, res) => {
   }
   try {
     const [updated] = await User.update(
-      { name, email, password, wallet_balance },
+      { name, email, password, wallet_balance, role },
       { where: { user_id: id } }
     );
     if (!updated) {

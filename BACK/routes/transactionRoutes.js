@@ -1,13 +1,14 @@
-import e from "express";
-import { getAllTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction} from "../controllers/transactionController.js";
+import express from "express";
+import { getAllTransactions, getTransactionById, createTransaction, updateTransaction, deleteTransaction } from "../controllers/transactionController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
+import authorizeRoles from "../middlewares/roleMiddleware.js";
 
-const router = e.Router();
+const router = express.Router();
 
-router.get("/", authMiddleware, getAllTransactions);
-router.get("/:id", authMiddleware, getTransactionById);
-router.post("/", authMiddleware, createTransaction);
-router.put("/:id", authMiddleware, updateTransaction);
-router.delete("/:id", authMiddleware, deleteTransaction);
+router.get("/", authMiddleware, authorizeRoles("admin"), getAllTransactions);
+router.get("/:id", authMiddleware, authorizeRoles("buyer", "admin"), getTransactionById);
+router.post("/", authMiddleware, authorizeRoles("buyer", "admin"), createTransaction);
+router.put("/:id", authMiddleware, authorizeRoles("admin"), updateTransaction);
+router.delete("/:id", authMiddleware, authorizeRoles("admin"), deleteTransaction);
 
 export default router;
