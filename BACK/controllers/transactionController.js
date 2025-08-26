@@ -1,7 +1,7 @@
 import TokenTransaction from "../models/TokenTransaction.js";
 import { isPositiveNumber, isInEnum, isNonEmptyString } from "../utils/validators.js";
 
-// Obtener todas las transacciones.
+// Obtener todas las transacciones
 export const getAllTransactions = async (req, res) => {
   try {
     const transactions = await TokenTransaction.findAll();

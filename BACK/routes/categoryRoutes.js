@@ -1,5 +1,5 @@
 import e from "express";
-import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from "../controllers/categoryController.js";
+import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from "../controllers/categoryController";
 
 
 const router = e.Router();
@@ -10,5 +10,5 @@ router.post("/", createCategory);
 router.put("/:id", updateCategory);
 router.delete("/:id", deleteCategory);
 
-//
+
 export default router;

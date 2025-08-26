@@ -1,7 +1,7 @@
-import Order from "../models/order.js";
+import Order from "../models/order";
 import { isPositiveNumber, isInEnum } from "../utils/validators.js";
 
-// Get all orders.
+// Get all orders
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.findAll();

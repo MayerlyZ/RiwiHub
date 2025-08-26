@@ -1,7 +1,7 @@
 // models/TokenTransaction.js
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-//
+
 const TokenTransaction = sequelize.define("TokenTransaction", {
   transaction_id: {
     type: DataTypes.INTEGER,

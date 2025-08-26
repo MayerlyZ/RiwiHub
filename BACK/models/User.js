@@ -1,11 +1,11 @@
 // models/User.js
 import { DataTypes } from "sequelize";
-import  sequelize  from "../config/db.js"; 
+import { sequelize } from "../config/db.js"; 
 
 const User = sequelize.define(
   "User",
   {
-    user_id: {  
+    user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -37,5 +37,5 @@ const User = sequelize.define(
     timestamps: false,   
   }
 );
-//
+
 export default User;
