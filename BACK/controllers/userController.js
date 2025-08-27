@@ -1,11 +1,10 @@
-import User from "../models/User.js";
-import { validatePassword, generateAuthToken } from "../utils/auth.js";
+import * as userService from "../services/userService.js";
 import { isNonEmptyString, isValidEmail, isPositiveNumber } from "../utils/validators.js";
 
 // Get all users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await userService.getAllUsers();
     res.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -17,13 +16,28 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await User.findByPk(id);
+    const user = await userService.getUserById(id);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     res.json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Delete a user
+export const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleted = await userService.deleteUser(id);
+    if (!deleted) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -45,7 +59,7 @@ export const createUser = async (req, res) => {
     return res.status(400).json({ error: "El saldo debe ser un número positivo." });
   }
   try {
-    const newUser = await User.create({
+    const newUser = await userService.createUser({
       name,
       email,
       password,
@@ -63,6 +77,7 @@ export const createUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, email, password, wallet_balance, role } = req.body;
+
   // Validaciones (solo si los campos vienen en el body)
   if (name !== undefined && !isNonEmptyString(name)) {
     return res.status(400).json({ error: "El nombre debe ser un string válido." });
@@ -76,12 +91,18 @@ export const updateUser = async (req, res) => {
   if (wallet_balance !== undefined && !isPositiveNumber(Number(wallet_balance))) {
     return res.status(400).json({ error: "El saldo debe ser un número positivo." });
   }
+
+  // Construye el objeto data solo con los campos enviados
+  const data = {};
+  if (name !== undefined) data.name = name;
+  if (email !== undefined) data.email = email;
+  if (password !== undefined) data.password = password;
+  if (wallet_balance !== undefined) data.wallet_balance = wallet_balance;
+  if (role !== undefined) data.role = role;
+
   try {
-    const [updated] = await User.update(
-      { name, email, password, wallet_balance, role },
-      { where: { user_id: id } }
-    );
-    if (!updated) {
+    const updatedUser = await userService.updateUser(id, data);
+    if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
     res.json({ message: "User updated successfully" });
@@ -91,50 +112,6 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// Delete a user
-export const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deleted = await User.destroy({ where: { id } });
-    if (!deleted) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.json({ message: "User deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
 
-// Login user
-export const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (!user || !(await validatePassword(password, user.password))) {
-      return res.status(401).json({ error: "Invalid email or password" });
-    }
-    const token = generateAuthToken(user);
-    res.json({ token });
-  } catch (error) {
-    console.error("Error logging in user:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
 
-// Register user
-export const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(409).json({ error: "Email already in use" });
-    }
-    const newUser = await User.create({ name, email, password });
-    const token = newUser.generateAuthToken();
-    res.status(201).json({ token });
-  } catch (error) {
-    console.error("Error registering user:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
+

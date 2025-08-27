@@ -21,6 +21,7 @@ export default function createAssociations() {
   User.hasMany(Order, { foreignKey: "user_id", as: "orders" });
   Order.belongsTo(User, { foreignKey: "user_id", as: "user" });
 
+
   // =========================
   // CATEGORIES
   // =========================
@@ -39,6 +40,8 @@ export default function createAssociations() {
 
   Item.hasMany(OrderItem, { foreignKey: "item_id", as: "orderItems" });
   OrderItem.belongsTo(Item, { foreignKey: "item_id", as: "item" });
+
+  
 
   // =========================
   // SHOPPING CART
