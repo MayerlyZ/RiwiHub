@@ -39,6 +39,13 @@ const Item = sequelize.define("Item", {
       model: "categories",
       key: "category_id",
     },
+  },  seller_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: "id",
+    },
   },
   created_at: {
     type: DataTypes.DATE,
