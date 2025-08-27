@@ -57,11 +57,11 @@ export const createItem = async (req, res) => {
       name,
       description,
       price,
-      price_token,
       stock: stock ?? 0,
       type,
       price_token,
       category_id,
+      seller_id,
     });
     res.status(201).json(newItem);
   } catch (error) {
