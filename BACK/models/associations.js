@@ -7,10 +7,11 @@ import ShoppingCart from "./shoppingCart.js";
 import CartItem from "./cartItem.js";
 import Order from "./order.js";
 import OrderItem from "./orderItem.js";
+import Inventory from "./inventory.js"; 
 
 export default function createAssociations() {
   // =========================
-  // USERS.
+  // USERS
   // =========================
   User.hasMany(TokenTransaction, { foreignKey: "user_id", as: "transactions" });
   TokenTransaction.belongsTo(User, { foreignKey: "user_id", as: "user" });
@@ -20,6 +21,12 @@ export default function createAssociations() {
 
   User.hasMany(Order, { foreignKey: "user_id", as: "orders" });
   Order.belongsTo(User, { foreignKey: "user_id", as: "user" });
+
+  // =========================
+  // SELLERS (User ↔ Item)
+  // =========================
+  User.hasMany(Item, { foreignKey: "seller_id", as: "items" });
+  Item.belongsTo(User, { foreignKey: "seller_id", as: "seller" });
 
   // =========================
   // CATEGORIES
@@ -39,6 +46,10 @@ export default function createAssociations() {
 
   Item.hasMany(OrderItem, { foreignKey: "item_id", as: "orderItems" });
   OrderItem.belongsTo(Item, { foreignKey: "item_id", as: "item" });
+
+  // Item ↔ Inventory (1:1)
+  Item.hasOne(Inventory, { foreignKey: "item_id", as: "inventory" });
+  Inventory.belongsTo(Item, { foreignKey: "item_id", as: "item" });
 
   // =========================
   // SHOPPING CART

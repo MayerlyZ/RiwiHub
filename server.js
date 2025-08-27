@@ -11,6 +11,8 @@ import cartRoutes from "./BACK/routes/cartRoutes.js";
 import orderRoutes from "./BACK/routes/orderRoutes.js";
 import transactionRoutes from "./BACK/routes/transactionRoutes.js";
 import createAssociations from "./BACK/models/associations.js";
+import accountingRoutes from "./BACK/routes/accountingRoutes.js";
+import inventoryRoutes from "./BACK/routes/inventoryRoutes.js";
 
 // Middlewares
 import errorMiddleware from "./BACK/middlewares/errorMiddleware.js";
@@ -30,6 +32,8 @@ app.use("/api/categories", authMiddleware, categoryRoutes);
 app.use("/api/carts", authMiddleware, cartRoutes);
 app.use("/api/orders", authMiddleware, orderRoutes);
 app.use("/api/transactions", authMiddleware, transactionRoutes);
+app.use("/api/inventory", authMiddleware, inventoryRoutes);
+app.use("/api/accounting", authMiddleware, accountingRoutes);
 
 // manejar errores 404
 app.use((req, res, next) => {
