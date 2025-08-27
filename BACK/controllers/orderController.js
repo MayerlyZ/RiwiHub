@@ -1,10 +1,10 @@
-import Order from "../models/order.js";
+import * as orderServices from "../services/orderService.js";
 import { isPositiveNumber, isInEnum } from "../utils/validators.js";
 
 // Get all orders
 export const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.findAll();
+    const orders = await orderServices.getAllOrders();
     res.json(orders);
   } catch (error) {
     console.error("Error fetching orders:", error);
@@ -16,7 +16,7 @@ export const getAllOrders = async (req, res) => {
 export const getOrderById = async (req, res) => {
   const { id } = req.params;
   try {
-    const order = await Order.findByPk(id);
+    const order = await orderServices.getOrderById(id);
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
@@ -29,7 +29,7 @@ export const getOrderById = async (req, res) => {
 
 // Create a new order
 export const createOrder = async (req, res) => {
-  const { user_id, status, total_amount } = req.body;
+  const { user_id, total_amount, status, payment_method } = req.body;
   if (!isPositiveNumber(Number(user_id))) {
     return res.status(400).json({ error: "El user_id es requerido y debe ser un número positivo." });
   }
@@ -39,11 +39,15 @@ export const createOrder = async (req, res) => {
   if (!isPositiveNumber(Number(total_amount))) {
     return res.status(400).json({ error: "El total_amount debe ser un número positivo." });
   }
+  if (payment_method !== undefined && payment_method !== null && !isInEnum(payment_method, ["wallet", "credit_card", "cash"])) {
+    return res.status(400).json({ error: "El método de pago no es válido." });
+  }
   try {
-    const newOrder = await Order.create({
+    const newOrder = await orderServices.createOrder({
       user_id,
-      status,
       total_amount,
+      status,
+      payment_method,
     });
     res.status(201).json(newOrder);
   } catch (error) {
@@ -65,12 +69,27 @@ export const updateOrder = async (req, res) => {
   if (total_amount !== undefined && !isPositiveNumber(Number(total_amount))) {
     return res.status(400).json({ error: "El total_amount debe ser un número positivo." });
   }
+  if (payment_method !== undefined && payment_method !== null && !isInEnum(payment_method, ["wallet", "credit_card", "cash"])) {
+    return res.status(400).json({ error: "El método de pago no es válido." });
+  }
+
+  const data = {};
+  if (user_id !== undefined) {
+    data.user_id = user_id;
+  }
+  if (status !== undefined) {
+    data.status = status;
+  }
+  if (total_amount !== undefined) {
+    data.total_amount = total_amount;
+  }
+  if (payment_method !== undefined) {
+    data.payment_method = payment_method;
+  }
   try {
-    const [updated] = await Order.update(
-      { user_id, status, total_amount },
-      { where: { order_id: id } }
-    );
-    if (!updated) {
+
+    const [updatedOrder] = await orderServices.updateOrder(id, data);
+    if (!updatedOrder) {
       return res.status(404).json({ error: "Order not found" });
     }
     res.json({ message: "Order updated successfully" });
@@ -84,7 +103,7 @@ export const updateOrder = async (req, res) => {
 export const deleteOrder = async (req, res) => {
   const { id } = req.params;
   try {
-    const deleted = await Order.destroy({ where: { order_id: id } });
+    const deleted = await orderServices.deleteOrder(id);
     if (!deleted) {
       return res.status(404).json({ error: "Order not found" });
     }
