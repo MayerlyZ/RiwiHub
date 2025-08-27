@@ -52,7 +52,7 @@ const CartItem = sequelize.define('CartItem', {
   timestamps: false,
 });
 
-// Hook para calcular el subtotal antes de guardar.
+// Hook para calcular el subtotal antes de guardar
 CartItem.beforeSave((cartItem, options) => {
   cartItem.subtotal = cartItem.quantity * cartItem.unit_price;
 });

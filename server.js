@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import sequelize from "./BACK/config/db.js";
 import cors from "cors";
 
-
 // Importar rutas
 import userRoutes from "./BACK/routes/userRoutes.js";
 import categoryRoutes from "./BACK/routes/categoryRoutes.js";
@@ -14,6 +13,7 @@ import createAssociations from "./BACK/models/associations.js";
 import accountingRoutes from "./BACK/routes/accountingRoutes.js";
 import inventoryRoutes from "./BACK/routes/inventoryRoutes.js";
 
+
 // Middlewares
 import errorMiddleware from "./BACK/middlewares/errorMiddleware.js";
 import authMiddleware from "./BACK/middlewares/authMiddleware.js";
@@ -22,9 +22,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-// Relaciones
-createAssociations()
 
 // Rutas
 app.use("/api/users", userRoutes);
@@ -48,9 +45,8 @@ sequelize.authenticate()
   .then(() => console.log("✅ Conectado a la base de datos"))
   .catch(err => console.error("❌ Error al conectar:", err));
 
-// Iniciar servidor.
+// Iniciar servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
-

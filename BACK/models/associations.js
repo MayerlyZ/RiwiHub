@@ -22,6 +22,7 @@ export default function createAssociations() {
   User.hasMany(Order, { foreignKey: "user_id", as: "orders" });
   Order.belongsTo(User, { foreignKey: "user_id", as: "user" });
 
+
   // =========================
   // SELLERS (User ↔ Item)
   // =========================
@@ -47,9 +48,9 @@ export default function createAssociations() {
   Item.hasMany(OrderItem, { foreignKey: "item_id", as: "orderItems" });
   OrderItem.belongsTo(Item, { foreignKey: "item_id", as: "item" });
 
-  // Item ↔ Inventory (1:1)
   Item.hasOne(Inventory, { foreignKey: "item_id", as: "inventory" });
   Inventory.belongsTo(Item, { foreignKey: "item_id", as: "item" });
+
 
   // =========================
   // SHOPPING CART

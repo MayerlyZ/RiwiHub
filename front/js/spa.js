@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         slideMargin: 0,
                         loop: true,
                         controls: false,
-                        pager: true
+                        pager: true,
+                        pause:4000,
                     });
                     $('#autoWidth').lightSlider({
                         autoWidth: true,

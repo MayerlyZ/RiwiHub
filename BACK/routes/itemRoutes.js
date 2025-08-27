@@ -1,15 +1,9 @@
-import e from "express";
-import {
-  getAllItems,
-  getItemById,
-  createItem,
-  updateItem,
-  deleteItem,
-} from "../controllers/itemController.js";
+import express from "express";
+import { getAllItems, getItemById, createItem, updateItem, deleteItem} from "../controllers/itemController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import { authorizeRoles } from "../middlewares/roleMiddleware.js";
 
-const router = e.Router();
+const router = express.Router();
 
 // ======================
 // Rutas públicas (buyers)
