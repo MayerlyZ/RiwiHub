@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-//
+
 const Item = sequelize.define("Item", {
   item_id: {
     type: DataTypes.INTEGER,
@@ -31,12 +31,24 @@ const Item = sequelize.define("Item", {
     type: DataTypes.ENUM("product", "service"),
     allowNull: false,
   },
-  category_id: {
+    price_token: {
+    type: DataTypes.DECIMAL(10, 2),
+    allowNull: true,
+    defaultValue: null 
+  },
+    category_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: "categories",
       key: "category_id",
+    },
+  },  seller_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: "id",
     },
   },
   created_at: {

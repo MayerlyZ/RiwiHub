@@ -9,4 +9,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   logging: false, // Cambia a true si quieres ver las consultas SQL
 });
 
+// Importar asociaciones
+import createAssociations from "../models/associations.js";
+createAssociations();
+
 export default sequelize;

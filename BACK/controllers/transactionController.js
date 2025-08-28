@@ -1,10 +1,10 @@
-import TokenTransaction from "../models/TokenTransaction.js";
+import * as tokenService from "../services/tokenService.js";
 import { isPositiveNumber, isInEnum, isNonEmptyString } from "../utils/validators.js";
 
-// Obtener todas las transacciones.
+// Obtener todas las transacciones
 export const getAllTransactions = async (req, res) => {
   try {
-    const transactions = await TokenTransaction.findAll();
+    const transactions = await tokenService.getAllTransactions();
     res.json(transactions);
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -16,7 +16,7 @@ export const getAllTransactions = async (req, res) => {
 export const getTransactionById = async (req, res) => {
   const { id } = req.params;
   try {
-    const transaction = await TokenTransaction.findByPk(id);
+    const transaction = await tokenService.getTransactionById(id);
     if (!transaction) {
       return res.status(404).json({ error: "Transaction not found" });
     }
@@ -45,14 +45,15 @@ export const createTransaction = async (req, res) => {
   if (!isPositiveNumber(Number(balance_after))) {
     return res.status(400).json({ error: "El balance_after debe ser un número positivo." });
   }
+  const data = {};
+  if (user_id !== undefined) data.user_id = user_id;
+  if (amount !== undefined) data.amount = amount;
+  if (transaction_type !== undefined) data.transaction_type = transaction_type;
+  if (description !== undefined) data.description = description;
+  if (balance_after !== undefined) data.balance_after = balance_after;
+
   try {
-    const newTransaction = await TokenTransaction.create({
-      user_id,
-      amount,
-      transaction_type,
-      description,
-      balance_after,
-    });
+    const newTransaction = await tokenService.createTransaction(data);
     res.status(201).json(newTransaction);
   } catch (error) {
     console.error("Error creating transaction:", error);
@@ -76,12 +77,16 @@ export const updateTransaction = async (req, res) => {
   if (balance_after !== undefined && !isPositiveNumber(Number(balance_after))) {
     return res.status(400).json({ error: "El balance_after debe ser un número positivo." });
   }
+
+  const data = {};
+  if (amount !== undefined) data.amount = amount;
+  if (transaction_type !== undefined) data.transaction_type = transaction_type;
+  if (description !== undefined) data.description = description;
+  if (balance_after !== undefined) data.balance_after = balance_after;
+
   try {
-    const [updated] = await TokenTransaction.update(
-      { amount, transaction_type, description, balance_after },
-      { where: { transaction_id: id } }
-    );
-    if (!updated) {
+    const updatedTransaction = await tokenService.updateTransaction(id, data);
+    if (!updatedTransaction) {
       return res.status(404).json({ error: "Transaction not found" });
     }
     res.json({ message: "Transaction updated successfully" });
@@ -95,7 +100,7 @@ export const updateTransaction = async (req, res) => {
 export const deleteTransaction = async (req, res) => {
   const { id } = req.params;
   try {
-    const deleted = await TokenTransaction.destroy({ where: { transaction_id: id } });
+    const deleted = await tokenService.deleteTransaction(id);
     if (!deleted) {
       return res.status(404).json({ error: "Transaction not found" });
     }
