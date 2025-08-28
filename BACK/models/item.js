@@ -49,15 +49,11 @@ const Item = sequelize.define("Item", {
     references: {
       model: User,
       key: "id",
-    },
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
+    }
   },
 }, {
   tableName: "items",
-  timestamps: false, // No usar createdAt/updatedAt automáticos
+  timestamps: true, 
 });
 
 export default Item; 
