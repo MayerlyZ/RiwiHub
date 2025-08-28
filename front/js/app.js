@@ -2,16 +2,18 @@
 $(document).ready(function() {
     // --- Configuración de Sliders (carruseles) ---
     $('#adaptive').lightSlider({
-        adaptiveHeight:true,
-        auto:true,
-        item:1,
-        slideMargin:0,
-        loop:true
+        adaptiveHeight: true,
+        auto: true,
+        item: 1,
+        slideMargin: 0,
+        loop: true,
+        pause: 6000, // <-- Cambia la velocidad del carrusel a 6 segundos
+        stop: 4000  
     });
     $('#autoWidth').lightSlider({
-        autoWidth:true,
-        loop:true,
-        onSliderLoad: function(){
+        autoWidth: true,
+        loop: true,
+        onSliderLoad: function() {
             $('#autoWidth').removeClass('cS-hidden');
         }
     });
@@ -51,11 +53,11 @@ $(document).ready(function() {
     });
 
     function showSection(sectionId) {
-    $('.main-view').addClass('hidden'); // oculta todas las secciones principales
-    $('#' + sectionId).removeClass('hidden'); // muestra solo la deseada
-}
+        $('.main-view').addClass('hidden'); // oculta todas las secciones principales
+        $('#' + sectionId).removeClass('hidden'); // muestra solo la deseada
+    }
 
- // =============================================================
+    // =============================================================
     // ================ LÓGICA DEL CARRITO Y MODAL (FUNCIONAL) =================
     // =============================================================
     
