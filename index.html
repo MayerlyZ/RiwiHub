@@ -57,52 +57,6 @@
                     <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
                 </i>
             </a>
-
-            
-            <ul class="flex space-x-8 md:flex hidden">
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Inicio</a>
-                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Nosotros</span>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tienda</a>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Tecnologia</a>
-                    <span class="absolute top-0 right-0 bg-[#705ffc] text-white text-xs px-2 rounded-sm transform -translate-x-1/2 -translate-y-1/2">Tokens</span>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Snacks</a>
-                </li>
-                <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Servicios</a>
-                </li>
-                 <li class="relative p-2">
-                    <a href="javascript:void(0);" onclick="showSection('varios-view')" class="text-gray-500 font-medium uppercase hover:text-teal-500 transition-colors">Varios</a>
-                </li>
-            </ul>
-
-            <div class="flex space-x-4">
-                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-                    <i class="far fa-user"></i>
-                </a>
-                <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-item-count" class="absolute -top-2 -right-2 bg-teal-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
-                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
-                    </i>
-                </a>
-            </div>
-            <div class="md:hidden">
-                <button class="menu-toggle text-xl text-gray-700">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-        
         <div class="md:hidden">
             <button class="menu-toggle text-xl text-gray-700">
                 <i class="fas fa-bars"></i>
@@ -746,16 +700,6 @@
             </div>
         </section>
     </div>
-    
-    <section id="products" class="grid grid-cols-3 gap-6 px-12 mt-40 main-view">
-        <div class="product-box cursor-pointer border rounded-lg p-4 shadow-md hover:shadow-lg transition"
-             data-item-id="1">
-            <img src="./front/images/snacks.jpg" alt="Snacks de Ana" class="w-full h-40 object-contain mb-4">
-            <h3 class="text-lg font-bold">Snacks de Ana</h3>
-            <p class="text-gray-600 text-sm">Deliciosos snacks para toda ocasión.</p>
-        </div>
-    </section>
-
     <div id="cart-view" class="main-view hidden mt-40 px-12">
         <div class="flex justify-center items-center mb-10">
             <h2 class="text-3xl text-gray-800 tracking-wide uppercase font-semibold">Tu Carrito de Compras</h2>
@@ -793,58 +737,6 @@
             </div>
         </div>
     </div>
-
-    
-
-    <footer id="footer" class="section footer p-10 bg-[#b5b3b3] text-gray-800 border-t border-gray-100 mt-5">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">EXTRAS</h3>
-                    <a href="#" class="block text-gray-800 text-base">Marcas</a>
-                    <a href="#" class="block text-gray-800 text-base">Certificados de regalo</a>
-                    <a href="#" class="block text-gray-800 text-base">Suscribete</a>
-                    <a href="#" class="block text-gray-800 text-base">Especiales</a>
-                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">INFORMACION</h3>
-                    <a href="#" class="block text-gray-800 text-base">Sobre Nosotros</a>
-                    <a href="#" class="block text-gray-800 text-base">Politica de Privacidad</a>
-                    <a href="#" class="block text-gray-800 text-base">Terminos & Condiciones</a>
-                    <a href="#" class="block text-gray-800 text-base">Contactanos</a>
-                    <a href="#" class="block text-gray-800 text-base">Mapa del Sitio</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">Mi Cuenta</h3>
-                    <a href="#" class="block text-gray-800 text-base">Mi Cuenta</a>
-                    <a href="#" class="block text-gray-800 text-base">Historial de pedidos</a>
-                    <a href="#" class="block text-gray-800 text-base">Lista de Deseos</a>
-                    <a href="#" class="block text-gray-800 text-base">Boletin informativo</a>
-                    <a href="#" class="block text-gray-800 text-base">Devoluciones</a>
-                </div>
-                <div class="footer-top__box">
-                    <h3 class="text-xl font-normal mb-4">CONTACT US</h3>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-map-marker-alt"></i></span>
-                        Medellin, Colombia
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-envelope"></i></span>
-                        riwihub@gmail.com
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-phone"></i></span>
-                        123456778
-                    </div>
-                    <div class="flex items-center text-gray-800 text-base">
-                        <span class="mr-4"><i class="fas fa-paper-plane"></i></span>
-                        Medellin, Colombia
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <footer id="footer" class="section p-10 bg-white text-gray-600 w-full text-center border-gray-700 my-4">
     <div class="container mx-auto flex flex-col items-center">

@@ -1,4 +1,3 @@
-// app.js
 $(document).ready(function() {
     // --- Configuración de Sliders (carruseles) ---
     $('#adaptive').lightSlider({
@@ -16,37 +15,33 @@ $(document).ready(function() {
         }
     });
 
-    // --- Lógica de los Formularios y la Barra de Búsqueda ---
-  
-    // Abrir y cerrar la barra de búsqueda
-    $('.search-icon').on('click', function() {
-
+    // --- Lógica de la Barra de Búsqueda y Formularios ---
+    $(document).on('click', '.search-icon', function(){
         $('.search-bar').removeClass('hidden').addClass('flex');
     });
 
-    $('.search-cancel-icon').on('click', function() {
+    $(document).on('click', '.search-cancel-icon', function(){
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
 
-    // Abrir y gestionar los formularios de inicio de sesión y registro
-    $('.user-icon, .already-account-btn').on('click', function() {
+    $(document).on('click', '.user-icon, .already-account-btn', function(){
         $('.form-container').removeClass('hidden').addClass('flex');
         $('.login-form').removeClass('hidden').addClass('flex');
         $('.sign-up-form').addClass('hidden').removeClass('flex');
     });
 
-    $('.sign-up-btn').on('click', function() {
+    $(document).on('click', '.sign-up-btn', function(){
         $('.form-container').removeClass('hidden').addClass('flex');
         $('.sign-up-form').removeClass('hidden').addClass('flex');
         $('.login-form').addClass('hidden').removeClass('flex');
     });
 
-    $('.form-cancel-icon').on('click', function() {
+    $(document).on('click', '.form-cancel-icon', function(){
         $('.form-container').addClass('hidden').removeClass('flex');
     });
 
-    // --- Lógica del menú responsivo ---
-    $('.menu-toggle').on('click', function() {
+    // Lógica del menú responsivo
+    $(document).on('click', '.menu-toggle', function() {
         $('.mobile-menu').toggleClass('hidden');
     });
 
