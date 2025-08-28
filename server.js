@@ -12,6 +12,7 @@ import transactionRoutes from "./BACK/routes/transactionRoutes.js";
 import createAssociations from "./BACK/models/associations.js";
 import accountingRoutes from "./BACK/routes/accountingRoutes.js";
 import inventoryRoutes from "./BACK/routes/inventoryRoutes.js";
+import reportRoutes from "./BACK/routes/reportRoutes.js";
 
 
 // Middlewares
@@ -31,6 +32,7 @@ app.use("/api/orders", authMiddleware, orderRoutes);
 app.use("/api/transactions", authMiddleware, transactionRoutes);
 app.use("/api/inventory", authMiddleware, inventoryRoutes);
 app.use("/api/accounting", authMiddleware, accountingRoutes);
+app.use("/api/reports", authMiddleware, reportRoutes);
 
 // manejar errores 404
 app.use((req, res, next) => {
@@ -42,8 +44,8 @@ app.use(errorMiddleware);
 
 // Conexión a la base de datos
 sequelize.authenticate()
-  .then(() => console.log("✅ Conectado a la base de datos"))
-  .catch(err => console.error("❌ Error al conectar:", err));
+  .then(() => console.log(" Conectado a la base de datos"))
+  .catch(err => console.error(" Error al conectar:", err));
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
