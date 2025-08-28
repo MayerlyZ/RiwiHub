@@ -20,9 +20,9 @@ export async function computeDailyReport(dateISO) {
   const start = new Date(`${dateISO}T00:00:00.000-05:00`);
   const end = new Date(`${dateISO}T23:59:59.999-05:00`);
 
-  // -- Filtro base por fecha de creación (created_at) dentro del día local
+  // -- Filtro base por fecha de creación (createdAt) dentro del día local
   const where = {
-    created_at: { [Op.between]: [start, end] },
+    createdAt: { [Op.between]: [start, end] },
     // Si tu tabla de órdenes tuviera un estado (p.ej. "status" o "order_status"),
     // podrías filtrar aquí solo "paid"/"completed".
     // status: { [Op.in]: ["paid", "completed"] }
