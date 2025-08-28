@@ -10,19 +10,10 @@ const CartItem = sequelize.define('CartItem', {
   cart_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'shopping_carts',
-      key: 'cart_id',
-    },
-    onDelete: 'CASCADE',
   },
   item_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'items',
-      key: 'item_id',
-    },
   },
   quantity: {
     type: DataTypes.INTEGER,
@@ -38,23 +29,16 @@ const CartItem = sequelize.define('CartItem', {
   subtotal: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+    get() {
+      return this.getDataValue('subtotal');
+    },
+    set(value) {
+      throw new Error("subtotal is a generated column and cannot be set manually.");
+    }
+  }
 }, {
   tableName: 'cart_items',
-  timestamps: false,
-});
-
-// Hook para calcular el subtotal antes de guardar
-CartItem.beforeSave((cartItem, options) => {
-  cartItem.subtotal = cartItem.quantity * cartItem.unit_price;
+  timestamps: true,
 });
 
 export default CartItem;

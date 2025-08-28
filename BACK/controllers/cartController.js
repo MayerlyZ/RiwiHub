@@ -3,7 +3,7 @@ import { isPositiveNumber } from "../utils/validators.js";
 
 //añadir item al carrito
 export const addItemToCart = async (req, res) => {
-  const user_id = req.params.userId;
+  const user_id = req.user.id;
   const { item_id, quantity } = req.body;
 
   if(!item_id || !isPositiveNumber(quantity)) {
@@ -20,8 +20,8 @@ export const addItemToCart = async (req, res) => {
 
 // Remove item from cart
 export const removeItemFromCart = async (req, res) => {
-  const user_id = req.params.userId;
-  const { item_id } = req.params;
+  const user_id = req.user.id;
+  const { id: item_id } = req.params;
 
   if (!item_id) {
     return res.status(400).json({ message: 'Item ID is required' });
@@ -41,7 +41,7 @@ export const removeItemFromCart = async (req, res) => {
 
 // Get cart contents
 export const getCartContents = async (req, res) => {
-  const user_id = req.params.userId;
+  const user_id = req.user.id;
   
   try {
     const cart = await cartService.getCartByUserId(user_id); // Busca si el usuario tiene carrito

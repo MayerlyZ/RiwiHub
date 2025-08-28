@@ -21,3 +21,7 @@ export const loginUser = async (email, password) => {
   const token = generateAuthToken(user);
   return { user, token };
 };
+
+export const getUserByEmail = async (email) => {
+  return await User.findOne({ where: { email } });
+};

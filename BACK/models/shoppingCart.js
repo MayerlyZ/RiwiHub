@@ -14,14 +14,11 @@ const ShoppingCart = sequelize.define("ShoppingCart", {
   status: {
     type: DataTypes.ENUM("active", "abandoned", "completed"),
     defaultValue: "active"
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
   }
 }, {
   tableName: "shopping_carts",
-  timestamps: false
+  timestamps: true
+
 });
 
 export default ShoppingCart;

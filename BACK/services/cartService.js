@@ -12,7 +12,7 @@ export const addItemToCart = async (user_id, item_id, quantity) => {
   }
 
   // Search for the cart item
-  let cartItem = await CartItem.findOne({ where: { cart_id: cart.id, item_id } });
+  let cartItem = await CartItem.findOne({ where: { cart_id: cart.cart_id, item_id } });
 
   if (cartItem) {
     // If the item is already in the cart, update the quantity
@@ -20,7 +20,7 @@ export const addItemToCart = async (user_id, item_id, quantity) => {
     await cartItem.save();
   } else {
     // If the item is not in the cart, add it
-    cartItem = await CartItem.create({ cart_id: cart.id, item_id, quantity });
+    cartItem = await CartItem.create({ cart_id: cart.cart_id, item_id, quantity });
   }
   return cartItem;
 };
@@ -29,18 +29,20 @@ export const addItemToCart = async (user_id, item_id, quantity) => {
 export const removeItemFromCart = async (user_id, item_id) => {
   const cart = await ShoppingCart.findOne({ where: { user_id } });
   if (!cart) return null;
-  const deleted = await CartItem.destroy({ where: { cart_id: cart.id, item_id } });
+  const deleted = await CartItem.destroy({ where: { cart_id: cart.cart_id, item_id } });
  return deleted;
 };
 
 // Get the contents of the cart
 export const getCartContents = async (user_id) => {
-  return await CartItem.findAll({ where: { user_id } });
+  const cart = await ShoppingCart.findOne({ where: { user_id } });
+  if (!cart) return [];
+  return await CartItem.findAll({ where: { cart_id: cart.cart_id } });
 };
 
 // Get the cart by user ID
 export const getCartByUserId = async (user_id) => {
-  return await ShoppingCart.findOne({ where: { user_id },
-  include: [{ model: CartItem, as: 'items' }]
-  });
+  return await ShoppingCart.findOne({ 
+    where: { user_id }, 
+    include: [{ model: CartItem, as: 'cartItems' }] });
 };

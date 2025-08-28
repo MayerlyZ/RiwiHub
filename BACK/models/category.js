@@ -18,14 +18,10 @@ const Category = sequelize.define("Category", {
   parent_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    references: {
-      model: "categories",
-      key: "category_id",
-    },
   },
 }, {
   tableName: "categories",
-  timestamps: false,
+  timestamps: true,
 });
 
 export default Category;

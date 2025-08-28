@@ -29,7 +29,12 @@ const OrderItem = sequelize.define("OrderItem", {
   },
 }, {
   tableName: "order_items",
-  timestamps: false,
+  timestamps: true,
+});
+
+// hook
+OrderItem.beforeSave((orderItem) => {
+  orderItem.subtotal = orderItem.quantity * orderItem.unit_price;
 });
 
 export default OrderItem;

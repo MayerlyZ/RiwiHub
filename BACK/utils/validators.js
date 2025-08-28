@@ -5,7 +5,7 @@ export function isValidEmail(email) {
 
 // Valida que un valor sea un número positivo
 export function isPositiveNumber(value) {
-	return typeof value === 'number' && value > 0;
+	return !isNaN(value) && Number(value) > 0;
 }
 
 // Valida que un string no esté vacío

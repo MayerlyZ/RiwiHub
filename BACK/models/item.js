@@ -19,6 +19,11 @@ const Item = sequelize.define("Item", {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
+  price_token: {  
+    type: DataTypes.DECIMAL(10, 2),
+    allowNull: true,
+    defaultValue: null,
+  },
   stock: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
@@ -27,26 +32,17 @@ const Item = sequelize.define("Item", {
     type: DataTypes.ENUM("product", "service"),
     allowNull: false,
   },
-    price_token: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: true,
-    defaultValue: null 
-  },
-    category_id: {
+  category_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: "categories",
-      key: "category_id",
-    },
   },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
+  seller_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 }, {
   tableName: "items",
-  timestamps: false, // No usar createdAt/updatedAt automáticos
+  timestamps: true,
 });
 
 export default Item;

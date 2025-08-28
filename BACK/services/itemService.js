@@ -1,4 +1,4 @@
-import Item from "../models/item";
+import Item from "../models/item.js";
 
 // Get all items
 export const getAllItems = async () => {

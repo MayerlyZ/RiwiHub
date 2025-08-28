@@ -1,4 +1,5 @@
 import * as authService from '../services/authService.js';
+import { generateAuthToken } from '../utils/auth.js';
 
 // Login user
 export const loginUser = async (req, res) => {
@@ -19,12 +20,12 @@ export const loginUser = async (req, res) => {
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const existingUser = await User.findOne({ where: { email } });
+    const existingUser = await authService.getUserByEmail(email);
     if (existingUser) {
       return res.status(409).json({ error: "Email already in use" });
     }
-    const newUser = await User.create({ name, email, password, wallet_balance: 0, role: "buyer" });
-    const token = newUser.generateAuthToken();
+    const newUser = await authService.registerUser({ name, email, password, wallet_balance: 0, role: "buyer" });
+    const token = generateAuthToken(newUser);
     res.status(201).json({ token });
   } catch (error) {
     console.error("Error registering user:", error);

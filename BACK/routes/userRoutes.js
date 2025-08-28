@@ -1,5 +1,6 @@
 import e from "express";
-import {getAllUsers, getUserById, createUser, updateUser, deleteUser, registerUser, loginUser } from "../controllers/userController.js";
+import {getAllUsers, getUserById, createUser, updateUser, deleteUser } from "../controllers/userController.js";
+import {registerUser, loginUser} from "../controllers/authController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = e.Router();

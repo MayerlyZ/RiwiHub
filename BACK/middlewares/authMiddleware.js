@@ -8,7 +8,7 @@ export default function authMiddleware(req, res, next) {
 
   const token = authHeader.split(" ")[1];
   try {
-    const decoded = jwr.verify(token, process.env.JWT_SECRET);
+    const decoded = JWT.verify(token, process.env.JWT_SECRET);
     req.user = decoded; // Attach user info to request object
     next();
   } catch (error) {

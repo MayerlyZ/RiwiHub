@@ -1,10 +1,15 @@
+// BACK/middlewares/roleMiddleware.js
+// Verifica que el usuario tenga un rol permitido
 
-export default function authorizeRoles(...allowedRoles) {
+export const authorizeRoles = (...roles) => {
   return (req, res, next) => {
-    // req.user debe estar definido por authMiddleware
-    if (!req.user || !allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ error: "No tienes permisos para acceder a este recurso" });
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ error: "Forbidden: insufficient permissions" });
     }
     next();
   };
-}
+};
+

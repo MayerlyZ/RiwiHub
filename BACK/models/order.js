@@ -22,14 +22,10 @@ const Order = sequelize.define("Order", {
   payment_method: {
     type: DataTypes.ENUM("wallet", "credit_card", "cash"),
     allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+  }
 }, {
   tableName: "orders",
-  timestamps: false,
+  timestamps: true,
 });
 
 export default Order;
