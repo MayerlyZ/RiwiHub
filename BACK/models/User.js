@@ -31,15 +31,12 @@ const User = sequelize.define(
       type: DataTypes.ENUM('admin', 'seller', 'buyer'),
       allowNull: false,
       defaultValue: 'buyer',
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
+    }
   },
   {
-    tableName: "users",  
-    timestamps: false,   
+    tableName: "users",
+    timestamps: true,          
+       
   }
 );
 

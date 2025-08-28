@@ -68,7 +68,7 @@ export const createItem = async (req, res) => {
       price_token,
       category_id,
       seller_id: req.user.role === "seller" ? req.user.id : req.body.seller_id,
-    });
+    };
   try {
     const newItem = await itemService.createItem(data);
     res.status(201).json(newItem);
