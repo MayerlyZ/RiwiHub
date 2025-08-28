@@ -102,66 +102,202 @@
         </ul>
     </div>
     <div
-        class="search-bar fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-xl flex justify-center z-50 hidden transition-all duration-300 ease-in-out">
-        <div class="w-11/12 border-b-2 border-gray-500 flex justify-center items-center h-[100px] mt-5">
-            <input type="text" placeholder="Search For Product" name="search"
-                class="w-full p-8 border-none outline-none text-4xl mx-5 placeholder-gray-400" />
-            <a href="javascript:void(0);"
-                class="search-cancel-icon text-gray-700 text-4xl pr-10 hover:text-teal-500 transition-colors">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
+        class="search-bar fixed top-24 right-8 w-96 h-16 bg-white shadow-xl rounded-lg flex items-center px-4 z-50 hidden transition-all duration-300 ease-in-out">
+        <input type="text" placeholder="Buscar producto" name="search"
+            class="flex-1 border-none outline-none text-lg px-2 placeholder-gray-400 bg-transparent" />
+        <a href="javascript:void(0);"
+            class="search-cancel-icon text-gray-700 text-2xl ml-3 hover:text-teal-500 transition-colors">
+            <i class="fas fa-times"></i>
+        </a>
     </div>
 
     <div
-        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50">
         <div
-            class="login-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
+            class="login-form w-[420px] p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-purple">
             <a href="javascript:void(0);"
                 class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
-            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Iniciar Sesión</strong>
-            <form action="" class="w-full flex flex-col justify-center items-center">
-                <input type="email" placeholder="Example@gmail.com" name="email" required
-                    class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="password" placeholder="password" name="password" required
-                    class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="submit" value="log In"
-                    class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
-            </form>
-            <div class="w-11/12 flex justify-between items-center mt-3">
-                <a href="#" class="text-gray-500 text-sm hover:text-teal-500">Olvidaste tu Contraseña</a>
-                <a href="javascript:void(0);"
-                    class="text-gray-500 text-sm border-b border-gray-500 leading-4 sign-up-btn hover:text-teal-500">Crear
-                    Cuenta</a>
-            </div>
-        </div>
+            
+            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-70 h-20 mb-4 object-contain" />
 
-        <div
-            class="sign-up-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
-            <a href="javascript:void(0);"
-                class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
-                <i class="fas fa-times"></i>
-            </a>
-            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Registrarse</strong>
-            <form action="" class="w-full flex flex-col justify-center items-center">
-                <input type="text" placeholder="full name" name="fullname" required
-                    class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="email" placeholder="Example@gmail.com" name="email" required
-                    class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="password" placeholder="password" name="password" required
-                    class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="submit" value="sign-up"
-                    class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
+            <h1 class="text-1.5xl font-bold mb-6">Sign in to your account</h1>
+            <form action="" class="w-full">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <input type="email" id="email" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <input type="password" id="password" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="w-full flex justify-between items-center mb-6">
+                    <label class="flex items-center text-sm text-gray-400">
+                        <input type="checkbox" class="w-4 h-4 text-[#8C5DFF] bg-transparent border-[#3C4153] rounded">
+                        <span class="ml-2">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-gray-400 hover:underline hover:text-white">Forgot password?</a>
+                </div>
+                <button type="submit"
+                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6">
+                    Sign in
+                </button>
             </form>
-            <div class="w-11/12 mt-3 text-center">
-                <a href="javascript:void(0);"
-                    class="already-account-btn text-gray-500 text-sm hover:text-teal-500">Already have Acount</a>
+            <div class="w-full flex items-center mb-6">
+                <div class="flex-grow border-t border-gray-700"></div>
+                <span class="mx-4 text-sm text-gray-400">Or continue with</span>
+                <div class="flex-grow border-t border-gray-700"></div>
+            </div>
+            <div class="w-full flex gap-4 mb-6">
+                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
+                        <path d="M12.0001 4.75001C14.0772 4.75001 15.8612 5.48514 17.2031 6.8687L20.0001 4.07176C17.9254 2.05832 15.1118 0.826294 12.0001 0.826294C7.54019 0.826294 3.79155 3.19706 1.87974 6.64344L5.68962 9.48912C6.51613 6.96024 9.00693 4.75001 12.0001 4.75001Z"></path>
+                        <path d="M23.3647 12.0001C23.3647 11.2323 23.2974 10.4856 23.1678 9.75781H12.0001V13.8837H18.7844C18.4735 15.5562 17.5256 16.9933 16.1558 17.9575L19.9657 20.8032C22.2536 18.6659 23.3647 15.6888 23.3647 12.0001Z"></path>
+                        <path d="M1.87974 6.64344L5.68962 9.48912C5.45267 10.203 5.32111 11.0001 5.32111 12.0001C5.32111 12.9865 5.44026 13.9213 5.65675 14.7937L1.87109 17.6593C0.686566 15.4283 0 13.0016 0 10.4578C0 8.87784 0.354124 7.37877 0.999742 6.00034L1.87974 6.64344Z"></path>
+                        <path d="M16.1558 17.9575C15.195 18.636 14.1037 19.1415 12.9113 19.4678L12.0001 19.4678L12.0001 15.3419H12.0298C9.57022 15.3419 7.4988 14.1365 6.43841 12.2745L2.62853 15.1192C4.5501 18.5752 8.29177 21.0001 12.0001 21.0001C15.1118 21.0001 17.8967 19.8596 19.9657 17.7023L16.1558 17.9575Z"></path>
+                    </svg>
+                    <span class="text-white">Google</span>
+                </button>
+                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
+                        <path d="M12.0001 2.24716C6.54019 2.24716 2.00012 6.78723 2.00012 12.2472C2.00012 16.6575 4.8859 20.3705 8.91035 21.6583C9.42398 21.7505 9.61058 21.4334 9.61058 21.1627C9.61058 20.9169 9.60126 20.1264 9.60126 19.3082C6.96347 19.8893 6.39828 18.1585 6.39828 18.1585C5.95252 17.0658 5.37893 16.7629 5.37893 16.7629C4.50285 16.1363 5.44199 16.1541 5.44199 16.1541C6.44855 16.2235 6.99427 17.1523 6.99427 17.1523C7.8091 18.5298 9.07008 18.1189 9.58371 17.8841C9.66442 17.3204 9.89782 16.9248 10.1554 16.7025C8.15933 16.4716 5.86012 15.6547 5.86012 12.2829C5.86012 11.294 6.20846 10.4489 6.76008 9.77353C6.6783 9.42938 6.4223 8.64775 6.85226 7.55502C6.85226 7.55502 7.5027 7.34005 9.5925 8.74201C10.2291 8.56064 10.9205 8.47144 11.6119 8.46211C12.3033 8.47144 12.9947 8.56064 13.6313 8.74201C15.7211 7.34005 16.3715 7.55502 16.3715 7.55502C16.8015 8.64775 16.5455 9.42938 16.4637 9.77353C17.0153 10.4489 17.3637 11.294 17.3637 12.2829C17.3637 15.6454 15.0645 16.4623 13.0684 16.7025C13.3768 16.9641 13.6231 17.4777 13.6231 18.2396C13.6231 19.3414 13.6142 20.2525 13.6142 20.5232C13.6142 20.7939 13.7915 21.1098 14.2863 21.0176C18.3107 19.7298 21.1965 16.0168 21.1965 11.6065C21.1965 6.14659 16.6565 1.60652 11.1965 1.60652H12.0001Z"></path>
+                    </svg>
+                    <span class="text-white">GitHub</span>
+                </button>
+            </div>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿No tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-register" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Regístrate</a>
             </div>
         </div>
     </div>
 
+    <!-- Modal de registro -->
+    <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-white">
+            <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
+            </a>
+            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain" />
+            <h1 class="text-2xl font-bold mb-6">Crear una cuenta</h1>
+            <form action="" class="w-full">
+                <div class="mb-4">
+                    <label for="register-role" class="block text-sm font-medium text-gray-400 mb-1">Tipo de usuario</label>
+                    <select id="register-role" class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        <option value="cliente">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="vendedor">Vendedor</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="register-name" class="block text-sm font-medium text-gray-400 mb-1">Nombre</label>
+                    <input type="text" id="register-name" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-cel" class="block text-sm font-medium text-gray-400 mb-1">Celular</label>
+                    <input type="text" id="register-cel" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-cedula" class="block text-sm font-medium text-gray-400 mb-1">Cédula</label>
+                    <input type="text" id="register-cedula" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4 hidden" id="cargo-section">
+                    <label for="register-cargo" class="block text-sm font-medium text-gray-400 mb-1">Cargo</label>
+                    <input type="text" id="register-cargo" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4 hidden" id="tienda-section">
+                    <label for="register-tienda" class="block text-sm font-medium text-gray-400 mb-1">Nombre de la tienda</label>
+                    <input type="text" id="register-tienda" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <input type="email" id="register-email" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-6">
+                    <label for="register-password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <input type="password" id="register-password" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <button type="submit"
+                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6">
+                    Registrarse
+                </button>
+            </form>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var roleSelect = document.getElementById('register-role');
+                    var cargoSection = document.getElementById('cargo-section');
+                    var tiendaSection = document.getElementById('tienda-section');
+                    roleSelect.addEventListener('change', function () {
+                        cargoSection.classList.add('hidden');
+                        tiendaSection.classList.add('hidden');
+                        if (roleSelect.value === 'administrador') {
+                            cargoSection.classList.remove('hidden');
+                        } else if (roleSelect.value === 'vendedor') {
+                            cargoSection.classList.remove('hidden');
+                            tiendaSection.classList.remove('hidden');
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+            </form>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mostrar registro
+        document.addEventListener('DOMContentLoaded', function () {
+            var showRegister = document.getElementById('show-register');
+            var showLogin = document.getElementById('show-login');
+            var registerModal = document.getElementById('register-modal');
+            var registerCancel = document.getElementById('register-cancel');
+            var loginForm = document.querySelector('.form-container');
+
+            if (showRegister) {
+                showRegister.onclick = function () {
+                    loginForm.style.display = 'none';
+                    registerModal.style.display = 'flex';
+                };
+            }
+            if (showLogin) {
+                showLogin.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            if (registerCancel) {
+                registerCancel.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            // Cerrar login con la X
+            var loginCancel = document.querySelector('.form-cancel-icon');
+            if (loginCancel) {
+                loginCancel.onclick = function () {
+                    loginForm.style.display = 'none';
+                };
+            }
+        });
+    </script>
     <div id="inicio-view" class="main-view main-content-padding">
         <ul id="adaptive" class="cs-hidden">
             <li class="item-a">
@@ -537,7 +673,7 @@
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nueva Llegada en
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nueva Llegada en
                     Tecnología</strong>
                 <p class="text-gray-500 mt-2 text-sm">Los gadgets más recientes para los coders.</p>
             </div>
@@ -738,7 +874,7 @@
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nuestros Mejores Snacks</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Mejores Snacks</strong>
                 <p class="text-gray-500 mt-2 text-sm">Prueba los mejores bocadillos del mercado.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
@@ -814,7 +950,7 @@
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nuestros Servicios</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Servicios</strong>
                 <p class="text-gray-500 mt-2 text-sm">Servicios de alta calidad para tu negocio.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
@@ -873,7 +1009,7 @@
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Productos Varios</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Productos Varios</strong>
                 <p class="text-gray-500 mt-2 text-sm">Explora una variedad de productos únicos.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
