@@ -171,25 +171,6 @@
             </div>
         </div>
     </div>
-    <script>
-        // Mostrar login solo al hacer click en el icono de usuario
-        document.addEventListener('DOMContentLoaded', function () {
-            var userIcon = document.querySelector('.user-icon');
-            var loginModal = document.getElementById('login-modal');
-            var loginCancel = loginModal.querySelector('.form-cancel-icon');
-
-            if (userIcon) {
-                userIcon.onclick = function () {
-                    loginModal.style.display = 'flex';
-                };
-            }
-            if (loginCancel) {
-                loginCancel.onclick = function () {
-                    loginModal.style.display = 'none';
-                };
-            }
-        });
-    </script>
 
     <!-- Modal de registro -->
     <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
@@ -252,23 +233,6 @@
                 <span class="text-black text-sm">¿Ya tienes cuenta?</span>
                 <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
             </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var roleSelect = document.getElementById('register-role');
-                    var cargoSection = document.getElementById('cargo-section');
-                    var tiendaSection = document.getElementById('tienda-section');
-                    roleSelect.addEventListener('change', function () {
-                        cargoSection.classList.add('hidden');
-                        tiendaSection.classList.add('hidden');
-                        if (roleSelect.value === 'administrador') {
-                            cargoSection.classList.remove('hidden');
-                        } else if (roleSelect.value === 'vendedor') {
-                            cargoSection.classList.remove('hidden');
-                            tiendaSection.classList.remove('hidden');
-                        }
-                    });
-                });
-            </script>
         </div>
     </div>
             </form>
@@ -278,42 +242,7 @@
             </div>
         </div>
     </div>
-    <script>
-        // Mostrar registro
-        document.addEventListener('DOMContentLoaded', function () {
-            var showRegister = document.getElementById('show-register');
-            var showLogin = document.getElementById('show-login');
-            var registerModal = document.getElementById('register-modal');
-            var registerCancel = document.getElementById('register-cancel');
-            var loginForm = document.querySelector('.form-container');
 
-            if (showRegister) {
-                showRegister.onclick = function () {
-                    loginForm.style.display = 'none';
-                    registerModal.style.display = 'flex';
-                };
-            }
-            if (showLogin) {
-                showLogin.onclick = function () {
-                    registerModal.style.display = 'none';
-                    loginForm.style.display = 'flex';
-                };
-            }
-            if (registerCancel) {
-                registerCancel.onclick = function () {
-                    registerModal.style.display = 'none';
-                    loginForm.style.display = 'flex';
-                };
-            }
-            // Cerrar login con la X
-            var loginCancel = document.querySelector('.form-cancel-icon');
-            if (loginCancel) {
-                loginCancel.onclick = function () {
-                    loginForm.style.display = 'none';
-                };
-            }
-        });
-    </script>
     <div id="inicio-view" class="main-view main-content-padding">
         <ul id="adaptive" class="cs-hidden">
             <li class="item-a">
@@ -1127,31 +1056,8 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    <footer id="footer" class="section p-10 bg-white text-purple-600 w-full text-center border-gray-700 my-4">
-        <div class="container mx-auto flex flex-col items-center">
-            <div class="footer-links flex space-x-6 text-purple-400 mb-6">
-                <a href="#" class="hover:text-black transition-colors duration-200">About</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Contactanos</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Saber más</a>
-            </div>
 
-            <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
-                <a href="#" class="hover:text-black transition-colors duration-200"><i
-                        class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
-            </div>
 
-            <div class="w-full text-center">
-                <hr class="border-gray-700 my-4">
-                <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
-            </div>
-=======
 <!-- Vista del vendedor -->
     <div id="seller-profile-view" class="main-view hidden mt-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            
@@ -1207,30 +1113,32 @@
             </section>
         </div>
     </div>
-    <footer id="footer" class="section p-10 bg-white text-gray-600 w-full text-center border-gray-700 my-4">
-    <div class="container mx-auto flex flex-col items-center">
-        <div class="footer-links flex space-x-6 text-gray-400 mb-6">
-            <a href="#" class="hover:text-black transition-colors duration-200">About</a>
-            <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
-            <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
-            <a href="#" class="hover:text-black transition-colors duration-200">Contactanos</a>
-            <a href="#" class="hover:text-black transition-colors duration-200">Saber más</a>
-        </div>
-        
-        <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
-            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
-            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
-        </div>
-        
-        <div class="w-full text-center">
-            <hr class="border-gray-700 my-4">
-            <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
->>>>>>> cce6dcc8c7d2e471062109f8f239c1dd5d3a6fb0
+   
+</body>
+<footer id="footer" class="section p-10 bg-white text-purple-600 w-full text-center border-gray-700 my-4">
+        <div class="container mx-auto flex flex-col items-center">
+            <div class="footer-links flex space-x-6 text-purple-400 mb-6">
+                <a href="#" class="hover:text-black transition-colors duration-200">About</a>
+                <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
+                <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
+                <a href="#" class="hover:text-black transition-colors duration-200">Contactanos</a>
+                <a href="#" class="hover:text-black transition-colors duration-200">Saber más</a>
+            </div>
+
+            <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
+                <a href="#" class="hover:text-black transition-colors duration-200"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="w-full text-center">
+                <hr class="border-gray-700 my-4">
+                <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
+            </div>
         </div>
     </footer>
-</body>
 
 </html>

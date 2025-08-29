@@ -372,3 +372,72 @@ $(document).ready(function() {
         if(authToken) renderSellerProducts();
     }
 });
+// --- LÓGICA DEL FORMULARIO DE REGISTRO ---
+// Muestra/oculta campos adicionales según el rol seleccionado.
+document.addEventListener('DOMContentLoaded', function () {
+                    var roleSelect = document.getElementById('register-role');
+                    var cargoSection = document.getElementById('cargo-section');
+                    var tiendaSection = document.getElementById('tienda-section');
+                    roleSelect.addEventListener('change', function () {
+                        cargoSection.classList.add('hidden');
+                        tiendaSection.classList.add('hidden');
+                        if (roleSelect.value === 'administrador') {
+                            cargoSection.classList.remove('hidden');
+                        } else if (roleSelect.value === 'vendedor') {
+                            cargoSection.classList.remove('hidden');
+                            tiendaSection.classList.remove('hidden');
+                        }
+                    });
+                });
+
+  // Mostrar registro
+        document.addEventListener('DOMContentLoaded', function () {
+            var showRegister = document.getElementById('show-register');
+            var showLogin = document.getElementById('show-login');
+            var registerModal = document.getElementById('register-modal');
+            var registerCancel = document.getElementById('register-cancel');
+            var loginForm = document.querySelector('.form-container');
+
+            if (showRegister) {
+                showRegister.onclick = function () {
+                    loginForm.style.display = 'none';
+                    registerModal.style.display = 'flex';
+                };
+            }
+            if (showLogin) {
+                showLogin.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            if (registerCancel) {
+                registerCancel.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            // Cerrar login con la X
+            var loginCancel = document.querySelector('.form-cancel-icon');
+            if (loginCancel) {
+                loginCancel.onclick = function () {
+                    loginForm.style.display = 'none';
+                };
+            }
+        });
+          // Mostrar login solo al hacer click en el icono de usuario
+        document.addEventListener('DOMContentLoaded', function () {
+            var userIcon = document.querySelector('.user-icon');
+            var loginModal = document.getElementById('login-modal');
+            var loginCancel = loginModal.querySelector('.form-cancel-icon');
+
+            if (userIcon) {
+                userIcon.onclick = function () {
+                    loginModal.style.display = 'flex';
+                };
+            }
+            if (loginCancel) {
+                loginCancel.onclick = function () {
+                    loginModal.style.display = 'none';
+                };
+            }
+        });
