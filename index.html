@@ -7,24 +7,21 @@
     <title>RiwiHub</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" type="text/css" href="./front/css/lightslider.css">
     <link rel="stylesheet" type="text/css" href="./front/css/style.css">
 
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
     <script src="./front/js/app.js"></script>
-    <script src="./front/js/spa.js"></script>
-
+    
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 </head>
 
 <body class="font-poppins">
     <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
         <div class="flex justify-between items-center px-12 h-20 bg-white">
-            <a href="#" class="logo">
+            <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="logo">
                 <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
             </a>
 
@@ -57,7 +54,6 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <a href="javascript:void(0);"
-                    onclick="showSection('seller-profile-view', this)"
                     class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
                     <i class="far fa-user"></i>
                 </a>
@@ -69,7 +65,7 @@
 
                 <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
                     <i class="fas fa-shopping-cart">
-                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
+                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal" id="cart-item-count">0</span>
                     </i>
                 </a>
 
@@ -79,7 +75,7 @@
                     </button>
                 </div>
             </div>
-
+            
             <div class="md:hidden">
                 <button class="menu-toggle text-xl text-gray-700">
                     <i class="fas fa-bars"></i>
@@ -114,31 +110,31 @@
     </div>
 
     <div id="login-modal"
-        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
-        <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-[#1B1E2B] shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-[#3C4153]">
+        class="modal-container fixed top-0 left-0 w-full h-full bg-black  bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-[white] shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-white">
             <a href="javascript:void(0);"
-                class="form-cancel-icon absolute top-2 right-4 text-white text-xl hover:text-teal-500 transition-colors">
+                class="modal-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
             <img src="./front/images/logopestaña.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain drop-shadow-lg" />
-            <h1 class="text-2xl font-bold mb-6 text-white">Sign in to your account</h1>
+            <h1 class="text-2xl font-bold mb-6 text-black">Sign in to your account</h1>
             <form action="" class="w-full">
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <label for="email" class="block text-sm font-medium text-black mb-1">Email address</label>
                     <input type="email" id="email" placeholder=""
-                        class="w-full h-12 px-4 bg-[#232734] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-white text-black border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <label for="password" class="block text-sm font-medium text-black mb-1">Password</label>
                     <input type="password" id="password" placeholder=""
-                        class="w-full h-12 px-4 bg-[#232734] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-white text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="w-full flex justify-between items-center mb-6">
                     <label class="flex items-center text-sm text-gray-400">
                         <input type="checkbox" class="w-4 h-4 text-[#8C5DFF] bg-transparent border-[#3C4153] rounded">
-                        <span class="ml-2 text-gray-400">Remember me</span>
+                        <span class="ml-2 text-black">Remember me</span>
                     </label>
-                    <a href="#" class="text-sm text-gray-400 hover:underline hover:text-white">Forgot password?</a>
+                    <a href="#" class="text-sm text-black hover:underline hover:text-white">Forgot password?</a>
                 </div>
                 <button type="submit"
                     class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6 shadow-lg">
@@ -147,7 +143,7 @@
             </form>
             <div class="w-full flex items-center mb-6">
                 <div class="flex-grow border-t border-gray-700"></div>
-                <span class="mx-4 text-sm text-gray-400">Or continue with</span>
+                <span class="mx-4 text-sm text-black">Or continue with</span>
                 <div class="flex-grow border-t border-gray-700"></div>
             </div>
             <div class="w-full flex gap-4 mb-6">
@@ -165,15 +161,15 @@
                 </button>
             </div>
             <div class="w-full text-center">
-                <span class="text-gray-400 text-sm">¿No tienes cuenta?</span>
+                <span class="text-black text-sm">¿No tienes cuenta?</span>
                 <a href="javascript:void(0);" id="show-register" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Regístrate</a>
             </div>
         </div>
     </div>
 
-    <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+    <div id="register-modal" class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
         <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-white to-teal-400 shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-white-500">
-            <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
+            <a href="javascript:void(0);" id="register-cancel" class="modal-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
             <img src="./front/images/logopestaña.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain" />
@@ -183,12 +179,11 @@
                     <label for="register-role" class="block text-sm font-medium text-black mb-1">Tipo de usuario</label>
                     <select id="register-role" class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                         <option value="cliente">Cliente</option>
-                        <option value="administrador">Administrador</option>
                         <option value="vendedor">Vendedor</option>
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="register-name" class="block  font-medium text-black mb-1">Nombre</label>
+                    <label for="register-name" class="block font-medium text-black mb-1">Nombre</label>
                     <input type="text" id="register-name" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
@@ -235,12 +230,12 @@
     </div>
 
     <div id="tokens-modal"
-        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
         <div
             class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-white shadow-2xl rounded-3xl flex flex-col items-center relative text-gray border-4 border-white-500">
             <a href="javascript:void(0);"
                 id="tokens-modal-cancel"
-                class="form-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-500 transition-colors">
+                class="modal-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
             <h2 class="text-2xl font-bold mb-4 text-gray-800">Tus Tokens</h2>
@@ -418,13 +413,10 @@
         </ul>
 
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
-
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
                 <img src="./front/images/coderexample.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
-
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -438,13 +430,10 @@
                     </div>
                 </a>
             </div>
-
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
                 <img src="./front/images/IAS_image.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
-
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -458,13 +447,10 @@
                     </div>
                 </a>
             </div>
-
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
                 <img src="./front/images/tokenriwi.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
-
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -478,7 +464,6 @@
                     </div>
                 </a>
             </div>
-
         </section>
 
         <section class="new-arrival flex flex-col justify-center items-center py-10">
@@ -491,7 +476,6 @@
 
             <div
                 class="product-container w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -511,7 +495,6 @@
                             class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Ana</span>
                     </div>
                 </div>
-
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -531,7 +514,6 @@
                             class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Amiguito</span>
                     </div>
                 </div>
-
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -551,7 +533,6 @@
                             class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Pablo</span>
                     </div>
                 </div>
-
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -577,9 +558,7 @@
         <div class="relative h-[40vh] my-5">
             <div class="absolute inset-0 bg-cover bg-center"
                 style="background-image: url('./front/images/tokens_banne2.webp');"></div>
-
             <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-
             <div class="relative w-4/5 h-full flex items-center mx-auto">
                 <div class="banner-text flex flex-col text-left text-white">
                     <span class="uppercase tracking-widest text-lg font-medium text-gray-200">
@@ -589,7 +568,7 @@
                         Recarga desde <br>
                         <span class="text-white">$10.000</span>
                     </strong>
-                    <a href="#"
+                    <a href="javascript:void(0);"
                         class="banner-btn w-40 h-10 flex justify-center items-center text-white bg-purple-600 uppercase tracking-wider mt-4 hover:bg-teal-600 transition">
                         Recarga Ahora
                     </a>
@@ -627,7 +606,7 @@
                     tecnologicos</span>
                 <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font
                         class="text-teal-500 text-black">código promocional</font></strong>
-                <a href="#"
+                <a href="javascript:void(0);"
                     class="w-40 h-10 flex justify-center items-center text-white bg-blue-500 uppercase tracking-wider mt-4">Obtener
                     Ahora</a>
             </div>
@@ -638,7 +617,6 @@
                     Tecnología</strong>
                 <p class="text-gray-500 mt-2 text-sm">Los gadgets más recientes para los coders.</p>
             </div>
-
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
@@ -1014,7 +992,7 @@
         </section>
     </div>
 
-    <section id="products" class="grid grid-cols-3 gap-6 px-12 mt-40 main-view">
+    <section id="products" class="grid grid-cols-3 gap-6 px-12 mt-40 main-view hidden">
         <div class="product-box cursor-pointer border rounded-lg p-4 shadow-md hover:shadow-lg transition"
             data-item-id="1">
             <img src="./front/images/snacks.jpg" alt="Snacks de Ana" class="w-full h-40 object-contain mb-4">
@@ -1091,7 +1069,7 @@
                 <div id="product-list-container" class="content-section">
                     <h2 class="text-2xl font-bold text-gray-700 mb-6">Mis Productos Almacenados</h2>
                     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        </div>
+                    </div>
                 </div>
                 <div id="product-form-container" class="content-section hidden">
                     <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border">

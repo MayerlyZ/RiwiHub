@@ -1,89 +1,100 @@
 $(document).ready(function() {
-    // --- INICIALIZACIÓN DE PLUGINS Y UI GENERAL ---
+    // -------------------------------------------------------------------------
+    // --- INICIALIZACIÓN DE PLUGINS Y NAVEGACIÓN
+    // -------------------------------------------------------------------------
 
-    // Inicializa el carrusel principal de la página de inicio.
-    $('#adaptive').lightSlider({
-        adaptiveHeight: true,
-        auto: true,
-        item: 1,
-        slideMargin: 0,
-        loop: true,
-        pause: 6000, // <-- Cambia la velocidad del carrusel a 6 segundos
-        stop: 4000  
-    });
+    // Función para mostrar una sección y ocultar las demás (SPA).
+    // Se toma la versión de spa.js por ser más robusta y re-inicializar los sliders.
+    window.showSection = function(sectionId) {
+        const views = document.querySelectorAll('.main-view');
+        views.forEach(view => {
+            view.classList.add('hidden');
+        });
+        const targetView = document.getElementById(sectionId);
+        if (targetView) {
+            targetView.classList.remove('hidden');
 
-    // Inicializa el carrusel de categorías.
-    $('#autoWidth').lightSlider({
-        autoWidth: true,
-        loop: true,
-        onSliderLoad: function() {
-            $('#autoWidth').removeClass('cS-hidden');
+            if (sectionId === 'inicio-view' && window.innerWidth >= 768) {
+                // Reinicializa los sliders solo si están en la vista de inicio y en desktop.
+                $('#adaptive').lightSlider({
+                    adaptiveHeight: true,
+                    auto: true,
+                    item: 1,
+                    slideMargin: 0,
+                    loop: true,
+                    controls: false,
+                    pager: true,
+                    pause: 4000,
+                });
+                $('#autoWidth').lightSlider({
+                    autoWidth: true,
+                    loop: true,
+                    slideMargin: 15,
+                    onSliderLoad: function() {
+                        $('#autoWidth').removeClass('cs-hidden');
+                    },
+                    controls: true,
+                    pager: false
+                });
+            }
         }
-    });
+    }
+
+    // Muestra la vista de inicio por defecto al cargar la página.
+    showSection('inicio-view');
 
     // --- MANEJADORES DE EVENTOS PARA LA INTERFAZ ---
-
-    // Muestra la barra de búsqueda al hacer clic en el ícono de lupa.
+    
+    // Muestra/oculta la barra de búsqueda.
     $(document).on('click', '.search-icon', function() {
         $('.search-bar').removeClass('hidden').addClass('flex');
     });
-
-    // Oculta la barra de búsqueda al hacer clic en el ícono de 'X'.
     $(document).on('click', '.search-cancel-icon', function() {
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
 
-    // Muestra el formulario de login al hacer clic en el ícono de usuario o en "ya tengo cuenta".
-    $(document).on('click', '.user-icon, .already-account-btn', function() {
-        $('.form-container').removeClass('hidden').addClass('flex');
-        $('.login-form').removeClass('hidden').addClass('flex');
-        $('.sign-up-form').addClass('hidden').removeClass('flex');
-    });
-
-    // Cambia al formulario de registro al hacer clic en "Crear Cuenta".
-    $(document).on('click', '.sign-up-btn', function() {
-        $('.form-container').removeClass('hidden').addClass('flex');
-        $('.sign-up-form').removeClass('hidden').addClass('flex');
-        $('.login-form').addClass('hidden').removeClass('flex');
-    });
-
-    // Cierra el contenedor de formularios.
-    $(document).on('click', '.form-cancel-icon', function() {
-        $('.form-container').addClass('hidden').removeClass('flex');
-    });
-
-    // Muestra/oculta el menú en dispositivos móviles.
+    // Muestra/oculta el menú móvil.
     $(document).on('click', '.menu-toggle', function() {
         $('.mobile-menu').toggleClass('hidden');
     });
 
-    // --- NAVEGACIÓN DE LA APLICACIÓN (SPA) ---
+    // --- MANEJO DE MODALES ---
 
-    // Función global para cambiar entre las diferentes vistas de la página.
-    window.showSection = function(sectionId) {
-        $('.main-view').addClass('hidden'); // Oculta todas las vistas.
-        $('#' + sectionId).removeClass('hidden'); // Muestra solo la vista solicitada.
-    }
+    // Muestra el modal de login.
+    $(document).on('click', '.user-icon, #show-login', function() {
+        $('#register-modal').addClass('hidden');
+        $('#login-modal').removeClass('hidden');
+    });
 
+    // Muestra el modal de registro.
+    $(document).on('click', '#show-register', function() {
+        $('#login-modal').addClass('hidden');
+        $('#register-modal').removeClass('hidden');
+    });
+    
+    // Muestra el modal de tokens.
+    $(document).on('click', '#tokens-icon', function() {
+        $('#tokens-modal').removeClass('hidden');
+    });
 
+    // Cierra todos los modales.
+    $(document).on('click', '.modal-cancel-icon', function() {
+        $(this).closest('.modal-container').addClass('hidden');
+    });
 
-    // =============================================================
-    // ================ LÓGICA FUNCIONAL CON API ===================
-    // =============================================================
+    // -------------------------------------------------------------------------
+    // --- LÓGICA FUNCIONAL CON API
+    // -------------------------------------------------------------------------
 
-    // Carga el token de autenticación del usuario desde el almacenamiento local.
     let authToken = localStorage.getItem('userToken') || null;
-
-    // --- FUNCIONES DEL CARRITO DE COMPRAS ---
 
     /**
      * Envía una petición a la API para añadir un producto al carrito del usuario.
-     * @param {number} itemId - El ID del producto a añadir.
      */
     function addItemToCart(itemId) {
         if (!authToken) {
             alert("Por favor, inicia sesión para añadir productos al carrito.");
-            $('.user-icon').click(); // Abre el modal de login.
+            $('#login-modal').removeClass('hidden'); // Abre el modal de login.
             return;
         }
         $.ajax({
@@ -107,7 +118,7 @@ $(document).ready(function() {
      * Pide a la API los productos del carrito y los muestra en la vista.
      */
     async function showCartView() {
-        showSection('cart-view'); // Muestra la sección del carrito.
+        showSection('cart-view');
         if (!authToken) {
             $('#cart-items-container').html('<p class="text-center text-indigo-500">Inicia sesión para ver tu carrito.</p>');
             return;
@@ -118,7 +129,7 @@ $(document).ready(function() {
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
-            renderCartItems(cartItems); // Dibuja los productos en el HTML.
+            renderCartItems(cartItems);
         } catch (error) {
             $('#cart-items-container').html('<p class="text-center text-red-500">No se pudo cargar tu carrito.</p>');
         }
@@ -126,11 +137,10 @@ $(document).ready(function() {
 
     /**
      * Genera el HTML para cada producto en el carrito y calcula el total.
-     * @param {Array} items - La lista de productos en el carrito.
      */
     function renderCartItems(items) {
         const container = $('#cart-items-container');
-        container.empty(); // Limpia el contenido anterior.
+        container.empty();
         if (!items || items.length === 0) {
             container.html('<p class="text-center text-gray-500">Tu carrito está vacío.</p>');
             $('#cart-total').text('$0');
@@ -163,13 +173,13 @@ $(document).ready(function() {
 
     // --- MANEJADORES DE EVENTOS (MODAL Y CARRITO) ---
 
-    // Abre el modal con detalles del producto al hacer clic en una tarjeta.
+    // Abre el modal con detalles del producto.
     $('body').on('click', '.product-box', function() {
         const itemId = $(this).data('item-id');
         if (!itemId) return;
         const clickedBox = $(this);
         $.ajax({
-            url: `http://localhost:5000/api/items/${item_id}`,
+            url: `http://localhost:5000/api/items/${itemId}`,
             method: 'GET',
             success: function(productData) {
                 const itemImageSrc = clickedBox.find('img').attr('src');
@@ -203,35 +213,34 @@ $(document).ready(function() {
     }
     $('#modal-close').on('click', closeModal);
 
-    // Añade un producto al carrito desde el botón en la tarjeta.
+    // Añade un producto al carrito desde la tarjeta.
     $('body').on('click', '.add-to-cart-btn', function(e) {
-        e.stopPropagation(); // Evita que se abra el modal.
+        e.stopPropagation();
         addItemToCart($(this).closest('.product-box').data('item-id'));
     });
 
-    // Añade un producto al carrito desde el botón DENTRO del modal.
+    // Añade un producto al carrito desde el modal.
     $('#modal-add-to-cart-btn').on('click', function() {
         closeModal();
         addItemToCart($(this).data('item_id'));
     });
 
-    // Lógica para el botón de canjear (actualmente es un placeholder).
+    // Lógica para el botón de canjear (placeholder).
     $('#redeem-button').on('click', function() {
         alert(`Funcionalidad de canje para el item ${$(this).data('item_id')} no implementada.`);
         closeModal();
     });
 
-    // Muestra la vista del carrito al hacer clic en el ícono de la navegación.
+    // Muestra la vista del carrito.
     $('#cart-icon').on('click', function(e) {
-        e.preventDefault(); // Evita que la página se recargue.
+        e.preventDefault();
         showCartView();
     });
 
-    // =============================================================
-    // ================ LÓGICA DEL PERFIL DE VENDEDOR ===============
-    // =============================================================
+    // -------------------------------------------------------------------------
+    // --- LÓGICA DEL PERFIL DE VENDEDOR
+    // -------------------------------------------------------------------------
     
-    // Solo ejecuta esta lógica si existe la vista del perfil de vendedor en el HTML.
     if ($('#seller-profile-view').length > 0) {
         const $productGrid = $('#product-grid');
         const $productListContainer = $('#product-list-container');
@@ -239,7 +248,6 @@ $(document).ready(function() {
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
 
-        // Pide a la API la lista de productos y los muestra.
         async function renderSellerProducts() {
             $productGrid.empty();
             if (!authToken) {
@@ -257,7 +265,6 @@ $(document).ready(function() {
                     return;
                 }
                 products.forEach(product => {
-                    // Genera la tarjeta HTML para cada producto.
                     const productCardHTML = `
                     <div class="bg-white border rounded-lg shadow-md overflow-hidden">
                         <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
@@ -278,14 +285,12 @@ $(document).ready(function() {
             }
         }
 
-        // Muestra una sección específica del perfil (lista o formulario).
         function showSellerContent($sectionToShow) {
             $productListContainer.addClass('hidden');
             $productFormContainer.addClass('hidden');
             $sectionToShow.removeClass('hidden');
         }
 
-        // Muestra el formulario para agregar un nuevo producto.
         $('#btn-show-add-form').on('click', () => {
             $formTitle.text('Agregar Nuevo Producto');
             $productForm[0].reset();
@@ -293,13 +298,11 @@ $(document).ready(function() {
             showSellerContent($productFormContainer);
         });
         
-        // Muestra la lista de productos.
         $('#btn-show-products, #btn-cancel').on('click', () => {
             renderSellerProducts();
             showSellerContent($productListContainer);
         });
 
-        // Envía los datos del formulario a la API para crear o actualizar un producto.
         $productForm.on('submit', async function(event) {
             event.preventDefault();
             const id = $('#product-id').val();
@@ -309,7 +312,7 @@ $(document).ready(function() {
                 price: parseFloat($('#product-price').val()),
                 image_url: $('#product-image').val(),
                 type: 'product',
-                category_id: 1 // Asigna una categoría por defecto.
+                category_id: 1
             };
             const isUpdating = !!id;
             const url = isUpdating ? `http://localhost:5000/api/items/${id}` : `http://localhost:5000/api/items`;
@@ -329,7 +332,6 @@ $(document).ready(function() {
             }
         });
 
-        // Carga los datos de un producto en el formulario para editarlo.
         $productGrid.on('click', '.btn-edit', async function() {
             const productId = $(this).data('id');
             try {
@@ -350,7 +352,6 @@ $(document).ready(function() {
             }
         });
 
-        // Envía una petición a la API para eliminar un producto.
         $productGrid.on('click', '.btn-delete', async function() {
             const productId = $(this).data('id');
             if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
@@ -368,76 +369,27 @@ $(document).ready(function() {
             }
         });
 
-        // Carga inicial de los productos del vendedor si hay un token.
         if(authToken) renderSellerProducts();
     }
+    
+    // -------------------------------------------------------------------------
+    // --- LÓGICA DE FORMULARIO DE REGISTRO
+    // -------------------------------------------------------------------------
+    var roleSelect = document.getElementById('register-role');
+    var cargoSection = document.getElementById('cargo-section');
+    var tiendaSection = document.getElementById('tienda-section');
+
+    if (roleSelect) {
+        roleSelect.addEventListener('change', function () {
+            cargoSection.classList.add('hidden');
+            tiendaSection.classList.add('hidden');
+            if (roleSelect.value === 'administrador') {
+                cargoSection.classList.remove('hidden');
+            } else if (roleSelect.value === 'vendedor') {
+                cargoSection.classList.remove('hidden');
+                tiendaSection.classList.remove('hidden');
+            }
+        });
+    }
+
 });
-// --- LÓGICA DEL FORMULARIO DE REGISTRO ---
-// Muestra/oculta campos adicionales según el rol seleccionado.
-document.addEventListener('DOMContentLoaded', function () {
-                    var roleSelect = document.getElementById('register-role');
-                    var cargoSection = document.getElementById('cargo-section');
-                    var tiendaSection = document.getElementById('tienda-section');
-                    roleSelect.addEventListener('change', function () {
-                        cargoSection.classList.add('hidden');
-                        tiendaSection.classList.add('hidden');
-                        if (roleSelect.value === 'administrador') {
-                            cargoSection.classList.remove('hidden');
-                        } else if (roleSelect.value === 'vendedor') {
-                            cargoSection.classList.remove('hidden');
-                            tiendaSection.classList.remove('hidden');
-                        }
-                    });
-                });
-
-  // Mostrar registro
-        document.addEventListener('DOMContentLoaded', function () {
-            var showRegister = document.getElementById('show-register');
-            var showLogin = document.getElementById('show-login');
-            var registerModal = document.getElementById('register-modal');
-            var registerCancel = document.getElementById('register-cancel');
-            var loginForm = document.querySelector('.form-container');
-
-            if (showRegister) {
-                showRegister.onclick = function () {
-                    loginForm.style.display = 'none';
-                    registerModal.style.display = 'flex';
-                };
-            }
-            if (showLogin) {
-                showLogin.onclick = function () {
-                    registerModal.style.display = 'none';
-                    loginForm.style.display = 'flex';
-                };
-            }
-            if (registerCancel) {
-                registerCancel.onclick = function () {
-                    registerModal.style.display = 'none';
-                    loginForm.style.display = 'flex';
-                };
-            }
-            // Cerrar login con la X
-            var loginCancel = document.querySelector('.form-cancel-icon');
-            if (loginCancel) {
-                loginCancel.onclick = function () {
-                    loginForm.style.display = 'none';
-                };
-            }
-        });
-          // Mostrar login solo al hacer click en el icono de usuario
-        document.addEventListener('DOMContentLoaded', function () {
-            var userIcon = document.querySelector('.user-icon');
-            var loginModal = document.getElementById('login-modal');
-            var loginCancel = loginModal.querySelector('.form-cancel-icon');
-
-            if (userIcon) {
-                userIcon.onclick = function () {
-                    loginModal.style.display = 'flex';
-                };
-            }
-            if (loginCancel) {
-                loginCancel.onclick = function () {
-                    loginModal.style.display = 'none';
-                };
-            }
-        });
