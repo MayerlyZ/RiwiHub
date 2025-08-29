@@ -110,49 +110,48 @@
             <i class="fas fa-times"></i>
         </a>
     </div>
-
+    <!-- Login Modal (hidden by default, opens only on user icon click) -->
     <div
-        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50">
+        id="login-modal"
+        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
         <div
-            class="login-form w-[420px] p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-purple">
+            class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-white to-teal-400 shadow-2xl rounded-3xl flex flex-col items-center relative text-gray border-4 border-white-500">
             <a href="javascript:void(0);"
-                class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+                class="form-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-200 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
-            
-            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-70 h-20 mb-4 object-contain" />
-
-            <h1 class="text-1.5xl font-bold mb-6">Sign in to your account</h1>
+            <img src="./front/images/logopestaña.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain drop-shadow-lg" />
+            <h1 class="text-2xl font-bold mb-6 text-gray-400">Sign in to your account</h1>
             <form action="" class="w-full">
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <label for="email" class="block text-gray text-sm font-medium text-black-200 mb-1">Email address</label>
                     <input type="email" id="email" placeholder=""
-                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-white text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <label for="password" class="block text-sm font-medium text-black-200 mb-1">Password</label>
                     <input type="password" id="password" placeholder=""
-                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-white text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="w-full flex justify-between items-center mb-6">
-                    <label class="flex items-center text-sm text-gray-400">
+                    <label class="flex items-center text-sm text-gray-200">
                         <input type="checkbox" class="w-4 h-4 text-[#8C5DFF] bg-transparent border-[#3C4153] rounded">
-                        <span class="ml-2">Remember me</span>
+                        <span class="ml-2 text-black">Remember me</span>
                     </label>
-                    <a href="#" class="text-sm text-gray-400 hover:underline hover:text-white">Forgot password?</a>
+                    <a href="#" class="text-sm text-black-200 hover:underline hover:text-teal-200">Forgot password?</a>
                 </div>
                 <button type="submit"
-                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6">
+                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6 shadow-lg">
                     Sign in
                 </button>
             </form>
             <div class="w-full flex items-center mb-6">
-                <div class="flex-grow border-t border-gray-700"></div>
-                <span class="mx-4 text-sm text-gray-400">Or continue with</span>
-                <div class="flex-grow border-t border-gray-700"></div>
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="mx-4 text-sm text-black-200">Or continue with</span>
+                <div class="flex-grow border-t border-gray-300"></div>
             </div>
             <div class="w-full flex gap-4 mb-6">
-                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
+                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors shadow-md">
                     <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
                         <path d="M12.0001 4.75001C14.0772 4.75001 15.8612 5.48514 17.2031 6.8687L20.0001 4.07176C17.9254 2.05832 15.1118 0.826294 12.0001 0.826294C7.54019 0.826294 3.79155 3.19706 1.87974 6.64344L5.68962 9.48912C6.51613 6.96024 9.00693 4.75001 12.0001 4.75001Z"></path>
                         <path d="M23.3647 12.0001C23.3647 11.2323 23.2974 10.4856 23.1678 9.75781H12.0001V13.8837H18.7844C18.4735 15.5562 17.5256 16.9933 16.1558 17.9575L19.9657 20.8032C22.2536 18.6659 23.3647 15.6888 23.3647 12.0001Z"></path>
@@ -161,31 +160,47 @@
                     </svg>
                     <span class="text-white">Google</span>
                 </button>
-                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
-                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
-                        <path d="M12.0001 2.24716C6.54019 2.24716 2.00012 6.78723 2.00012 12.2472C2.00012 16.6575 4.8859 20.3705 8.91035 21.6583C9.42398 21.7505 9.61058 21.4334 9.61058 21.1627C9.61058 20.9169 9.60126 20.1264 9.60126 19.3082C6.96347 19.8893 6.39828 18.1585 6.39828 18.1585C5.95252 17.0658 5.37893 16.7629 5.37893 16.7629C4.50285 16.1363 5.44199 16.1541 5.44199 16.1541C6.44855 16.2235 6.99427 17.1523 6.99427 17.1523C7.8091 18.5298 9.07008 18.1189 9.58371 17.8841C9.66442 17.3204 9.89782 16.9248 10.1554 16.7025C8.15933 16.4716 5.86012 15.6547 5.86012 12.2829C5.86012 11.294 6.20846 10.4489 6.76008 9.77353C6.6783 9.42938 6.4223 8.64775 6.85226 7.55502C6.85226 7.55502 7.5027 7.34005 9.5925 8.74201C10.2291 8.56064 10.9205 8.47144 11.6119 8.46211C12.3033 8.47144 12.9947 8.56064 13.6313 8.74201C15.7211 7.34005 16.3715 7.55502 16.3715 7.55502C16.8015 8.64775 16.5455 9.42938 16.4637 9.77353C17.0153 10.4489 17.3637 11.294 17.3637 12.2829C17.3637 15.6454 15.0645 16.4623 13.0684 16.7025C13.3768 16.9641 13.6231 17.4777 13.6231 18.2396C13.6231 19.3414 13.6142 20.2525 13.6142 20.5232C13.6142 20.7939 13.7915 21.1098 14.2863 21.0176C18.3107 19.7298 21.1965 16.0168 21.1965 11.6065C21.1965 6.14659 16.6565 1.60652 11.1965 1.60652H12.0001Z"></path>
-                    </svg>
+                <button class="flex-1 h-12 w-full flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors shadow-md">
                     <span class="text-white">GitHub</span>
                 </button>
             </div>
             <div class="w-full text-center">
-                <span class="text-gray-400 text-sm">¿No tienes cuenta?</span>
+                <span class="text-black-200 text-sm">¿No tienes cuenta?</span>
                 <a href="javascript:void(0);" id="show-register" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Regístrate</a>
             </div>
         </div>
     </div>
+    <script>
+        // Mostrar login solo al hacer click en el icono de usuario
+        document.addEventListener('DOMContentLoaded', function () {
+            var userIcon = document.querySelector('.user-icon');
+            var loginModal = document.getElementById('login-modal');
+            var loginCancel = loginModal.querySelector('.form-cancel-icon');
+
+            if (userIcon) {
+                userIcon.onclick = function () {
+                    loginModal.style.display = 'flex';
+                };
+            }
+            if (loginCancel) {
+                loginCancel.onclick = function () {
+                    loginModal.style.display = 'none';
+                };
+            }
+        });
+    </script>
 
     <!-- Modal de registro -->
     <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
-        <div class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-white">
-            <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+        <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-white to-teal-400 shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-white-500">
+            <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
-            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain" />
-            <h1 class="text-2xl font-bold mb-6">Crear una cuenta</h1>
+            <img src="./front/images/logopestaña.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain" />
+            <h1 class="text-2xl font-bold mb-6 text-gray-400">Crear una cuenta</h1>
             <form action="" class="w-full">
                 <div class="mb-4">
-                    <label for="register-role" class="block text-sm font-medium text-gray-400 mb-1">Tipo de usuario</label>
+                    <label for="register-role" class="block text-sm font-medium text-black mb-1">Tipo de usuario</label>
                     <select id="register-role" class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                         <option value="cliente">Cliente</option>
                         <option value="administrador">Administrador</option>
@@ -193,37 +208,37 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="register-name" class="block text-sm font-medium text-gray-400 mb-1">Nombre</label>
+                    <label for="register-name" class="block  font-medium text-black mb-1">Nombre</label>
                     <input type="text" id="register-name" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-4">
-                    <label for="register-cel" class="block text-sm font-medium text-gray-400 mb-1">Celular</label>
+                    <label for="register-cel" class="block text-sm font-medium text-black mb-1">Celular</label>
                     <input type="text" id="register-cel" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-4">
-                    <label for="register-cedula" class="block text-sm font-medium text-gray-400 mb-1">Cédula</label>
+                    <label for="register-cedula" class="block text-sm font-medium text-black mb-1">Cédula</label>
                     <input type="text" id="register-cedula" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-4 hidden" id="cargo-section">
-                    <label for="register-cargo" class="block text-sm font-medium text-gray-400 mb-1">Cargo</label>
+                    <label for="register-cargo" class="block text-sm font-medium text-black mb-1">Cargo</label>
                     <input type="text" id="register-cargo" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-4 hidden" id="tienda-section">
-                    <label for="register-tienda" class="block text-sm font-medium text-gray-400 mb-1">Nombre de la tienda</label>
+                    <label for="register-tienda" class="block text-sm font-medium text-black mb-1">Nombre de la tienda</label>
                     <input type="text" id="register-tienda" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-4">
-                    <label for="register-email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <label for="register-email" class="block text-sm font-medium text-black mb-1">Email address</label>
                     <input type="email" id="register-email" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-6">
-                    <label for="register-password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <label for="register-password" class="block text-sm font-medium text-black mb-1">Password</label>
                     <input type="password" id="register-password" placeholder=""
                         class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
@@ -233,7 +248,7 @@
                 </button>
             </form>
             <div class="w-full text-center">
-                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
+                <span class="text-black text-sm">¿Ya tienes cuenta?</span>
                 <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
             </div>
             <script>
@@ -881,7 +896,7 @@
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-1.png"
+                        <img src="front/images/snacks/galletas.png"
                             class="w-full h-full object-contain object-center rounded-4xl">
                         <div
                             class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
@@ -899,7 +914,7 @@
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-2.png"
+                        <img src="front/images/snacks/chocolatina.webp"
                             class="w-full h-full object-contain object-center rounded-4xl">
                         <div
                             class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
@@ -917,7 +932,7 @@
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-3.png"
+                        <img src="front/images/snacks/gomitas.webp"
                             class="w-full h-full object-contain object-center rounded-4xl">
                         <div
                             class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
@@ -1111,9 +1126,9 @@
         </div>
     </div>
 
-    <footer id="footer" class="section p-10 bg-white text-gray-600 w-full text-center border-gray-700 my-4">
+    <footer id="footer" class="section p-10 bg-white text-purple-600 w-full text-center border-gray-700 my-4">
         <div class="container mx-auto flex flex-col items-center">
-            <div class="footer-links flex space-x-6 text-gray-400 mb-6">
+            <div class="footer-links flex space-x-6 text-purple-400 mb-6">
                 <a href="#" class="hover:text-black transition-colors duration-200">About</a>
                 <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
                 <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
