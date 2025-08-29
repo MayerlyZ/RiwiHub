@@ -109,7 +109,7 @@ $(document).ready(function() {
     async function showCartView() {
         showSection('cart-view'); // Muestra la sección del carrito.
         if (!authToken) {
-            $('#cart-items-container').html('<p class="text-center text-red-500">Inicia sesión para ver tu carrito.</p>');
+            $('#cart-items-container').html('<p class="text-center text-indigo-500">Inicia sesión para ver tu carrito.</p>');
             return;
         }
         try {
@@ -169,7 +169,7 @@ $(document).ready(function() {
         if (!itemId) return;
         const clickedBox = $(this);
         $.ajax({
-            url: `http://localhost:5000/api/items/${itemId}`,
+            url: `http://localhost:5000/api/items/${item_id}`,
             method: 'GET',
             success: function(productData) {
                 const itemImageSrc = clickedBox.find('img').attr('src');
@@ -260,7 +260,7 @@ $(document).ready(function() {
                     // Genera la tarjeta HTML para cada producto.
                     const productCardHTML = `
                     <div class="bg-white border rounded-lg shadow-md overflow-hidden">
-                        <img src="${product.image_url}" alt="${product.name}" class="w-full h-48 object-cover">
+                        <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-lg font-bold">${product.name}</h3>
                             <p class="text-gray-600 text-sm mt-2">${product.description}</p>
