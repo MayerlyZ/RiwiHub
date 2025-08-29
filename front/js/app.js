@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // -------------------------------------------------------------------------
     // --- INICIALIZACIÓN DE PLUGINS Y NAVEGACIÓN
     // -------------------------------------------------------------------------
@@ -37,34 +38,60 @@ $(document).ready(function() {
                     pager: false
                 });
             }
+
         }
     }
 
-    // Muestra la vista de inicio por defecto al cargar la página.
-    showSection('inicio-view');
 
-    // --- MANEJADORES DE EVENTOS PARA LA INTERFAZ ---
-    
-    // Muestra/oculta la barra de búsqueda.
+    // --- UI EVENT HANDLERS ---
+
+    // Show the search bar when clicking the magnifying glass icon.
     $(document).on('click', '.search-icon', function() {
         $('.search-bar').removeClass('hidden').addClass('flex');
+    });
+
+    // Hide the search bar when clicking the 'X' icon.
+    // Muestra la vista de inicio por defecto al cargar la página.
+    showSection('inicio-view');
     });
     $(document).on('click', '.search-cancel-icon', function() {
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
 
-    // Muestra/oculta el menú móvil.
+
+    // Show the login form when clicking the user icon or "already have an account".
+    $(document).on('click', '.user-icon, .already-account-btn', function() {
+        $('.form-container').removeClass('hidden').addClass('flex');
+        $('.login-form').removeClass('hidden').addClass('flex');
+        $('.sign-up-form').addClass('hidden').removeClass('flex');
+    });
+
+    // Switch to the sign-up form when clicking "Create Account".
+    $(document).on('click', '.sign-up-btn', function() {
+        $('.form-container').removeClass('hidden').addClass('flex');
+        $('.sign-up-form').removeClass('hidden').addClass('flex');
+        $('.login-form').addClass('hidden').removeClass('flex');
+    });
+
+    // Close the form container.
+    $(document).on('click', '.form-cancel-icon', function() {
+        $('.form-container').addClass('hidden').removeClass('flex');
+    });
+
+    // Toggle mobile menu visibility.
     $(document).on('click', '.menu-toggle', function() {
         $('.mobile-menu').toggleClass('hidden');
     });
 
-    // --- MANEJO DE MODALES ---
 
-    // Muestra el modal de login.
-    $(document).on('click', '.user-icon, #show-login', function() {
-        $('#register-modal').addClass('hidden');
-        $('#login-modal').removeClass('hidden');
-    });
+    // --- APPLICATION NAVIGATION (SPA) ---
+
+    // Global function to switch between different page views.
+    window.showSection = function(sectionId) {
+        $('.main-view').addClass('hidden'); // Hide all views.
+        $('#' + sectionId).removeClass('hidden'); // Show only the requested view.
+    }
+
 
     // Muestra el modal de registro.
     $(document).on('click', '#show-register', function() {
@@ -82,19 +109,24 @@ $(document).ready(function() {
         $(this).closest('.modal-container').addClass('hidden');
     });
 
-    // -------------------------------------------------------------------------
-    // --- LÓGICA FUNCIONAL CON API
-    // -------------------------------------------------------------------------
 
+    // =============================================================
+    // ===================== API FUNCTIONAL LOGIC ==================
+    // =============================================================
+
+    // Load user authentication token from local storage.
     let authToken = localStorage.getItem('userToken') || null;
 
+    // --- SHOPPING CART FUNCTIONS ---
+
     /**
-     * Envía una petición a la API para añadir un producto al carrito del usuario.
+     * Sends a request to the API to add a product to the user's cart.
+     * @param {number} itemId - The ID of the product to add.
      */
     function addItemToCart(itemId) {
         if (!authToken) {
-            alert("Por favor, inicia sesión para añadir productos al carrito.");
-            $('#login-modal').removeClass('hidden'); // Abre el modal de login.
+            alert("Please log in to add products to the cart.");
+            $('.user-icon').click(); // Opens the login modal.
             return;
         }
         $.ajax({
@@ -105,22 +137,23 @@ $(document).ready(function() {
             data: JSON.stringify({ itemId: itemId, quantity: 1 }),
             success: (res) => {
                 alert(res.message);
-                showCartView(); // Actualiza y muestra la vista del carrito.
+                showCartView(); // Refresh and display the cart view.
             },
             error: (err) => {
-                console.error("Error al añadir al carrito:", err);
-                alert('Error al añadir al carrito, vuelve a intentarlo.');
+                console.error("Error adding to cart:", err);
+                alert('Error adding to cart, please try again.');
             }
         });
     }
 
     /**
-     * Pide a la API los productos del carrito y los muestra en la vista.
+     * Requests the products in the cart from the API and displays them in the view.
      */
     async function showCartView() {
-        showSection('cart-view');
+        showSection('cart-view'); // Display the cart section.
+
         if (!authToken) {
-            $('#cart-items-container').html('<p class="text-center text-indigo-500">Inicia sesión para ver tu carrito.</p>');
+            $('#cart-items-container').html('<p class="text-center text-indigo-500">Log in to see your cart.</p>');
             return;
         }
         try {
@@ -129,20 +162,23 @@ $(document).ready(function() {
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
-            renderCartItems(cartItems);
+            renderCartItems(cartItems); // Render products in HTML.
+
         } catch (error) {
-            $('#cart-items-container').html('<p class="text-center text-red-500">No se pudo cargar tu carrito.</p>');
+            $('#cart-items-container').html('<p class="text-center text-red-500">Could not load your cart.</p>');
         }
     }
 
     /**
-     * Genera el HTML para cada producto en el carrito y calcula el total.
+
+     * Generates the HTML for each product in the cart and calculates the total.
+     * @param {Array} items - The list of products in the cart.
      */
     function renderCartItems(items) {
         const container = $('#cart-items-container');
-        container.empty();
+        container.empty(); // Clear previous content.
         if (!items || items.length === 0) {
-            container.html('<p class="text-center text-gray-500">Tu carrito está vacío.</p>');
+            container.html('<p class="text-center text-gray-500">Your cart is empty.</p>');
             $('#cart-total').text('$0');
             $('#cart-item-count').text('0');
             return;
@@ -162,7 +198,7 @@ $(document).ready(function() {
                             <p class="text-gray-600">$${new Intl.NumberFormat('es-CO').format(item.price)}</p>
                         </div>
                     </div>
-                    <div><p>Cantidad: ${cartItem.quantity}</p></div>
+                    <div><p>Quantity: ${cartItem.quantity}</p></div>
                     <button class="remove-from-cart-btn text-red-500 hover:text-red-700" data-item-id="${item.item_id}"><i class="fas fa-trash"></i></button>
                 </div>`;
             container.append(itemHtml);
@@ -171,9 +207,10 @@ $(document).ready(function() {
         $('#cart-item-count').text(totalItems);
     }
 
-    // --- MANEJADORES DE EVENTOS (MODAL Y CARRITO) ---
+    // --- EVENT HANDLERS (MODAL & CART) ---
 
-    // Abre el modal con detalles del producto.
+
+    // Open product detail modal when clicking on a product card.
     $('body').on('click', '.product-box', function() {
         const itemId = $(this).data('item-id');
         if (!itemId) return;
@@ -185,7 +222,7 @@ $(document).ready(function() {
                 const itemImageSrc = clickedBox.find('img').attr('src');
                 $('#modal-img').attr('src', itemImageSrc);
                 $('#modal-name').text(productData.name);
-                $('#modal-description').text(productData.description || 'No hay descripción disponible.');
+                $('#modal-description').text(productData.description || 'No description available.');
                 $('#modal-price').text(`$${new Intl.NumberFormat('es-CO').format(productData.price)}`);
                 if (productData.token_price) {
                     $('#token-section, #redeem-button').show();
@@ -200,11 +237,11 @@ $(document).ready(function() {
                     $('#modal-content-wrapper').removeClass('scale-95 opacity-0').addClass('scale-100 opacity-100');
                 }, 10);
             },
-            error: () => alert("No se pudo cargar la información del producto.")
+            error: () => alert("Failed to load product information.")
         });
     });
 
-    // Cierra el modal con una animación de salida.
+    // Close modal with exit animation.
     function closeModal() {
         $('#modal-content-wrapper').removeClass('scale-100 opacity-100').addClass('scale-95 opacity-0');
         setTimeout(() => {
@@ -213,34 +250,35 @@ $(document).ready(function() {
     }
     $('#modal-close').on('click', closeModal);
 
-    // Añade un producto al carrito desde la tarjeta.
+
+    // Add a product to the cart from the card button.
     $('body').on('click', '.add-to-cart-btn', function(e) {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent modal from opening.
         addItemToCart($(this).closest('.product-box').data('item-id'));
     });
 
-    // Añade un producto al carrito desde el modal.
+    // Add a product to the cart from the modal button.
     $('#modal-add-to-cart-btn').on('click', function() {
         closeModal();
         addItemToCart($(this).data('item_id'));
     });
-
-    // Lógica para el botón de canjear (placeholder).
+    // Redeem button logic (currently a placeholder).
     $('#redeem-button').on('click', function() {
-        alert(`Funcionalidad de canje para el item ${$(this).data('item_id')} no implementada.`);
+        alert(`Redeem functionality for item ${$(this).data('item_id')} not implemented yet.`);
         closeModal();
     });
 
-    // Muestra la vista del carrito.
+    // Show cart view when clicking the nav cart icon.
     $('#cart-icon').on('click', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent page reload.
         showCartView();
     });
 
-    // -------------------------------------------------------------------------
-    // --- LÓGICA DEL PERFIL DE VENDEDOR
-    // -------------------------------------------------------------------------
+    // =============================================================
+    // ================== SELLER PROFILE LOGIC =====================
+    // =============================================================
     
+    // Only execute this logic if seller profile view exists in the HTML.
     if ($('#seller-profile-view').length > 0) {
         const $productGrid = $('#product-grid');
         const $productListContainer = $('#product-list-container');
@@ -248,10 +286,12 @@ $(document).ready(function() {
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
 
+
+        // Fetch product list from API and display them.
         async function renderSellerProducts() {
             $productGrid.empty();
             if (!authToken) {
-                $productGrid.html('<p class="text-center text-red-500 col-span-full">Debes iniciar sesión para ver tus productos.</p>');
+                $productGrid.html('<p class="text-center text-red-500 col-span-full">You must log in to view your products.</p>');
                 return;
             }
             try {
@@ -261,10 +301,12 @@ $(document).ready(function() {
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
                 if (products.length === 0) {
-                    $productGrid.html('<p class="text-center text-gray-500 col-span-full">No tienes productos. ¡Agrega uno!</p>');
+                    $productGrid.html('<p class="text-center text-gray-500 col-span-full">You don’t have any products. Add one!</p>');
                     return;
                 }
                 products.forEach(product => {
+
+                    // Generate HTML card for each product.
                     const productCardHTML = `
                     <div class="bg-white border rounded-lg shadow-md overflow-hidden">
                         <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
@@ -274,35 +316,43 @@ $(document).ready(function() {
                             <p class="text-xl font-semibold text-teal-600 mt-4">$${new Intl.NumberFormat('es-CO').format(product.price)}</p>
                         </div>
                         <div class="bg-gray-50 p-3 flex justify-end gap-2">
-                            <button class="btn-edit text-sm font-medium text-white bg-yellow-500 py-1 px-3 rounded hover:bg-yellow-600" data-id="${product.item_id}">✏️ Editar</button>
-                            <button class="btn-delete text-sm font-medium text-white bg-red-500 py-1 px-3 rounded hover:bg-red-600" data-id="${product.item_id}">🗑️ Eliminar</button>
+                            <button class="btn-edit text-sm font-medium text-white bg-yellow-500 py-1 px-3 rounded hover:bg-yellow-600" data-id="${product.item_id}">✏️ Edit</button>
+                            <button class="btn-delete text-sm font-medium text-white bg-red-500 py-1 px-3 rounded hover:bg-red-600" data-id="${product.item_id}">🗑️ Delete</button>
                         </div>
                     </div>`;
                     $productGrid.append(productCardHTML);
                 });
             } catch (error) {
-                $productGrid.html('<p class="text-center text-red-500 col-span-full">Error al cargar los productos.</p>');
+                $productGrid.html('<p class="text-center text-red-500 col-span-full">Error loading products.</p>');
             }
         }
 
+
+        // Show a specific profile section (list or form).
         function showSellerContent($sectionToShow) {
             $productListContainer.addClass('hidden');
             $productFormContainer.addClass('hidden');
             $sectionToShow.removeClass('hidden');
         }
 
+        // Show form to add a new product.
         $('#btn-show-add-form').on('click', () => {
-            $formTitle.text('Agregar Nuevo Producto');
+            $formTitle.text('Add New Product');
             $productForm[0].reset();
             $('#product-id').val('');
             showSellerContent($productFormContainer);
         });
         
+
+        // Show product list.
+
         $('#btn-show-products, #btn-cancel').on('click', () => {
             renderSellerProducts();
             showSellerContent($productListContainer);
         });
 
+
+        // Submit form data to API to create or update a product.
         $productForm.on('submit', async function(event) {
             event.preventDefault();
             const id = $('#product-id').val();
@@ -312,7 +362,8 @@ $(document).ready(function() {
                 price: parseFloat($('#product-price').val()),
                 image_url: $('#product-image').val(),
                 type: 'product',
-                category_id: 1
+                category_id: 1 // Assign a default category.
+
             };
             const isUpdating = !!id;
             const url = isUpdating ? `http://localhost:5000/api/items/${id}` : `http://localhost:5000/api/items`;
@@ -324,14 +375,16 @@ $(document).ready(function() {
                     headers: { 'Authorization': 'Bearer ' + authToken },
                     data: JSON.stringify(productData)
                 });
-                alert(`Producto ${isUpdating ? 'actualizado' : 'creado'} con éxito.`);
+                alert(`Product ${isUpdating ? 'updated' : 'created'} successfully.`);
                 renderSellerProducts();
                 showSellerContent($productListContainer);
             } catch (error) {
-                alert('Error al guardar el producto.');
+                alert('Error saving product.');
             }
         });
 
+
+        // Load a product's data into the form for editing.
         $productGrid.on('click', '.btn-edit', async function() {
             const productId = $(this).data('id');
             try {
@@ -340,7 +393,7 @@ $(document).ready(function() {
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
-                $formTitle.text('Actualizar Producto');
+                $formTitle.text('Update Product');
                 $('#product-id').val(productToEdit.item_id);
                 $('#product-name').val(productToEdit.name);
                 $('#product-description').val(productToEdit.description);
@@ -348,26 +401,106 @@ $(document).ready(function() {
                 $('#product-image').val(productToEdit.image_url);
                 showSellerContent($productFormContainer);
             } catch (error) {
-                alert('No se pudo cargar el producto para editar.');
+                alert('Could not load product for editing.');
             }
         });
 
+
+        // Send API request to delete a product.
         $productGrid.on('click', '.btn-delete', async function() {
             const productId = $(this).data('id');
-            if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+            if (confirm('Are you sure you want to delete this product?')) {
                 try {
                     await $.ajax({
                         url: `http://localhost:5000/api/items/${productId}`,
                         method: 'DELETE',
                         headers: { 'Authorization': 'Bearer ' + authToken }
                     });
-                    alert('Producto eliminado.');
+                    alert('Product deleted.');
                     renderSellerProducts();
                 } catch (error) {
-                    alert('Error al eliminar el producto.');
+                    alert('Error deleting product.');
                 }
             }
         });
+
+
+        // Initial load of seller products if token exists.
+        if(authToken) renderSellerProducts();
+    }
+});
+
+// --- SIGN-UP FORM LOGIC ---
+// Show/hide additional fields based on the selected role.
+document.addEventListener('DOMContentLoaded', function () {
+    var roleSelect = document.getElementById('register-role');
+    var cargoSection = document.getElementById('cargo-section');
+    var tiendaSection = document.getElementById('tienda-section');
+    roleSelect.addEventListener('change', function () {
+        cargoSection.classList.add('hidden');
+        tiendaSection.classList.add('hidden');
+        if (roleSelect.value === 'administrador') {
+            cargoSection.classList.remove('hidden');
+        } else if (roleSelect.value === 'vendedor') {
+            cargoSection.classList.remove('hidden');
+            tiendaSection.classList.remove('hidden');
+        }
+    });
+});
+
+// --- REGISTRATION AND LOGIN MODALS ---
+// Show registration form.
+document.addEventListener('DOMContentLoaded', function () {
+    var showRegister = document.getElementById('show-register');
+    var showLogin = document.getElementById('show-login');
+    var registerModal = document.getElementById('register-modal');
+    var registerCancel = document.getElementById('register-cancel');
+    var loginForm = document.querySelector('.form-container');
+
+    if (showRegister) {
+        showRegister.onclick = function () {
+            loginForm.style.display = 'none';
+            registerModal.style.display = 'flex';
+        };
+    }
+    if (showLogin) {
+        showLogin.onclick = function () {
+            registerModal.style.display = 'none';
+            loginForm.style.display = 'flex';
+        };
+    }
+    if (registerCancel) {
+        registerCancel.onclick = function () {
+            registerModal.style.display = 'none';
+            loginForm.style.display = 'flex';
+        };
+    }
+    // Close login with the X button.
+    var loginCancel = document.querySelector('.form-cancel-icon');
+    if (loginCancel) {
+        loginCancel.onclick = function () {
+            loginForm.style.display = 'none';
+        };
+    }
+});
+
+// Show login only when clicking the user icon.
+document.addEventListener('DOMContentLoaded', function () {
+    var userIcon = document.querySelector('.user-icon');
+    var loginModal = document.getElementById('login-modal');
+    var loginCancel = loginModal.querySelector('.form-cancel-icon');
+
+    if (userIcon) {
+        userIcon.onclick = function () {
+            loginModal.style.display = 'flex';
+        };
+    }
+    if (loginCancel) {
+        loginCancel.onclick = function () {
+            loginModal.style.display = 'none';
+        };
+    }
+});
 
         if(authToken) renderSellerProducts();
     }
@@ -410,3 +543,4 @@ $(document).ready(function() {
                         mobileMenu.classList.add('hidden');
                     }
                 }
+
