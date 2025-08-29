@@ -1,25 +1,47 @@
 $(document).ready(function() {
-    // --- INITIALIZATION OF PLUGINS AND GENERAL UI ---
 
-    // Initialize the main carousel.
-    $('#adaptive').lightSlider({
-        adaptiveHeight: true,
-        auto: true,
-        item: 1,
-        slideMargin: 0,
-        loop: true,
-        pause: 6000, // <-- Changes the carousel speed to 6 seconds
-        stop: 4000  
-    });
+    // -------------------------------------------------------------------------
+    // --- INICIALIZACIÓN DE PLUGINS Y NAVEGACIÓN
+    // -------------------------------------------------------------------------
 
-    // Initialize the categories carousel.
-    $('#autoWidth').lightSlider({
-        autoWidth: true,
-        loop: true,
-        onSliderLoad: function() {
-            $('#autoWidth').removeClass('cS-hidden');
+    // Función para mostrar una sección y ocultar las demás (SPA).
+    // Se toma la versión de spa.js por ser más robusta y re-inicializar los sliders.
+    window.showSection = function(sectionId) {
+        const views = document.querySelectorAll('.main-view');
+        views.forEach(view => {
+            view.classList.add('hidden');
+        });
+        const targetView = document.getElementById(sectionId);
+        if (targetView) {
+            targetView.classList.remove('hidden');
+
+            if (sectionId === 'inicio-view' && window.innerWidth >= 768) {
+                // Reinicializa los sliders solo si están en la vista de inicio y en desktop.
+                $('#adaptive').lightSlider({
+                    adaptiveHeight: true,
+                    auto: true,
+                    item: 1,
+                    slideMargin: 0,
+                    loop: true,
+                    controls: false,
+                    pager: true,
+                    pause: 4000,
+                });
+                $('#autoWidth').lightSlider({
+                    autoWidth: true,
+                    loop: true,
+                    slideMargin: 15,
+                    onSliderLoad: function() {
+                        $('#autoWidth').removeClass('cs-hidden');
+                    },
+                    controls: true,
+                    pager: false
+                });
+            }
+
         }
-    });
+    }
+
 
     // --- UI EVENT HANDLERS ---
 
@@ -29,9 +51,13 @@ $(document).ready(function() {
     });
 
     // Hide the search bar when clicking the 'X' icon.
+    // Muestra la vista de inicio por defecto al cargar la página.
+    showSection('inicio-view');
+    });
     $(document).on('click', '.search-cancel-icon', function() {
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
+
 
     // Show the login form when clicking the user icon or "already have an account".
     $(document).on('click', '.user-icon, .already-account-btn', function() {
@@ -57,6 +83,7 @@ $(document).ready(function() {
         $('.mobile-menu').toggleClass('hidden');
     });
 
+
     // --- APPLICATION NAVIGATION (SPA) ---
 
     // Global function to switch between different page views.
@@ -65,6 +92,22 @@ $(document).ready(function() {
         $('#' + sectionId).removeClass('hidden'); // Show only the requested view.
     }
 
+
+    // Muestra el modal de registro.
+    $(document).on('click', '#show-register', function() {
+        $('#login-modal').addClass('hidden');
+        $('#register-modal').removeClass('hidden');
+    });
+    
+    // Muestra el modal de tokens.
+    $(document).on('click', '#tokens-icon', function() {
+        $('#tokens-modal').removeClass('hidden');
+    });
+
+    // Cierra todos los modales.
+    $(document).on('click', '.modal-cancel-icon', function() {
+        $(this).closest('.modal-container').addClass('hidden');
+    });
 
 
     // =============================================================
@@ -108,6 +151,7 @@ $(document).ready(function() {
      */
     async function showCartView() {
         showSection('cart-view'); // Display the cart section.
+
         if (!authToken) {
             $('#cart-items-container').html('<p class="text-center text-indigo-500">Log in to see your cart.</p>');
             return;
@@ -119,12 +163,14 @@ $(document).ready(function() {
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
             renderCartItems(cartItems); // Render products in HTML.
+
         } catch (error) {
             $('#cart-items-container').html('<p class="text-center text-red-500">Could not load your cart.</p>');
         }
     }
 
     /**
+
      * Generates the HTML for each product in the cart and calculates the total.
      * @param {Array} items - The list of products in the cart.
      */
@@ -162,6 +208,7 @@ $(document).ready(function() {
     }
 
     // --- EVENT HANDLERS (MODAL & CART) ---
+
 
     // Open product detail modal when clicking on a product card.
     $('body').on('click', '.product-box', function() {
@@ -203,6 +250,7 @@ $(document).ready(function() {
     }
     $('#modal-close').on('click', closeModal);
 
+
     // Add a product to the cart from the card button.
     $('body').on('click', '.add-to-cart-btn', function(e) {
         e.stopPropagation(); // Prevent modal from opening.
@@ -214,7 +262,6 @@ $(document).ready(function() {
         closeModal();
         addItemToCart($(this).data('item_id'));
     });
-
     // Redeem button logic (currently a placeholder).
     $('#redeem-button').on('click', function() {
         alert(`Redeem functionality for item ${$(this).data('item_id')} not implemented yet.`);
@@ -239,6 +286,7 @@ $(document).ready(function() {
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
 
+
         // Fetch product list from API and display them.
         async function renderSellerProducts() {
             $productGrid.empty();
@@ -257,6 +305,7 @@ $(document).ready(function() {
                     return;
                 }
                 products.forEach(product => {
+
                     // Generate HTML card for each product.
                     const productCardHTML = `
                     <div class="bg-white border rounded-lg shadow-md overflow-hidden">
@@ -278,6 +327,7 @@ $(document).ready(function() {
             }
         }
 
+
         // Show a specific profile section (list or form).
         function showSellerContent($sectionToShow) {
             $productListContainer.addClass('hidden');
@@ -293,11 +343,14 @@ $(document).ready(function() {
             showSellerContent($productFormContainer);
         });
         
+
         // Show product list.
+
         $('#btn-show-products, #btn-cancel').on('click', () => {
             renderSellerProducts();
             showSellerContent($productListContainer);
         });
+
 
         // Submit form data to API to create or update a product.
         $productForm.on('submit', async function(event) {
@@ -310,6 +363,7 @@ $(document).ready(function() {
                 image_url: $('#product-image').val(),
                 type: 'product',
                 category_id: 1 // Assign a default category.
+
             };
             const isUpdating = !!id;
             const url = isUpdating ? `http://localhost:5000/api/items/${id}` : `http://localhost:5000/api/items`;
@@ -328,6 +382,7 @@ $(document).ready(function() {
                 alert('Error saving product.');
             }
         });
+
 
         // Load a product's data into the form for editing.
         $productGrid.on('click', '.btn-edit', async function() {
@@ -350,6 +405,7 @@ $(document).ready(function() {
             }
         });
 
+
         // Send API request to delete a product.
         $productGrid.on('click', '.btn-delete', async function() {
             const productId = $(this).data('id');
@@ -367,6 +423,7 @@ $(document).ready(function() {
                 }
             }
         });
+
 
         // Initial load of seller products if token exists.
         if(authToken) renderSellerProducts();
@@ -444,3 +501,46 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 });
+
+        if(authToken) renderSellerProducts();
+    }
+    
+    // -------------------------------------------------------------------------
+    // --- LÓGICA DE FORMULARIO DE REGISTRO
+    // -------------------------------------------------------------------------
+    var roleSelect = document.getElementById('register-role');
+    var cargoSection = document.getElementById('cargo-section');
+    var tiendaSection = document.getElementById('tienda-section');
+
+    if (roleSelect) {
+        roleSelect.addEventListener('change', function () {
+            cargoSection.classList.add('hidden');
+            tiendaSection.classList.add('hidden');
+            if (roleSelect.value === 'administrador') {
+                cargoSection.classList.remove('hidden');
+            } else if (roleSelect.value === 'vendedor') {
+                cargoSection.classList.remove('hidden');
+                tiendaSection.classList.remove('hidden');
+            }
+        });
+    }
+
+});
+    function showSection(sectionId) {
+                    // Oculta todas las vistas principales
+                    document.querySelectorAll('.main-view').forEach(function(view) {
+                        view.classList.add('hidden');
+                    });
+                    // Muestra la vista seleccionada
+                    var section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.remove('hidden');
+                        window.scrollTo(0, 0);
+                    }
+                    // Opcional: Oculta el menú móvil después de seleccionar
+                    var mobileMenu = document.querySelector('.mobile-menu');
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+
