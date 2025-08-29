@@ -54,3 +54,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Muestra la vista de inicio por defecto al cargar la página
     showSection('inicio-view');
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const tokensIcon = document.getElementById('tokens-icon');
+    const tokensModal = document.getElementById('tokens-modal');
+    const tokensModalCancel = document.getElementById('tokens-modal-cancel');
+
+    // Función para mostrar el modal de tokens
+    function showTokensModal() {
+        tokensModal.classList.remove('hidden');
+    }
+
+    // Función para ocultar el modal de tokens
+    function hideTokensModal() {
+        tokensModal.classList.add('hidden');
+    }
+
+    // Escuchar clic en el botón de tokens en el nav
+    if (tokensIcon) {
+        tokensIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+            showTokensModal();
+        });
+    }
+
+    // Escuchar clic en el botón de cerrar del modal
+    if (tokensModalCancel) {
+        tokensModalCancel.addEventListener('click', (event) => {
+            event.preventDefault();
+            hideTokensModal();
+        });
+    }
+
+    // Ocultar el modal si se hace clic fuera de él
+    tokensModal.addEventListener('click', (event) => {
+        if (event.target === tokensModal) {
+            hideTokensModal();
+        }
+    });
+});

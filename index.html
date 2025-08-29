@@ -19,7 +19,6 @@
     <script src="./front/js/spa.js"></script>
 
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
-
 </head>
 
 <body class="font-poppins">
@@ -57,21 +56,22 @@
                     class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
                     <i class="fas fa-search"></i>
                 </a>
-              <a href="javascript:void(0);"
-                onclick="showSection('seller-profile-view', this)"
-                class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-                <i class="far fa-user"></i>
-            </a>
-             
-                <a href="#" id= "cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                  <i class="fas fa-shopping-cart">
-                    <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
-                  </i>
+                <a href="javascript:void(0);"
+                    onclick="showSection('seller-profile-view', this)"
+                    class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
+                    <i class="far fa-user"></i>
+                </a>
+                
+                <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-coins"></i>
+                    <span class="text-sm font-semibold">5000</span>
                 </a>
 
-
-
-
+                <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
+                    <i class="fas fa-shopping-cart">
+                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
+                    </i>
+                </a>
 
                 <div class="md:hidden">
                     <button class="menu-toggle text-xl text-gray-700">
@@ -102,6 +102,7 @@
                     class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Varios</a></li>
         </ul>
     </div>
+    
     <div
         class="search-bar fixed top-24 right-8 w-96 h-16 bg-white shadow-xl rounded-lg flex items-center px-4 z-50 hidden transition-all duration-300 ease-in-out">
         <input type="text" placeholder="Buscar producto" name="search"
@@ -111,35 +112,33 @@
             <i class="fas fa-times"></i>
         </a>
     </div>
-    <!-- Login Modal (hidden by default, opens only on user icon click) -->
-    <div
-        id="login-modal"
+
+    <div id="login-modal"
         class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
-        <div
-            class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-white to-teal-400 shadow-2xl rounded-3xl flex flex-col items-center relative text-gray border-4 border-white-500">
+        <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-[#1B1E2B] shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-[#3C4153]">
             <a href="javascript:void(0);"
-                class="form-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-200 transition-colors">
+                class="form-cancel-icon absolute top-2 right-4 text-white text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
             <img src="./front/images/logopestaña.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain drop-shadow-lg" />
-            <h1 class="text-2xl font-bold mb-6 text-gray-400">Sign in to your account</h1>
+            <h1 class="text-2xl font-bold mb-6 text-white">Sign in to your account</h1>
             <form action="" class="w-full">
                 <div class="mb-4">
-                    <label for="email" class="block text-gray text-sm font-medium text-black-200 mb-1">Email address</label>
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
                     <input type="email" id="email" placeholder=""
-                        class="w-full h-12 px-4 bg-white text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-[#232734] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-black-200 mb-1">Password</label>
+                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
                     <input type="password" id="password" placeholder=""
-                        class="w-full h-12 px-4 bg-white text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-[#232734] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="w-full flex justify-between items-center mb-6">
-                    <label class="flex items-center text-sm text-gray-200">
+                    <label class="flex items-center text-sm text-gray-400">
                         <input type="checkbox" class="w-4 h-4 text-[#8C5DFF] bg-transparent border-[#3C4153] rounded">
-                        <span class="ml-2 text-black">Remember me</span>
+                        <span class="ml-2 text-gray-400">Remember me</span>
                     </label>
-                    <a href="#" class="text-sm text-black-200 hover:underline hover:text-teal-200">Forgot password?</a>
+                    <a href="#" class="text-sm text-gray-400 hover:underline hover:text-white">Forgot password?</a>
                 </div>
                 <button type="submit"
                     class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6 shadow-lg">
@@ -147,9 +146,9 @@
                 </button>
             </form>
             <div class="w-full flex items-center mb-6">
-                <div class="flex-grow border-t border-gray-300"></div>
-                <span class="mx-4 text-sm text-black-200">Or continue with</span>
-                <div class="flex-grow border-t border-gray-300"></div>
+                <div class="flex-grow border-t border-gray-700"></div>
+                <span class="mx-4 text-sm text-gray-400">Or continue with</span>
+                <div class="flex-grow border-t border-gray-700"></div>
             </div>
             <div class="w-full flex gap-4 mb-6">
                 <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors shadow-md">
@@ -166,13 +165,12 @@
                 </button>
             </div>
             <div class="w-full text-center">
-                <span class="text-black-200 text-sm">¿No tienes cuenta?</span>
+                <span class="text-gray-400 text-sm">¿No tienes cuenta?</span>
                 <a href="javascript:void(0);" id="show-register" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Regístrate</a>
             </div>
         </div>
     </div>
 
-    <!-- Modal de registro -->
     <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
         <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-white to-teal-400 shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-white-500">
             <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
@@ -235,11 +233,56 @@
             </div>
         </div>
     </div>
-            </form>
-            <div class="w-full text-center">
-                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
-                <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
+
+    <div id="tokens-modal"
+        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div
+            class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-white shadow-2xl rounded-3xl flex flex-col items-center relative text-gray border-4 border-white-500">
+            <a href="javascript:void(0);"
+                id="tokens-modal-cancel"
+                class="form-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
+            </a>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Tus Tokens</h2>
+            <div class="flex items-center gap-4 my-4 p-4 border rounded-xl w-full bg-gray-50">
+                <i class="fas fa-dollar-sign text-4xl text-teal-500"></i>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold text-gray-700" id="current-tokens">5000 Tokens</span>
+                    <span class="text-sm text-gray-500">Saldo actual</span>
+                </div>
             </div>
+
+            <h3 class="text-xl font-bold mt-6 mb-4 text-gray-800">Comprar Más Tokens</h3>
+            
+            <div class="w-full space-y-4">
+                <div class="purchase-option flex justify-between items-center p-4 border rounded-lg hover:shadow-md transition cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <span class="text-lg font-semibold text-gray-700">1000 Tokens</span>
+                        <span class="text-xs text-gray-500">- 10% de descuento</span>
+                    </div>
+                    <strong class="text-xl text-teal-500">$5.000 COP</strong>
+                </div>
+
+                <div class="purchase-option flex justify-between items-center p-4 border rounded-lg hover:shadow-md transition cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <span class="text-lg font-semibold text-gray-700">5000 Tokens</span>
+                        <span class="text-xs text-gray-500">- 15% de descuento</span>
+                    </div>
+                    <strong class="text-xl text-teal-500">$20.000 COP</strong>
+                </div>
+
+                <div class="purchase-option flex justify-between items-center p-4 border rounded-lg hover:shadow-md transition cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <span class="text-lg font-semibold text-gray-700">10000 Tokens</span>
+                        <span class="text-xs text-gray-500">- 20% de descuento</span>
+                    </div>
+                    <strong class="text-xl text-teal-500">$35.000 COP</strong>
+                </div>
+            </div>
+
+            <button class="mt-8 w-full h-12 bg-purple-600 text-white uppercase rounded-md shadow-md cursor-pointer hover:bg-purple-700 transition-colors">
+                Comprar Ahora
+            </button>
         </div>
     </div>
 
@@ -305,7 +348,6 @@
 
         <br>
         <br>
-
 
         <div class="flex justify-center items-center mt-10">
             <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">
@@ -378,14 +420,11 @@
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
 
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-                <!-- Imagen -->
                 <img src="./front/images/coderexample.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                <!-- Overlay semitransparente -->
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-                <!-- Texto -->
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -401,14 +440,11 @@
             </div>
 
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-                <!-- Imagen -->
                 <img src="./front/images/IAS_image.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                <!-- Overlay semitransparente -->
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-                <!-- Texto -->
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -423,16 +459,12 @@
                 </a>
             </div>
 
-
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-                <!-- Imagen -->
                 <img src="./front/images/tokenriwi.png"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                <!-- Overlay semitransparente -->
                 <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-                <!-- Texto -->
                 <a href="#">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                         <strong
@@ -450,7 +482,6 @@
         </section>
 
         <section class="new-arrival flex flex-col justify-center items-center py-10">
-            <!-- Título -->
             <div class="arrival-heading flex flex-col justify-center items-center">
                 <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">
                     Elementos destacados
@@ -458,24 +489,19 @@
                 <p class="text-gray-500 mt-2 text-sm">Ofrecemos una alta variedad de emprendimientos</p>
             </div>
 
-            <!-- Contenedor de productos en grid -->
             <div
                 class="product-container w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
 
-                <!-- Tarjeta producto -->
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-                    <!-- Imagen -->
                     <div class="product-img w-full h-56 relative group bg-gray-50">
                         <img src="./front/images/snack_colombiano.jpg"
                             class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
-                        <!-- Botón carrito -->
                         <a href="#"
                             class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
-                    <!-- Detalles -->
                     <div
                         class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
                         <a href="#"
@@ -486,7 +512,6 @@
                     </div>
                 </div>
 
-                <!-- Copia y cambia datos -->
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -549,19 +574,12 @@
             </div>
         </section>
 
-
-
-
-
         <div class="relative h-[40vh] my-5">
-            <!-- Imagen de fondo -->
             <div class="absolute inset-0 bg-cover bg-center"
                 style="background-image: url('./front/images/tokens_banne2.webp');"></div>
 
-            <!-- Overlay oscuro para resaltar texto -->
             <div class="absolute inset-0 bg-black bg-opacity-40"></div>
 
-            <!-- Contenedor del texto -->
             <div class="relative w-4/5 h-full flex items-center mx-auto">
                 <div class="banner-text flex flex-col text-left text-white">
                     <span class="uppercase tracking-widest text-lg font-medium text-gray-200">
@@ -578,8 +596,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
             <div
@@ -1057,10 +1073,8 @@
     </div>
 
 
-
-<!-- Vista del vendedor -->
     <div id="seller-profile-view" class="main-view hidden mt-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
                 <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Mi Perfil de Vendedor</h1>
                 <p class="mt-4 text-lg text-gray-500">Gestiona tus productos de forma fácil y rápida..</p>
@@ -1074,14 +1088,11 @@
                 </button>
             </section>
             <section id="dynamic-content">
-                <!-- Contenedor para la lista de productos -->
                 <div id="product-list-container" class="content-section">
                     <h2 class="text-2xl font-bold text-gray-700 mb-6">Mis Productos Almacenados</h2>
                     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Los productos se cargarán aquí dinámicamente -->
-                    </div>
+                        </div>
                 </div>
-                <!-- Contenedor para el formulario de producto -->
                 <div id="product-form-container" class="content-section hidden">
                     <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border">
                         <h2 id="form-title" class="text-2xl font-bold text-gray-700 mb-6 text-center">Formulario de Producto</h2>
@@ -1113,32 +1124,31 @@
             </section>
         </div>
     </div>
-   
 </body>
 <footer id="footer" class="section p-10 bg-white text-purple-600 w-full text-center border-gray-700 my-4">
-        <div class="container mx-auto flex flex-col items-center">
-            <div class="footer-links flex space-x-6 text-purple-400 mb-6">
-                <a href="#" class="hover:text-black transition-colors duration-200">About</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Contactanos</a>
-                <a href="#" class="hover:text-black transition-colors duration-200">Saber más</a>
-            </div>
-
-            <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
-                <a href="#" class="hover:text-black transition-colors duration-200"><i
-                        class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
-                <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
-            </div>
-
-            <div class="w-full text-center">
-                <hr class="border-gray-700 my-4">
-                <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
-            </div>
+    <div class="container mx-auto flex flex-col items-center">
+        <div class="footer-links flex space-x-6 text-purple-400 mb-6">
+            <a href="#" class="hover:text-black transition-colors duration-200">About</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Nosotros</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Tokens</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Contactanos</a>
+            <a href="#" class="hover:text-black transition-colors duration-200">Saber más</a>
         </div>
-    </footer>
+
+        <div class="footer-social-icons flex space-x-6 text-2xl mb-6 text-gray-400">
+            <a href="#" class="hover:text-black transition-colors duration-200"><i
+                        class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-github"></i></a>
+            <a href="#" class="hover:text-black transition-colors duration-200"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="w-full text-center">
+            <hr class="border-gray-700 my-4">
+            <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
+        </div>
+    </div>
+</footer>
 
 </html>
