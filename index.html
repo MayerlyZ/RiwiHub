@@ -14,7 +14,6 @@
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
     <script src="./front/js/app.js"></script>
-    <script src="./front/js/spa.js"></script>
     
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
@@ -61,10 +60,9 @@
                     class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
                     <i class="far fa-user"></i>
                 </a>
-                
-                <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2">
+                <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2 hidden">
                     <i class="fas fa-coins"></i>
-                    <span class="text-sm font-semibold">5000</span>
+                    <span class="text-sm font-semibold" id="token-balance">5000</span>
                 </a>
 
                 <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
