@@ -393,3 +393,20 @@ $(document).ready(function() {
     }
 
 });
+    function showSection(sectionId) {
+                    // Oculta todas las vistas principales
+                    document.querySelectorAll('.main-view').forEach(function(view) {
+                        view.classList.add('hidden');
+                    });
+                    // Muestra la vista seleccionada
+                    var section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.remove('hidden');
+                        window.scrollTo(0, 0);
+                    }
+                    // Opcional: Oculta el menú móvil después de seleccionar
+                    var mobileMenu = document.querySelector('.mobile-menu');
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }

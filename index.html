@@ -1,5 +1,5 @@
-<section class="services flex w-11/12 justify-center flex-wrap mx-auto my-10 gap-8"></section>
-    <div class="flex flex-row gap-8 w-full justify-center"></div>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -14,21 +14,15 @@
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
     <script src="./front/js/app.js"></script>
+    <script src="./front/js/spa.js"></script>
     
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
-    <style>
-        .rounded-4xl {
-            border-radius: 30px;
-        }
-        /* Nueva clase para el espaciado del banner principalll */
-        .main-content-padding {
-            padding-top: 100px; /* Ajusta este valor según la altura de tu navbar */
-        }
-    </style>
+
 </head>
 
 <body class="font-poppins">
+
     <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
         <div class="flex justify-between items-center px-12 h-20 bg-white">
             <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="logo">
@@ -106,25 +100,7 @@
                     class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
             <li><a href="javascript:void(0);" onclick="showSection('varios-view')"
                     class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Varios</a></li>
-            <script>
-                function showSection(sectionId) {
-                    // Oculta todas las vistas principales
-                    document.querySelectorAll('.main-view').forEach(function(view) {
-                        view.classList.add('hidden');
-                    });
-                    // Muestra la vista seleccionada
-                    var section = document.getElementById(sectionId);
-                    if (section) {
-                        section.classList.remove('hidden');
-                        window.scrollTo(0, 0);
-                    }
-                    // Opcional: Oculta el menú móvil después de seleccionar
-                    var mobileMenu = document.querySelector('.mobile-menu');
-                    if (mobileMenu) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            </script>
+            
         </ul>
     </div>
     
@@ -139,7 +115,7 @@
     </div>
 
     <div id="login-modal"
-        class="modal-container fixed top-0 left-0 w-full h-full bg-black  bg-opacity-20 flex justify-center items-center z-50 hidden">
+        class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
         <div class="login-form w-[520px] max-h-[90vh] overflow-y-auto p-8 bg-[white] shadow-2xl rounded-3xl flex flex-col items-center relative text-white border-4 border-white">
             <a href="javascript:void(0);"
                 class="modal-cancel-icon absolute top-2 right-4 text-black text-xl hover:text-teal-500 transition-colors">
@@ -156,7 +132,7 @@
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-black mb-1">Password</label>
                     <input type="password" id="password" placeholder=""
-                        class="w-full h-12 px-4 bg-white text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        class="w-full h-12 px-4 bg-white text-black border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="w-full flex justify-between items-center mb-6">
                     <label class="flex items-center text-sm text-gray-400">
@@ -310,6 +286,7 @@
         </div>
     </div>
 
+
     <div id="inicio-view" class="main-view main-content-padding">
         <ul id="adaptive" class="cs-hidden">
             <li class="item-a">
@@ -319,7 +296,7 @@
                         <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en
                             Snacks</span>
                         <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con
-                            <font class="text-teal text-orange-700">código promocional</font></strong>
+                            <span class="text-orange-700">código promocional</span></strong>
                         <a href="javascript:void(0);" onclick="showSection('snacks-view')"
                             class="w-40 h-10 flex justify-center items-center text-white bg-orange-700 uppercase tracking-wider mt-4">Obtener
                             Ahora</a>
@@ -333,7 +310,7 @@
                         <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en
                             productos tecnologicos</span>
                         <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con
-                            <font class="text-teal-500 text-black">código promocional</font></strong>
+                            <span class="text-teal-500 text-black">código promocional</span></strong>
                         <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"
                             class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener
                             Ahora</a>
@@ -344,10 +321,10 @@
                 <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
                     style="background-image: url('./front/images/serviciosbanner.png');">
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                        <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en
+                        <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en
                             servicios</span>
                         <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con
-                            <span style="color: #1f4070;">código promocional</span></strong>
+                            <span class="text-[#1f4070]">código promocional</span></strong>
                         <a href="javascript:void(0);" onclick="showSection('servicios-view')"
                             class="w-40 h-10 flex justify-center items-center text-white uppercase tracking-wider mt-4"
                             style="background-color: #1f4070;">Obtener Ahora</a>
@@ -359,34 +336,24 @@
                     style="background-image: url('./front/images/varios.png');">
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                         <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en
-                            producctos varios</span>
+                            productos varios</span>
                         <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con
-                            <br>con <span style="color: #022c66;">código promocional</span></strong>
+                            <br>con <span class="text-[#022c66]">código promocional</span></strong>
                         <a href="javascript:void(0);" onclick="showSection('varios-view')"
                             class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4"
                             style="background-color: #022c66;">Obtener Ahora</a>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
-
-        <br>
-        <br>
-
             </li>
         </ul>
 
-
-
-            <div class="flex justify-center items-center mt-10">
-                <h2 class="text-3xl font-bold uppercase tracking-widest text-gray-800 relative">
-                    Categorías
-                    <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
-                </h2>
-            </div>
-       
-
+        <div class="flex justify-center items-center mt-10">
+            <h2 class="text-3xl font-bold uppercase tracking-widest text-gray-800 relative">
+                Categorías
+                <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
+            </h2>
+        </div>
+        
         <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
             <li class="item flex flex-col justify-start items-center mx-5">
                 <div
@@ -449,7 +416,6 @@
                 <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
             </li>
         </ul>
-
 
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
@@ -535,8 +501,6 @@
                             class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Ana</span>
                     </div>
                 </div>
-
-               
                 <div
                     class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
@@ -596,10 +560,8 @@
                 </div>
             </div>
         </section>
-        <br>
-        <br>
-            
-        <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
+
+        <section class="services flex w-10/12 justify-center flex-wrap mx-auto">
             <div class="flex flex-row gap-8 w-full justify-center">
                 <div class="flex flex-col items-center justify-center text-center p-6 border rounded-xl shadow-sm transition-transform transform hover:scale-105 min-h-[220px] w-80">
                     <div class="flex items-center justify-center w-16 h-16 rounded-full border border-gray-300 mb-4">
@@ -613,17 +575,18 @@
                         <i class="fas fa-headset text-2xl text-purple-500"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">Soporte entre semana</h3>
-                    <p class="text-gray-500">Brindamos soporte técnico durante toda la semana.</p>
+                    <p class="text-gray-500">Brindamos soporte técnico <br>durante toda la semana.</p>
                 </div>
                 <div class="flex flex-col items-center justify-center text-center p-6 border rounded-xl shadow-sm transition-transform transform hover:scale-105 min-h-[220px]">
                     <div class="flex items-center justify-center w-16 h-16 rounded-full border border-gray-300 mb-4">
                         <i class="fas fa-shield-alt text-2xl text-purple-500"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">Seguridad</h3>
-                    <p class="text-gray-500">No te preocupes, tus compras siempre estarán protegidas.</p>
+                    <p class="text-gray-500">No te preocupes, tus compras <br>siempre estarán protegidas.</p>
                 </div>
             </div>
         </section>
+    </div>
 
     <div id="tecnologia-view" class="main-view hidden main-content-padding">
         <ul id="tecnologia-slider" class="cs-hidden">
@@ -633,7 +596,7 @@
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                         <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                         <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con
-                            <font class="text-teal-500 text-black">código promocional</font>
+                            <span class="text-teal-500 text-black">código promocional</span>
                         </strong>
                         <a href="javascript:void(0);"
                             class="w-40 h-10 flex justify-center items-center text-white bg-blue-500 uppercase tracking-wider mt-4">Obtener
@@ -648,11 +611,9 @@
                     Nueva llegada en tecnología
                     <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
                 </h2>
-                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nueva Llegada en Tecnología</strong>
                 <p class="text-gray-500 mt-2 text-sm">Los gadgets más recientes para los coders.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <!-- Productos de tecnología -->
                 <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/tecnology/audifonos-removebg-preview.png"
@@ -804,7 +765,6 @@
                     Nuestros mejores snacks
                     <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
                 </h2>
-                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Mejores Snacks</strong>
                 <p class="text-gray-500 mt-2 text-sm">Prueba los mejores bocadillos del mercado.</p>
             </div>
             
@@ -871,7 +831,7 @@
         <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
             style="background-image: url('./front/images/serviciosbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en
+                <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en
                     servicios</span>
                 <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span
                         style="color: #1f4070;">código promocional</span></strong>
@@ -886,7 +846,6 @@
                     <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
                 </h2>
 
-                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Servicios</strong>
 
                 <p class="text-gray-500 mt-2 text-sm">Servicios de alta calidad para tu negocio.</p>
             </div>
@@ -946,13 +905,10 @@
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-
                 <h2 class="text-2xl font-bold uppercase tracking-widest text-gray-800 relative">
                     Productos Varios
                     <span class="block h-1 w-24 bg-[rgb(112,95,250)] mx-auto mt-2 rounded"></span>
                 </h2>
-
-                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Productos Varios</strong>
                 <p class="text-gray-500 mt-2 text-sm">Explora una variedad de productos únicos.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
@@ -1054,7 +1010,6 @@
         </div>
     </div>
 
-
     <div id="seller-profile-view" class="main-view hidden mt-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
@@ -1132,5 +1087,4 @@
         </div>
     </div>
 </footer>
-
 </html>
