@@ -1,182 +1,342 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     // -------------------------------------------------------------------------
-    // --- INICIALIZACIÓN DE PLUGINS Y NAVEGACIÓN
+    // ---------------------------- CONFIG / STATE -----------------------------
     // -------------------------------------------------------------------------
 
-    // Función para mostrar una sección y ocultar las demás (SPA).
-    // Se toma la versión de spa.js por ser más robusta y re-inicializar los sliders.
-    window.showSection = function(sectionId) {
-        const views = document.querySelectorAll('.main-view');
-        views.forEach(view => {
-            view.classList.add('hidden');
-        });
-        const targetView = document.getElementById(sectionId);
-        if (targetView) {
-            targetView.classList.remove('hidden');
+    // Load state from localStorage
+    let authToken = localStorage.getItem('userToken') || null;
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-            if (sectionId === 'inicio-view' && window.innerWidth >= 768) {
-                // Reinicializa los sliders solo si están en la vista de inicio y en desktop.
+    // Ensure the tokens icon is hidden by default if there's no session
+    if (!authToken) {
+        $('#tokens-icon').addClass('hidden');
+    }
+
+    // -------------------------------------------------------------------------
+    // --------------------- PLUGIN / UI INITIALIZATION ----------------------
+    // -------------------------------------------------------------------------
+
+    // Initialize sliders (if they exist)
+    function initSliders() {
+        try {
+            if ($('#adaptive').length) {
                 $('#adaptive').lightSlider({
                     adaptiveHeight: true,
                     auto: true,
                     item: 1,
                     slideMargin: 0,
-                    loop: true,
-                    controls: false,
-                    pager: true,
-                    pause: 4000,
+                    loop: true
                 });
+            }
+            if ($('#autoWidth').length) {
                 $('#autoWidth').lightSlider({
                     autoWidth: true,
                     loop: true,
-                    slideMargin: 15,
-                    onSliderLoad: function() {
-                        $('#autoWidth').removeClass('cs-hidden');
-                    },
-                    controls: true,
-                    pager: false
+                    onSliderLoad: function () { $('#autoWidth').removeClass('cS-hidden'); }
                 });
             }
-
+        } catch (e) {
+            // If lightSlider is not loaded, prevent the app from breaking
+            console.warn('lightSlider init failed or not present', e);
         }
     }
 
+    // Run on startup
+    initSliders();
 
-    // --- UI EVENT HANDLERS ---
+    // -------------------------------------------------------------------------
+    // --------------------------- NAVIGATION (SPA) ----------------------------
+    // -------------------------------------------------------------------------
 
-    // Show the search bar when clicking the magnifying glass icon.
-    $(document).on('click', '.search-icon', function() {
+    // showSection: hides all .main-view views and shows the requested one.
+    window.showSection = function (sectionId, element) {
+        $('.main-view').addClass('hidden');
+        const $target = $('#' + sectionId);
+        if ($target.length) {
+            $target.removeClass('hidden');
+
+            // If it's the home view, re-initialize sliders to prevent glitches
+            if (sectionId === 'inicio-view' && window.innerWidth >= 768) {
+                initSliders();
+            }
+        }
+
+        // Update the visual state of the active nav-tab
+        $('.nav-tab').removeClass('bg-[rgb(112,95,250)] text-white').addClass('text-gray-600');
+        if (element) {
+            $(element).addClass('bg-[rgb(112,95,250)] text-white').removeClass('text-gray-600');
+        }
+    };
+
+    // Show the default section
+    showSection('inicio-view', $('.nav-tab').first());
+
+    // -------------------------------------------------------------------------
+    // -------------------------- UI: EVENT HANDLERS ---------------------------
+    // -------------------------------------------------------------------------
+
+    // Search bar
+    $(document).on('click', '.search-icon', function () {
         $('.search-bar').removeClass('hidden').addClass('flex');
     });
-
-    // Hide the search bar when clicking the 'X' icon.
-    // Muestra la vista de inicio por defecto al cargar la página.
-    showSection('inicio-view');
-    });
-    $(document).on('click', '.search-cancel-icon', function() {
+    $(document).on('click', '.search-cancel-icon', function () {
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
 
-
-    // Show the login form when clicking the user icon or "already have an account".
-    $(document).on('click', '.user-icon, .already-account-btn', function() {
-        $('.form-container').removeClass('hidden').addClass('flex');
-        $('.login-form').removeClass('hidden').addClass('flex');
-        $('.sign-up-form').addClass('hidden').removeClass('flex');
-    });
-
-    // Switch to the sign-up form when clicking "Create Account".
-    $(document).on('click', '.sign-up-btn', function() {
-        $('.form-container').removeClass('hidden').addClass('flex');
-        $('.sign-up-form').removeClass('hidden').addClass('flex');
-        $('.login-form').addClass('hidden').removeClass('flex');
-    });
-
-    // Close the form container.
-    $(document).on('click', '.form-cancel-icon', function() {
-        $('.form-container').addClass('hidden').removeClass('flex');
-    });
-
-    // Toggle mobile menu visibility.
-    $(document).on('click', '.menu-toggle', function() {
+    // Mobile menu toggle
+    $(document).on('click', '.menu-toggle', function () {
         $('.mobile-menu').toggleClass('hidden');
     });
 
+    // Open login modal (from icon or other buttons)
+    $(document).on('click', '.user-icon, .already-account-btn', function () {
+        $('#login-modal').removeClass('hidden').addClass('flex');
+    });
 
-    // --- APPLICATION NAVIGATION (SPA) ---
+    // Switch to register modal
+    $(document).on('click', '#show-register, .sign-up-btn', function () {
+        $('#login-modal').addClass('hidden');
+        $('#register-modal').removeClass('hidden').addClass('flex');
+    });
 
-    // Global function to switch between different page views.
-    window.showSection = function(sectionId) {
-        $('.main-view').addClass('hidden'); // Hide all views.
-        $('#' + sectionId).removeClass('hidden'); // Show only the requested view.
+    // Switch back to login from register
+    $(document).on('click', '#show-login', function () {
+        $('#register-modal').addClass('hidden');
+        $('#login-modal').removeClass('hidden').addClass('flex');
+    });
+
+    // Close modals (from 'X' button or others)
+    $(document).on('click', '.modal-cancel-icon, .form-cancel-icon', function () {
+        $(this).closest('.modal-container').addClass('hidden').removeClass('flex');
+    });
+
+    // Close product modal (animated)
+    $('#modal-close').on('click', function () {
+        closeModal();
+    });
+
+    // Show tokens modal (if authenticated)
+    $(document).on('click', '#tokens-icon', function () {
+        if (authToken) {
+            $('#tokens-modal').removeClass('hidden').addClass('flex');
+        } else {
+            alert('You must be logged in to see your tokens.');
+        }
+    });
+
+    // Show the cart
+    $('#cart-icon').on('click', function (e) {
+        e.preventDefault();
+        showCartView();
+    });
+
+    // Delegation: clicking on a product card opens the detail modal
+    $('body').on('click', '.product-box', function () {
+        const itemId = $(this).data('item-id');
+        if (!itemId) return;
+        const clickedBox = $(this);
+        // Request to get product details
+        $.ajax({
+            url: `http://localhost:13000/api/items/${itemId}`,
+            method: 'GET',
+            success: function (productData) {
+                // Populate modal with data
+                const itemImageSrc = clickedBox.find('img').attr('src') || productData.image_url || '';
+                $('#modal-img').attr('src', itemImageSrc);
+                $('#modal-name').text(productData.name || 'No name');
+                $('#modal-description').text(productData.description || 'No description available.');
+                $('#modal-price').text(`$${new Intl.NumberFormat('en-US').format(productData.price || 0)}`);
+                if (productData.token_price) {
+                    $('#token-section, #redeem-button').show();
+                    $('#modal-token-price').text(productData.token_price);
+                } else {
+                    $('#token-section, #redeem-button').hide();
+                }
+                $('#redeem-button').data('item_id', productData.item_id);
+                $('#modal-add-to-cart-btn').data('item_id', productData.item_id);
+                // Open modal with flex class
+                $('#product-modal').removeClass('hidden').addClass('flex');
+                // Small animation
+                setTimeout(() => {
+                    $('#modal-content-wrapper').removeClass('scale-95 opacity-0').addClass('scale-100 opacity-100');
+                }, 10);
+            },
+            error: function () {
+                alert('Could not load product information.');
+            }
+        });
+    });
+
+    // Prevent clicks on inner buttons from triggering the product modal
+    $('body').on('click', '.add-to-cart-btn', function (e) {
+        e.stopPropagation();
+        const itemId = $(this).closest('.product-box').data('item-id');
+        addItemToCart(itemId);
+    });
+
+    // Modal button: add to cart
+    $('#modal-add-to-cart-btn').on('click', function () {
+        closeModal();
+        addItemToCart($(this).data('item_id'));
+    });
+
+    // Redeem placeholder
+    $('#redeem-button').on('click', function () {
+        alert(`Redeem functionality for item ${$(this).data('item_id')} is not yet implemented.`);
+        closeModal();
+    });
+
+    // -------------------------------------------------------------------------
+    // -------------------------- MODAL / ANIMATIONS ---------------------------
+    // -------------------------------------------------------------------------
+
+    function closeModal() {
+        $('#modal-content-wrapper').removeClass('scale-100 opacity-100').addClass('scale-95 opacity-0');
+        setTimeout(() => {
+            $('#product-modal').addClass('hidden').removeClass('flex');
+        }, 300);
     }
 
+    // -------------------------------------------------------------------------
+    // ----------------------------- AUTHENTICATION ----------------------------
+    // -------------------------------------------------------------------------
 
-    // Muestra el modal de registro.
-    $(document).on('click', '#show-register', function() {
-        $('#login-modal').addClass('hidden');
-        $('#register-modal').removeClass('hidden');
+    // Update UI related to auth (shows/hides tokens and balance)
+    function updateUIBasedOnAuth() {
+        if (authToken && currentUser) {
+            $('#tokens-icon').removeClass('hidden');
+            $('#tokens-icon .text-sm').text(currentUser.wallet_balance || 0);
+            $('#current-tokens').text(`${currentUser.wallet_balance || 0} Tokens`);
+        } else {
+            $('#tokens-icon').addClass('hidden');
+            // Optionally, clear other user-related UI fields
+        }
+    }
+
+    // Login form handler (simulated)
+    $('#login-modal form').on('submit', function (e) {
+        e.preventDefault();
+        const email = $('#login-email').val();
+        const password = $('#login-password').val();
+
+        $.ajax({
+            url: 'http://localhost:13000/api/users/login',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ email, password }),
+            success: function (res) {
+                authToken = res.token;
+                currentUser = res.user;
+                localStorage.setItem('userToken', authToken);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                alert('Login successful!');
+                $('#login-modal').addClass('hidden');
+                updateUIBasedOnAuth();
+            },
+        });
     });
-    
-    // Muestra el modal de tokens.
-    $(document).on('click', '#tokens-icon', function() {
-        $('#tokens-modal').removeClass('hidden');
+
+    // Registration form handler (UI only; implement actual request when endpoint is ready)
+    $('#register-modal form').on('submit', function (e) {
+        e.preventDefault();
+        const name = $('#register-name').val();
+        const email = $('#register-email').val();
+        const password = $('#register-password').val();
+        const role = $('#register-role').val();
+        const cargo = $('#register-cargo').val();
+        const storeName = $('#register-store-name').val();
+        
+        // Basic frontend validation
+        if (!name || !email || !password) {
+            alert('Name, email, and password are required.');
+            return;
+        }
+
+        const payload = { name, email, password, role };
+        if (role === 'administrador' || role === 'vendedor') {
+            payload.cargo = cargo;
+        }
+        if (role === 'vendedor') {
+            payload.store_name = storeName;
+        }
+
+        $.ajax({
+            url: 'http://localhost:13000/api/users/register',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(payload),
+            success: function (res) {
+                alert('Registration successful! You can now log in.');
+                $('#register-modal').addClass('hidden');
+                $('#login-modal').removeClass('hidden').addClass('flex');
+            },
+            error: function (err) {
+                console.error('Registration error:', err);
+                alert('Registration failed: ' + (err.responseJSON.message || 'Unknown error.'));
+            }
+        });
     });
 
-    // Cierra todos los modales.
-    $(document).on('click', '.modal-cancel-icon', function() {
-        $(this).closest('.modal-container').addClass('hidden');
+    // Show/hide additional fields in registration form based on role
+    $('#register-role').on('change', function () {
+        const role = $(this).val();
+        $('#cargo-section').toggleClass('hidden', role !== 'administrador' && role !== 'vendedor');
+        $('#tienda-section').toggleClass('hidden', role !== 'vendedor');
     });
 
+    // -------------------------------------------------------------------------
+    // ------------------------------ SHOPPING CART ---------------------------------
+    // -------------------------------------------------------------------------
 
-    // =============================================================
-    // ===================== API FUNCTIONAL LOGIC ==================
-    // =============================================================
-
-    // Load user authentication token from local storage.
-    let authToken = localStorage.getItem('userToken') || null;
-
-    // --- SHOPPING CART FUNCTIONS ---
-
-    /**
-     * Sends a request to the API to add a product to the user's cart.
-     * @param {number} itemId - The ID of the product to add.
-     */
+    // Add product to cart (uses backend endpoint)
     function addItemToCart(itemId) {
         if (!authToken) {
-            alert("Please log in to add products to the cart.");
-            $('.user-icon').click(); // Opens the login modal.
+            alert('Please log in to add products to the cart.');
+            $('.user-icon').click();
             return;
         }
         $.ajax({
-            url: `http://localhost:5000/api/carts/add`,
+            url: `http://localhost:13000/api/carts/add`,
             method: 'POST',
             contentType: 'application/json',
             headers: { 'Authorization': 'Bearer ' + authToken },
             data: JSON.stringify({ itemId: itemId, quantity: 1 }),
-            success: (res) => {
-                alert(res.message);
-                showCartView(); // Refresh and display the cart view.
+            success: function (res) {
+                alert(res.message || 'Product added to cart.');
+                showCartView();
             },
-            error: (err) => {
-                console.error("Error adding to cart:", err);
+            error: function (err) {
+                console.error('Error adding to cart:', err);
                 alert('Error adding to cart, please try again.');
             }
         });
     }
 
-    /**
-     * Requests the products in the cart from the API and displays them in the view.
-     */
+    // View cart: fetches items and renders them
     async function showCartView() {
-        showSection('cart-view'); // Display the cart section.
-
+        showSection('cart-view');
         if (!authToken) {
             $('#cart-items-container').html('<p class="text-center text-indigo-500">Log in to see your cart.</p>');
             return;
         }
         try {
             const cartItems = await $.ajax({
-                url: 'http://localhost:5000/api/carts/',
+                url: 'http://localhost:13000/api/carts/',
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
-            renderCartItems(cartItems); // Render products in HTML.
-
+            renderCartItems(cartItems);
         } catch (error) {
+            console.error('Error loading cart', error);
             $('#cart-items-container').html('<p class="text-center text-red-500">Could not load your cart.</p>');
         }
     }
 
-    /**
-
-     * Generates the HTML for each product in the cart and calculates the total.
-     * @param {Array} items - The list of products in the cart.
-     */
+    // Render the cart items
     function renderCartItems(items) {
         const container = $('#cart-items-container');
-        container.empty(); // Clear previous content.
+        container.empty();
         if (!items || items.length === 0) {
             container.html('<p class="text-center text-gray-500">Your cart is empty.</p>');
             $('#cart-total').text('$0');
@@ -187,15 +347,17 @@ $(document).ready(function() {
         let totalItems = 0;
         items.forEach(cartItem => {
             const item = cartItem.item;
-            const subtotal = parseFloat(item.price) * cartItem.quantity;
+            const price = parseFloat(item.price || 0);
+            const subtotal = price * cartItem.quantity;
             total += subtotal;
             totalItems += cartItem.quantity;
             const itemHtml = `
                 <div class="flex items-center justify-between border-b pb-4 mb-4">
                     <div class="flex items-center">
+                        <img src="${item.image_url || 'https://via.placeholder.com/80'}" class="w-20 h-20 object-cover rounded" alt="${item.name}">
                         <div class="ml-4">
                             <p class="font-bold text-lg">${item.name}</p>
-                            <p class="text-gray-600">$${new Intl.NumberFormat('es-CO').format(item.price)}</p>
+                            <p class="text-gray-600">$${new Intl.NumberFormat('en-US').format(price)}</p>
                         </div>
                     </div>
                     <div><p>Quantity: ${cartItem.quantity}</p></div>
@@ -203,91 +365,46 @@ $(document).ready(function() {
                 </div>`;
             container.append(itemHtml);
         });
-        $('#cart-total').text(`$${new Intl.NumberFormat('es-CO').format(total)}`);
+        $('#cart-total').text(`$${new Intl.NumberFormat('en-US').format(total)}`);
         $('#cart-item-count').text(totalItems);
     }
 
-    // --- EVENT HANDLERS (MODAL & CART) ---
-
-
-    // Open product detail modal when clicking on a product card.
-    $('body').on('click', '.product-box', function() {
-        const itemId = $(this).data('item-id');
-        if (!itemId) return;
-        const clickedBox = $(this);
+    // Remove item from cart (delegated)
+    $('body').on('click', '.remove-from-cart-btn', function () {
+        const id = $(this).data('item-id');
+        if (!authToken) {
+            alert('You must be logged in.');
+            return;
+        }
+        if (!confirm('Remove this product from the cart?')) return;
         $.ajax({
-            url: `http://localhost:5000/api/items/${itemId}`,
-            method: 'GET',
-            success: function(productData) {
-                const itemImageSrc = clickedBox.find('img').attr('src');
-                $('#modal-img').attr('src', itemImageSrc);
-                $('#modal-name').text(productData.name);
-                $('#modal-description').text(productData.description || 'No description available.');
-                $('#modal-price').text(`$${new Intl.NumberFormat('es-CO').format(productData.price)}`);
-                if (productData.token_price) {
-                    $('#token-section, #redeem-button').show();
-                    $('#modal-token-price').text(productData.token_price);
-                } else {
-                    $('#token-section, #redeem-button').hide();
-                }
-                $('#redeem-button').data('item_id', productData.item_id);
-                $('#modal-add-to-cart-btn').data('item_id', productData.item_id);
-                $('#product-modal').removeClass('hidden').addClass('flex');
-                setTimeout(() => {
-                    $('#modal-content-wrapper').removeClass('scale-95 opacity-0').addClass('scale-100 opacity-100');
-                }, 10);
+            url: `http://localhost:13000/api/carts/remove/${id}`,
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + authToken },
+            success: function (res) {
+                alert(res.message || 'Product removed.');
+                showCartView();
             },
-            error: () => alert("Failed to load product information.")
+            error: function () {
+                alert('Could not remove the product.');
+            }
         });
     });
 
-    // Close modal with exit animation.
-    function closeModal() {
-        $('#modal-content-wrapper').removeClass('scale-100 opacity-100').addClass('scale-95 opacity-0');
-        setTimeout(() => {
-            $('#product-modal').addClass('hidden').removeClass('flex');
-        }, 300);
-    }
-    $('#modal-close').on('click', closeModal);
+    // -------------------------------------------------------------------------
+    // ------------------------- SELLER PROFILE ---------------------------
+    // -------------------------------------------------------------------------
 
-
-    // Add a product to the cart from the card button.
-    $('body').on('click', '.add-to-cart-btn', function(e) {
-        e.stopPropagation(); // Prevent modal from opening.
-        addItemToCart($(this).closest('.product-box').data('item-id'));
-    });
-
-    // Add a product to the cart from the modal button.
-    $('#modal-add-to-cart-btn').on('click', function() {
-        closeModal();
-        addItemToCart($(this).data('item_id'));
-    });
-    // Redeem button logic (currently a placeholder).
-    $('#redeem-button').on('click', function() {
-        alert(`Redeem functionality for item ${$(this).data('item_id')} not implemented yet.`);
-        closeModal();
-    });
-
-    // Show cart view when clicking the nav cart icon.
-    $('#cart-icon').on('click', function(e) {
-        e.preventDefault(); // Prevent page reload.
-        showCartView();
-    });
-
-    // =============================================================
-    // ================== SELLER PROFILE LOGIC =====================
-    // =============================================================
-    
-    // Only execute this logic if seller profile view exists in the HTML.
+    // Only run this logic if the seller profile view exists
     if ($('#seller-profile-view').length > 0) {
+
         const $productGrid = $('#product-grid');
         const $productListContainer = $('#product-list-container');
         const $productFormContainer = $('#product-form-container');
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
 
-
-        // Fetch product list from API and display them.
+        // Load seller's products
         async function renderSellerProducts() {
             $productGrid.empty();
             if (!authToken) {
@@ -296,64 +413,59 @@ $(document).ready(function() {
             }
             try {
                 const products = await $.ajax({
-                    url: 'http://localhost:5000/api/items',
+                    url: 'http://localhost:13000/api/items',
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
-                if (products.length === 0) {
-                    $productGrid.html('<p class="text-center text-gray-500 col-span-full">You don’t have any products. Add one!</p>');
+                if (!products || products.length === 0) {
+                    $productGrid.html('<p class="text-center text-gray-500 col-span-full">You don’t have any products. Add one.</p>');
                     return;
                 }
                 products.forEach(product => {
-
-                    // Generate HTML card for each product.
                     const productCardHTML = `
-                    <div class="bg-white border rounded-lg shadow-md overflow-hidden">
-                        <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">${product.name}</h3>
-                            <p class="text-gray-600 text-sm mt-2">${product.description}</p>
-                            <p class="text-xl font-semibold text-teal-600 mt-4">$${new Intl.NumberFormat('es-CO').format(product.price)}</p>
-                        </div>
-                        <div class="bg-gray-50 p-3 flex justify-end gap-2">
-                            <button class="btn-edit text-sm font-medium text-white bg-yellow-500 py-1 px-3 rounded hover:bg-yellow-600" data-id="${product.item_id}">✏️ Edit</button>
-                            <button class="btn-delete text-sm font-medium text-white bg-red-500 py-1 px-3 rounded hover:bg-red-600" data-id="${product.item_id}">🗑️ Delete</button>
-                        </div>
-                    </div>`;
+                        <div class="bg-white border rounded-lg shadow-md overflow-hidden">
+                            <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold">${product.name}</h3>
+                                <p class="text-gray-600 text-sm mt-2">${product.description || ''}</p>
+                                <p class="text-xl font-semibold text-teal-600 mt-4">$${new Intl.NumberFormat('en-US').format(product.price || 0)}</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 flex justify-end gap-2">
+                                <button class="btn-edit text-sm font-medium text-white bg-yellow-500 py-1 px-3 rounded hover:bg-yellow-600" data-id="${product.item_id}">✏️ Edit</button>
+                                <button class="btn-delete text-sm font-medium text-white bg-red-500 py-1 px-3 rounded hover:bg-red-600" data-id="${product.item_id}">🗑️ Delete</button>
+                            </div>
+                        </div>`;
                     $productGrid.append(productCardHTML);
                 });
             } catch (error) {
+                console.error('Error loading seller products', error);
                 $productGrid.html('<p class="text-center text-red-500 col-span-full">Error loading products.</p>');
             }
         }
 
-
-        // Show a specific profile section (list or form).
+        // Show a specific section within the seller profile
         function showSellerContent($sectionToShow) {
             $productListContainer.addClass('hidden');
             $productFormContainer.addClass('hidden');
             $sectionToShow.removeClass('hidden');
         }
 
-        // Show form to add a new product.
-        $('#btn-show-add-form').on('click', () => {
+        // Button: show add product form
+        $('#btn-show-add-form').on('click', function () {
             $formTitle.text('Add New Product');
             $productForm[0].reset();
             $('#product-id').val('');
             showSellerContent($productFormContainer);
         });
-        
 
-        // Show product list.
-
-        $('#btn-show-products, #btn-cancel').on('click', () => {
+        // Button: show product list
+        $('#btn-show-products, #btn-cancel').on('click', function () {
             renderSellerProducts();
             showSellerContent($productListContainer);
         });
 
-
-        // Submit form data to API to create or update a product.
-        $productForm.on('submit', async function(event) {
+        // Submit form: create or update product
+        $productForm.on('submit', async function (event) {
             event.preventDefault();
             const id = $('#product-id').val();
             const productData = {
@@ -362,15 +474,15 @@ $(document).ready(function() {
                 price: parseFloat($('#product-price').val()),
                 image_url: $('#product-image').val(),
                 type: 'product',
-                category_id: 1 // Assign a default category.
-
+                category_id: 1 // TODO: make dynamic if needed
             };
             const isUpdating = !!id;
-            const url = isUpdating ? `http://localhost:5000/api/items/${id}` : `http://localhost:5000/api/items`;
+            const url = isUpdating ? `http://localhost:13000/api/items/${id}` : `http://localhost:13000/api/items`;
             const method = isUpdating ? 'PUT' : 'POST';
             try {
                 await $.ajax({
-                    url, method,
+                    url,
+                    method,
                     contentType: 'application/json',
                     headers: { 'Authorization': 'Bearer ' + authToken },
                     data: JSON.stringify(productData)
@@ -379,17 +491,17 @@ $(document).ready(function() {
                 renderSellerProducts();
                 showSellerContent($productListContainer);
             } catch (error) {
+                console.error('Error saving product', error);
                 alert('Error saving product.');
             }
         });
 
-
-        // Load a product's data into the form for editing.
-        $productGrid.on('click', '.btn-edit', async function() {
+        // Load product data into form for editing
+        $productGrid.on('click', '.btn-edit', async function () {
             const productId = $(this).data('id');
             try {
                 const productToEdit = await $.ajax({
-                    url: `http://localhost:5000/api/items/${productId}`,
+                    url: `http://localhost:13000/api/items/${productId}`,
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
@@ -401,146 +513,49 @@ $(document).ready(function() {
                 $('#product-image').val(productToEdit.image_url);
                 showSellerContent($productFormContainer);
             } catch (error) {
+                console.error('Could not load product for editing', error);
                 alert('Could not load product for editing.');
             }
         });
 
-
-        // Send API request to delete a product.
-        $productGrid.on('click', '.btn-delete', async function() {
+        // Delete product
+        $productGrid.on('click', '.btn-delete', async function () {
             const productId = $(this).data('id');
-            if (confirm('Are you sure you want to delete this product?')) {
-                try {
-                    await $.ajax({
-                        url: `http://localhost:5000/api/items/${productId}`,
-                        method: 'DELETE',
-                        headers: { 'Authorization': 'Bearer ' + authToken }
-                    });
-                    alert('Product deleted.');
-                    renderSellerProducts();
-                } catch (error) {
-                    alert('Error deleting product.');
-                }
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            try {
+                await $.ajax({
+                    url: `http://localhost:13000/api/items/${productId}`,
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + authToken }
+                });
+                alert('Product deleted.');
+                renderSellerProducts();
+            } catch (error) {
+                console.error('Error deleting product', error);
+                alert('Error deleting product.');
             }
         });
 
+        // Initial load of seller products if authenticated
+        if (authToken) renderSellerProducts();
+    } // end seller-profile-view check
 
-        // Initial load of seller products if token exists.
-        if(authToken) renderSellerProducts();
-    }
-});
+    // -------------------------------------------------------------------------
+    // -------------------- ADDITIONAL LOGIC / UTILS -----------------------
+    // -------------------------------------------------------------------------
 
-// --- SIGN-UP FORM LOGIC ---
-// Show/hide additional fields based on the selected role.
-document.addEventListener('DOMContentLoaded', function () {
-    var roleSelect = document.getElementById('register-role');
-    var cargoSection = document.getElementById('cargo-section');
-    var tiendaSection = document.getElementById('tienda-section');
-    roleSelect.addEventListener('change', function () {
-        cargoSection.classList.add('hidden');
-        tiendaSection.classList.add('hidden');
-        if (roleSelect.value === 'administrador') {
-            cargoSection.classList.remove('hidden');
-        } else if (roleSelect.value === 'vendedor') {
-            cargoSection.classList.remove('hidden');
-            tiendaSection.classList.remove('hidden');
-        }
+    // Logout handler (if you have a dedicated logout button)
+    $(document).on('click', '#logout-btn', function () {
+        if (!confirm('Log out?')) return;
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('currentUser');
+        authToken = null;
+        currentUser = null;
+        updateUIBasedOnAuth();
+        alert('Logged out.');
+        showSection('inicio-view');
     });
+
+    // Final UI update on page load
+    updateUIBasedOnAuth();
 });
-
-// --- REGISTRATION AND LOGIN MODALS ---
-// Show registration form.
-document.addEventListener('DOMContentLoaded', function () {
-    var showRegister = document.getElementById('show-register');
-    var showLogin = document.getElementById('show-login');
-    var registerModal = document.getElementById('register-modal');
-    var registerCancel = document.getElementById('register-cancel');
-    var loginForm = document.querySelector('.form-container');
-
-    if (showRegister) {
-        showRegister.onclick = function () {
-            loginForm.style.display = 'none';
-            registerModal.style.display = 'flex';
-        };
-    }
-    if (showLogin) {
-        showLogin.onclick = function () {
-            registerModal.style.display = 'none';
-            loginForm.style.display = 'flex';
-        };
-    }
-    if (registerCancel) {
-        registerCancel.onclick = function () {
-            registerModal.style.display = 'none';
-            loginForm.style.display = 'flex';
-        };
-    }
-    // Close login with the X button.
-    var loginCancel = document.querySelector('.form-cancel-icon');
-    if (loginCancel) {
-        loginCancel.onclick = function () {
-            loginForm.style.display = 'none';
-        };
-    }
-});
-
-// Show login only when clicking the user icon.
-document.addEventListener('DOMContentLoaded', function () {
-    var userIcon = document.querySelector('.user-icon');
-    var loginModal = document.getElementById('login-modal');
-    var loginCancel = loginModal.querySelector('.form-cancel-icon');
-
-    if (userIcon) {
-        userIcon.onclick = function () {
-            loginModal.style.display = 'flex';
-        };
-    }
-    if (loginCancel) {
-        loginCancel.onclick = function () {
-            loginModal.style.display = 'none';
-        };
-    }
-});
-
-        if(authToken) renderSellerProducts();
-    }
-    
-    // -------------------------------------------------------------------------
-    // --- LÓGICA DE FORMULARIO DE REGISTRO
-    // -------------------------------------------------------------------------
-    var roleSelect = document.getElementById('register-role');
-    var cargoSection = document.getElementById('cargo-section');
-    var tiendaSection = document.getElementById('tienda-section');
-
-    if (roleSelect) {
-        roleSelect.addEventListener('change', function () {
-            cargoSection.classList.add('hidden');
-            tiendaSection.classList.add('hidden');
-            if (roleSelect.value === 'administrador') {
-                cargoSection.classList.remove('hidden');
-            } else if (roleSelect.value === 'vendedor') {
-                cargoSection.classList.remove('hidden');
-                tiendaSection.classList.remove('hidden');
-            }
-        });
-    }
-
-});
-    function showSection(sectionId) {
-                    // Oculta todas las vistas principales
-                    document.querySelectorAll('.main-view').forEach(function(view) {
-                        view.classList.add('hidden');
-                    });
-                    // Muestra la vista seleccionada
-                    var section = document.getElementById(sectionId);
-                    if (section) {
-                        section.classList.remove('hidden');
-                        window.scrollTo(0, 0);
-                    }
-                    // Opcional: Oculta el menú móvil después de seleccionar
-                    var mobileMenu = document.querySelector('.mobile-menu');
-                    if (mobileMenu) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-
