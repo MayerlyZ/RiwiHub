@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RiwiHub</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <link rel="stylesheet" type="text/css" href="./front/css/lightslider.css">
     <link rel="stylesheet" type="text/css" href="./front/css/style.css">
 
@@ -20,186 +21,411 @@
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
 </head>
-<body class="font-poppins">
-<nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
-    <div class="flex justify-between items-center px-12 h-20 bg-white">
-        <a href="#" class="logo">
-            <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
-        </a>
-        
-        <ul class="flex space-x-2 p-2 rounded-full border border-gray-300 bg-white">
-            <li>
-                <a href="javascript:void(0);" onclick="showSection('inicio-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Inicio</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Tecnología</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);" onclick="showSection('snacks-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Snacks</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);" onclick="showSection('servicios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Servicios</a>
-            </li>
-             <li>
-                <a href="javascript:void(0);" onclick="showSection('varios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Varios</a>
-            </li>
-        </ul>
 
-        <div class="flex space-x-4 items-center">
-            <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">                <i class="fas fa-search"></i>
+<body class="font-poppins">
+    <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
+        <div class="flex justify-between items-center px-12 h-20 bg-white">
+            <a href="#" class="logo">
+                <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
             </a>
-            <a href="javascript:void(0);"
+
+            <ul class="flex space-x-2 p-2 rounded-full border border-gray-300 bg-white">
+                <li>
+                    <a href="javascript:void(0);" onclick="showSection('inicio-view', this)"
+                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Inicio</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)"
+                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Tecnología</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="showSection('snacks-view', this)"
+                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Snacks</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="showSection('servicios-view', this)"
+                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Servicios</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="showSection('varios-view', this)"
+                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-teal-500 hover:bg-gray-200">Varios</a>
+                </li>
+            </ul>
+
+            <div class="flex space-x-4 items-center">
+                <a href="javascript:void(0);"
+                    class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
+                    <i class="fas fa-search"></i>
+                </a>
+              <a href="javascript:void(0);"
                 onclick="showSection('seller-profile-view', this)"
                 class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
                 <i class="far fa-user"></i>
             </a>
-            <a href="#" id= "cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                <i class="fas fa-shopping-cart">
+             
+                <a href="#" id= "cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
+                  <i class="fas fa-shopping-cart">
                     <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal">0</span>
-                </i>
-            </a>
-        <div class="md:hidden">
-            <button class="menu-toggle text-xl text-gray-700">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </div>
-</nav>
+                  </i>
+                </a>
 
-<div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
-    <ul class="flex flex-col">
-        <li><a href="javascript:void(0);" onclick="showSection('inicio-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Inicio</a></li>
-        <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tecnologia</a></li>
-        <li><a href="javascript:void(0);" onclick="showSection('snacks-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Snacks</a></li>
-        <li><a href="javascript:void(0);" onclick="showSection('servicios-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
-        <li><a href="javascript:void(0);" onclick="showSection('varios-view')" class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Varios</a></li>
-    </ul>
-</div>
-    <div class="search-bar fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-xl flex justify-center z-50 hidden transition-all duration-300 ease-in-out">
-        <div class="w-11/12 border-b-2 border-gray-500 flex justify-center items-center h-[100px] mt-5">
-            <input type="text" placeholder="Search For Product" name="search" class="w-full p-8 border-none outline-none text-4xl mx-5 placeholder-gray-400"/>
-            <a href="javascript:void(0);" class="search-cancel-icon text-gray-700 text-4xl pr-10 hover:text-teal-500 transition-colors">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
-    </div>
-    
-    <div class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
-        <div class="login-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
-            <a href="javascript:void(0);" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
-                <i class="fas fa-times"></i>
-            </a>
-            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Iniciar Sesión</strong>
-            <form action="" class="w-full flex flex-col justify-center items-center">
-                <input type="email" placeholder="Example@gmail.com" name="email" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="password" placeholder="password" name="password" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="submit" value="log In" class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
-            </form>
-            <div class="w-11/12 flex justify-between items-center mt-3">
-                <a href="#" class="text-gray-500 text-sm hover:text-teal-500">Olvidaste tu Contraseña</a>
-                <a href="javascript:void(0);" class="text-gray-500 text-sm border-b border-gray-500 leading-4 sign-up-btn hover:text-teal-500">Crear Cuenta</a>
+
+
+
+
+                <div class="md:hidden">
+                    <button class="menu-toggle text-xl text-gray-700">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="md:hidden">
+                <button class="menu-toggle text-xl text-gray-700">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
+    </nav>
 
-        <div class="sign-up-form w-[420px] p-8 bg-white shadow-lg rounded-md flex flex-col justify-center items-center relative hidden">
-            <a href="javascript:void(0);" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+    <div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
+        <ul class="flex flex-col">
+            <li><a href="javascript:void(0);" onclick="showSection('inicio-view')"
+                    class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Inicio</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view')"
+                    class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Tecnologia</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('snacks-view')"
+                    class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Snacks</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('servicios-view')"
+                    class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Servicios</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('varios-view')"
+                    class="block px-8 py-4 text-gray-500 font-medium uppercase hover:bg-gray-100">Varios</a></li>
+        </ul>
+    </div>
+    <div
+        class="search-bar fixed top-24 right-8 w-96 h-16 bg-white shadow-xl rounded-lg flex items-center px-4 z-50 hidden transition-all duration-300 ease-in-out">
+        <input type="text" placeholder="Buscar producto" name="search"
+            class="flex-1 border-none outline-none text-lg px-2 placeholder-gray-400 bg-transparent" />
+        <a href="javascript:void(0);"
+            class="search-cancel-icon text-gray-700 text-2xl ml-3 hover:text-teal-500 transition-colors">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>
+
+    <div
+        class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50">
+        <div
+            class="login-form w-[420px] p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-purple">
+            <a href="javascript:void(0);"
+                class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
-            <strong class="text-4xl text-gray-700 font-medium uppercase tracking-wide">Registrarse</strong>
-            <form action="" class="w-full flex flex-col justify-center items-center">
-                <input type="text" placeholder="full name" name="fullname" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="email" placeholder="Example@gmail.com" name="email" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="password" placeholder="password" name="password" required class="w-11/12 h-12 my-2 px-3 border border-gray-200 outline-none rounded-lg placeholder-gray-400">
-                <input type="submit" value="sign-up" class="w-11/12 h-12 bg-teal-500 text-white border-none outline-none uppercase mt-3 rounded-md shadow-md cursor-pointer">
+            
+            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-70 h-20 mb-4 object-contain" />
+
+            <h1 class="text-1.5xl font-bold mb-6">Sign in to your account</h1>
+            <form action="" class="w-full">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <input type="email" id="email" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <input type="password" id="password" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-white border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="w-full flex justify-between items-center mb-6">
+                    <label class="flex items-center text-sm text-gray-400">
+                        <input type="checkbox" class="w-4 h-4 text-[#8C5DFF] bg-transparent border-[#3C4153] rounded">
+                        <span class="ml-2">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-gray-400 hover:underline hover:text-white">Forgot password?</a>
+                </div>
+                <button type="submit"
+                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6">
+                    Sign in
+                </button>
             </form>
-            <div class="w-11/12 mt-3 text-center">
-                <a href="javascript:void(0);" class="already-account-btn text-gray-500 text-sm hover:text-teal-500">Already have Acount</a>
+            <div class="w-full flex items-center mb-6">
+                <div class="flex-grow border-t border-gray-700"></div>
+                <span class="mx-4 text-sm text-gray-400">Or continue with</span>
+                <div class="flex-grow border-t border-gray-700"></div>
+            </div>
+            <div class="w-full flex gap-4 mb-6">
+                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
+                        <path d="M12.0001 4.75001C14.0772 4.75001 15.8612 5.48514 17.2031 6.8687L20.0001 4.07176C17.9254 2.05832 15.1118 0.826294 12.0001 0.826294C7.54019 0.826294 3.79155 3.19706 1.87974 6.64344L5.68962 9.48912C6.51613 6.96024 9.00693 4.75001 12.0001 4.75001Z"></path>
+                        <path d="M23.3647 12.0001C23.3647 11.2323 23.2974 10.4856 23.1678 9.75781H12.0001V13.8837H18.7844C18.4735 15.5562 17.5256 16.9933 16.1558 17.9575L19.9657 20.8032C22.2536 18.6659 23.3647 15.6888 23.3647 12.0001Z"></path>
+                        <path d="M1.87974 6.64344L5.68962 9.48912C5.45267 10.203 5.32111 11.0001 5.32111 12.0001C5.32111 12.9865 5.44026 13.9213 5.65675 14.7937L1.87109 17.6593C0.686566 15.4283 0 13.0016 0 10.4578C0 8.87784 0.354124 7.37877 0.999742 6.00034L1.87974 6.64344Z"></path>
+                        <path d="M16.1558 17.9575C15.195 18.636 14.1037 19.1415 12.9113 19.4678L12.0001 19.4678L12.0001 15.3419H12.0298C9.57022 15.3419 7.4988 14.1365 6.43841 12.2745L2.62853 15.1192C4.5501 18.5752 8.29177 21.0001 12.0001 21.0001C15.1118 21.0001 17.8967 19.8596 19.9657 17.7023L16.1558 17.9575Z"></path>
+                    </svg>
+                    <span class="text-white">Google</span>
+                </button>
+                <button class="flex-1 h-12 flex justify-center items-center gap-2 bg-[#232734] border border-[#3C4153] rounded-lg hover:bg-[#3C4153] transition-colors">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
+                        <path d="M12.0001 2.24716C6.54019 2.24716 2.00012 6.78723 2.00012 12.2472C2.00012 16.6575 4.8859 20.3705 8.91035 21.6583C9.42398 21.7505 9.61058 21.4334 9.61058 21.1627C9.61058 20.9169 9.60126 20.1264 9.60126 19.3082C6.96347 19.8893 6.39828 18.1585 6.39828 18.1585C5.95252 17.0658 5.37893 16.7629 5.37893 16.7629C4.50285 16.1363 5.44199 16.1541 5.44199 16.1541C6.44855 16.2235 6.99427 17.1523 6.99427 17.1523C7.8091 18.5298 9.07008 18.1189 9.58371 17.8841C9.66442 17.3204 9.89782 16.9248 10.1554 16.7025C8.15933 16.4716 5.86012 15.6547 5.86012 12.2829C5.86012 11.294 6.20846 10.4489 6.76008 9.77353C6.6783 9.42938 6.4223 8.64775 6.85226 7.55502C6.85226 7.55502 7.5027 7.34005 9.5925 8.74201C10.2291 8.56064 10.9205 8.47144 11.6119 8.46211C12.3033 8.47144 12.9947 8.56064 13.6313 8.74201C15.7211 7.34005 16.3715 7.55502 16.3715 7.55502C16.8015 8.64775 16.5455 9.42938 16.4637 9.77353C17.0153 10.4489 17.3637 11.294 17.3637 12.2829C17.3637 15.6454 15.0645 16.4623 13.0684 16.7025C13.3768 16.9641 13.6231 17.4777 13.6231 18.2396C13.6231 19.3414 13.6142 20.2525 13.6142 20.5232C13.6142 20.7939 13.7915 21.1098 14.2863 21.0176C18.3107 19.7298 21.1965 16.0168 21.1965 11.6065C21.1965 6.14659 16.6565 1.60652 11.1965 1.60652H12.0001Z"></path>
+                    </svg>
+                    <span class="text-white">GitHub</span>
+                </button>
+            </div>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿No tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-register" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Regístrate</a>
             </div>
         </div>
     </div>
-    
+
+    <!-- Modal de registro -->
+    <div id="register-modal" class="form-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-[white] shadow-lg rounded-2xl flex flex-col items-center relative text-white">
+            <a href="javascript:void(0);" id="register-cancel" class="form-cancel-icon absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
+            </a>
+            <img src="./front/images/logopral.png" alt="Logo RiwiHub" class="w-32 h-20 mb-4 object-contain" />
+            <h1 class="text-2xl font-bold mb-6">Crear una cuenta</h1>
+            <form action="" class="w-full">
+                <div class="mb-4">
+                    <label for="register-role" class="block text-sm font-medium text-gray-400 mb-1">Tipo de usuario</label>
+                    <select id="register-role" class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                        <option value="cliente">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="vendedor">Vendedor</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="register-name" class="block text-sm font-medium text-gray-400 mb-1">Nombre</label>
+                    <input type="text" id="register-name" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-cel" class="block text-sm font-medium text-gray-400 mb-1">Celular</label>
+                    <input type="text" id="register-cel" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-cedula" class="block text-sm font-medium text-gray-400 mb-1">Cédula</label>
+                    <input type="text" id="register-cedula" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4 hidden" id="cargo-section">
+                    <label for="register-cargo" class="block text-sm font-medium text-gray-400 mb-1">Cargo</label>
+                    <input type="text" id="register-cargo" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4 hidden" id="tienda-section">
+                    <label for="register-tienda" class="block text-sm font-medium text-gray-400 mb-1">Nombre de la tienda</label>
+                    <input type="text" id="register-tienda" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block text-sm font-medium text-gray-400 mb-1">Email address</label>
+                    <input type="email" id="register-email" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <div class="mb-6">
+                    <label for="register-password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <input type="password" id="register-password" placeholder=""
+                        class="w-full h-12 px-4 bg-[white] text-gray-700 border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
+                </div>
+                <button type="submit"
+                    class="w-full h-12 bg-[#8C5DFF] text-white font-semibold rounded-lg hover:bg-[#A37BFF] transition-colors mb-6">
+                    Registrarse
+                </button>
+            </form>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var roleSelect = document.getElementById('register-role');
+                    var cargoSection = document.getElementById('cargo-section');
+                    var tiendaSection = document.getElementById('tienda-section');
+                    roleSelect.addEventListener('change', function () {
+                        cargoSection.classList.add('hidden');
+                        tiendaSection.classList.add('hidden');
+                        if (roleSelect.value === 'administrador') {
+                            cargoSection.classList.remove('hidden');
+                        } else if (roleSelect.value === 'vendedor') {
+                            cargoSection.classList.remove('hidden');
+                            tiendaSection.classList.remove('hidden');
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+            </form>
+            <div class="w-full text-center">
+                <span class="text-gray-400 text-sm">¿Ya tienes cuenta?</span>
+                <a href="javascript:void(0);" id="show-login" class="text-[#8C5DFF] hover:underline ml-2 text-sm font-semibold">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mostrar registro
+        document.addEventListener('DOMContentLoaded', function () {
+            var showRegister = document.getElementById('show-register');
+            var showLogin = document.getElementById('show-login');
+            var registerModal = document.getElementById('register-modal');
+            var registerCancel = document.getElementById('register-cancel');
+            var loginForm = document.querySelector('.form-container');
+
+            if (showRegister) {
+                showRegister.onclick = function () {
+                    loginForm.style.display = 'none';
+                    registerModal.style.display = 'flex';
+                };
+            }
+            if (showLogin) {
+                showLogin.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            if (registerCancel) {
+                registerCancel.onclick = function () {
+                    registerModal.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                };
+            }
+            // Cerrar login con la X
+            var loginCancel = document.querySelector('.form-cancel-icon');
+            if (loginCancel) {
+                loginCancel.onclick = function () {
+                    loginForm.style.display = 'none';
+                };
+            }
+        });
+    </script>
     <div id="inicio-view" class="main-view main-content-padding">
         <ul id="adaptive" class="cs-hidden">
-        <li class="item-a">
-            <div class="full-slider-box h-[65vh] bg-cover bg-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/snacksbanner.png');">
-                <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                    <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en Snacks</span>
-                    <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font class="text-teal text-orange-700">código promocional</font></strong>
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view')" class="w-40 h-10 flex justify-center items-center text-white bg-orange-700 uppercase tracking-wider mt-4">Obtener Ahora</a>
+            <li class="item-a">
+                <div class="full-slider-box h-[65vh] bg-cover bg-repeat bg-center flex justify-center items-center"
+                    style="background-image: url('./front/images/snacksbanner.png');">
+                    <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                        <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en
+                            Snacks</span>
+                        <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con
+                            <font class="text-teal text-orange-700">código promocional</font></strong>
+                        <a href="javascript:void(0);" onclick="showSection('snacks-view')"
+                            class="w-40 h-10 flex justify-center items-center text-white bg-orange-700 uppercase tracking-wider mt-4">Obtener
+                            Ahora</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="item-a">
-            <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/tecnologiabanner.png');">
-                <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                    <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
-                    <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
+            </li>
+            <li class="item-a">
+                <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+                    style="background-image: url('./front/images/tecnologiabanner.png');">
+                    <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                        <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en
+                            productos tecnologicos</span>
+                        <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con
+                            <font class="text-teal-500 text-black">código promocional</font></strong>
+                        <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"
+                            class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4">Obtener
+                            Ahora</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="item-a">
-            <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/serviciosbanner.png');">
-                <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                    <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en servicios</span>
-                    <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span style="color: #1f4070;">código promocional</span></strong>
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')" class="w-40 h-10 flex justify-center items-center text-white uppercase tracking-wider mt-4" style="background-color: #1f4070;">Obtener Ahora</a>
+            </li>
+            <li class="item-a">
+                <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+                    style="background-image: url('./front/images/serviciosbanner.png');">
+                    <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                        <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en
+                            servicios</span>
+                        <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con
+                            <span style="color: #1f4070;">código promocional</span></strong>
+                        <a href="javascript:void(0);" onclick="showSection('servicios-view')"
+                            class="w-40 h-10 flex justify-center items-center text-white uppercase tracking-wider mt-4"
+                            style="background-color: #1f4070;">Obtener Ahora</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="item-a">
-            <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/varios.png');">
-                <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                    <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en producctos varios</span>
-                    <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <br>con <span style="color: #022c66;">código promocional</span></strong>
-                    <a href="javascript:void(0);" onclick="showSection('varios-view')" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4" style="background-color: #022c66;">Obtener Ahora</a>
+            </li>
+            <li class="item-a">
+                <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+                    style="background-image: url('./front/images/varios.png');">
+                    <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
+                        <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en
+                            producctos varios</span>
+                        <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con
+                            <br>con <span style="color: #022c66;">código promocional</span></strong>
+                        <a href="javascript:void(0);" onclick="showSection('varios-view')"
+                            class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4"
+                            style="background-color: #022c66;">Obtener Ahora</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
 
         <br>
         <br>
 
 
         <div class="flex justify-center items-center mt-10">
-            <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">Categorias</h2>
+            <h2 class="text-2xl text-gray-800 tracking-wide uppercase font-semibold px-8 py-2 border border-gray-200">
+                Categorias</h2>
         </div>
-        
+
         <ul id="autoWidth" class="cs-hidden flex justify-center my-20 mx-auto">
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view')"><img src="front/images/tecnologia/saludable.png" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="javascript:void(0);" onclick="showSection('snacks-view')">
+                        <img src="front/images/tecnologia/saludable.png"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
-                <span class="text-base font-semibold mt-1 text-gray-600 position:center text-center"> Snacks <br> Saludables</span>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Snacks <br> Saludables</span>
             </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"><img src="front/images/sccesorios.webp" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                        <img src="front/images/sccesorios.webp"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
-                <span class="text-base font-semibold mt-1 text-gray-600">Accesorios</span>
+                <span class="text-base font-semibold mt-1 text-gray-600 text-center">Accesorios</span>
             </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')"><img src="front/images/tecnologia/dulces.png" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                        <img src="front/images/tecnologia/dulces.png"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
                 <span class="text-base font-semibold mt-1 text-gray-600 text-center">Servicios de Conduccion</span>
             </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view')"><img src="front/images/tecnologia/nube.png" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="javascript:void(0);" onclick="showSection('servicios-view')">
+                        <img src="front/images/tecnologia/nube.png"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
                 <span class="text-base font-semibold mt-1 text-gray-600 text-center">Consigue tu pagina web</span>
             </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')"><img src="front/images/tecnologia/servicios_varios.png" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view')">
+                        <img src="front/images/tecnologia/servicios_varios.png"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
                 <span class="text-base font-semibold mt-1 text-gray-600 text-center">Tecnologia</span>
             </li>
-            <li class="item flex flex-col justify-center items-center mx-5">
-                <div class="w-40 h-40 rounded-lg overflow-hidden">
-                    <a href="#"><img src="front/images/oferta.webp" class="w-full h-full object-cover object-center"></a>
+            <li class="item flex flex-col justify-start items-center mx-5">
+                <div
+                    class="w-40 h-40 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white flex items-center justify-center">
+                    <a href="#">
+                        <img src="front/images/oferta.webp"
+                            class="w-36 h-36 object-cover transition-transform duration-300 hover:scale-110">
+                    </a>
                 </div>
                 <span class="text-base font-semibold mt-1 text-gray-600 text-center">Ofertas</span>
             </li>
@@ -208,66 +434,75 @@
         <section class="sale w-11/12 flex flex-wrap justify-center mx-auto my-5">
 
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-            <!-- Imagen -->
-            <img src="./front/images/coderexample.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <!-- Imagen -->
+                <img src="./front/images/coderexample.png"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-            <!-- Overlay semitransparente -->
-            <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
+                <!-- Overlay semitransparente -->
+                <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-            <!-- Texto -->
-            <a href="#">
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                <strong class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
-                    Consigue tu pagina web
-                </strong>
-                <span class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
-                    Contacta a los coders
-                </span>
-                </div>
-            </a>
+                <!-- Texto -->
+                <a href="#">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                        <strong
+                            class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
+                            Consigue tu pagina web
+                        </strong>
+                        <span
+                            class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
+                            Contacta a los coders
+                        </span>
+                    </div>
+                </a>
             </div>
 
             <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-            <!-- Imagen -->
-            <img src="./front/images/IAS_image.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <!-- Imagen -->
+                <img src="./front/images/IAS_image.png"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-            <!-- Overlay semitransparente -->
-            <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
+                <!-- Overlay semitransparente -->
+                <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-            <!-- Texto -->
-            <a href="#">
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                <strong class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
-                    Adquiere tu suscripción a ChatGpt Pro
-                </strong>
-                <span class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
-                    Hasta 10% de descuento
-                </span>
-                </div>
-            </a>
+                <!-- Texto -->
+                <a href="#">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                        <strong
+                            class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
+                            Adquiere tu suscripción a ChatGpt Pro
+                        </strong>
+                        <span
+                            class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
+                            Hasta 10% de descuento
+                        </span>
+                    </div>
+                </a>
             </div>
 
 
-                      <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
-            <!-- Imagen -->
-            <img src="./front/images/tokenriwi.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="sale-box w-72 mx-5 my-5 relative flex-grow-[0.5] overflow-hidden rounded-lg shadow-md group">
+                <!-- Imagen -->
+                <img src="./front/images/tokenriwi.png"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-            <!-- Overlay semitransparente -->
-            <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
+                <!-- Overlay semitransparente -->
+                <div class="absolute inset-0 bg-black/40 transition duration-500 group-hover:bg-black/80"></div>
 
-            <!-- Texto -->
-            <a href="#">
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                <strong class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
-                    Conoce tus Tokens
-                </strong>
-                <span class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
-                    1 Tokens= $5 cop
-                </span>
-                </div>
-            </a>
+                <!-- Texto -->
+                <a href="#">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                        <strong
+                            class="text-lg font-semibold text-white leading-tight transition duration-300 group-hover:scale-110 group-hover:drop-shadow-lg">
+                            Conoce tus Tokens
+                        </strong>
+                        <span
+                            class="text-sm text-gray-200 mt-1 transition duration-300 group-hover:text-white group-hover:scale-105">
+                            1 Tokens= $5 cop
+                        </span>
+                    </div>
+                </a>
             </div>
-            
+
         </section>
 
         <section class="new-arrival flex flex-col justify-center items-center py-10">
@@ -280,114 +515,143 @@
             </div>
 
             <!-- Contenedor de productos en grid -->
-            <div class="product-container w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-                
+            <div
+                class="product-container w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+
                 <!-- Tarjeta producto -->
-                <div class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div
+                    class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <!-- Imagen -->
                     <div class="product-img w-full h-56 relative group bg-gray-50">
-                        <img src="./front/images/snack_colombiano.jpg" class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
+                        <img src="./front/images/snack_colombiano.jpg"
+                            class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <!-- Botón carrito -->
                         <a href="#"
-                        class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
+                            class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
                     <!-- Detalles -->
-                    <div class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Tienda de dulces y más</a>
-                        <span class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Ana</span>
+                    <div
+                        class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
+                        <a href="#"
+                            class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Tienda de
+                            dulces y más</a>
+                        <span
+                            class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Ana</span>
                     </div>
                 </div>
 
                 <!-- Copia y cambia datos -->
-                <div class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div
+                    class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
-                        <img src="./front/images/foto_pro.png" class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
+                        <img src="./front/images/foto_pro.png"
+                            class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
-                        class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
+                            class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
-                    <div class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Servicio Fotografía</a>
-                        <span class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Amiguito</span>
+                    <div
+                        class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
+                        <a href="#"
+                            class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Servicio
+                            Fotografía</a>
+                        <span
+                            class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Amiguito</span>
                     </div>
                 </div>
 
-                <div class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div
+                    class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
-                        <img src="./front/images/servicio_taxi.png" class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
+                        <img src="./front/images/servicio_taxi.png"
+                            class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
-                        class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
+                            class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
-                    <div class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Servicio Transporte</a>
-                        <span class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Pablo</span>
+                    <div
+                        class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
+                        <a href="#"
+                            class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Servicio
+                            Transporte</a>
+                        <span
+                            class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Pablo</span>
                     </div>
                 </div>
 
-                <div class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div
+                    class="product-box flex flex-col bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="product-img w-full h-56 relative group bg-gray-50">
-                        <img src="./front/images/servicio_pc.jpg" class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
+                        <img src="./front/images/servicio_pc.jpg"
+                            class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
-                        class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
+                            class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
-                    <div class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Mantenimiento PC</a>
-                        <span class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Andres</span>
+                    <div
+                        class="product-details flex flex-col items-center text-center w-full p-5 border-t border-gray-100">
+                        <a href="#"
+                            class="text-sm text-gray-500 hover:text-purple-600 transition-colors duration-300">Mantenimiento
+                            PC</a>
+                        <span
+                            class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Andres</span>
                     </div>
                 </div>
             </div>
         </section>
-        
-    
 
 
-        
+
+
+
         <div class="relative h-[40vh] my-5">
-        <!-- Imagen de fondo -->
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./front/images/tokens_banne2.webp');"></div>
-        
-        <!-- Overlay oscuro para resaltar texto -->
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <!-- Imagen de fondo -->
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: url('./front/images/tokens_banne2.webp');"></div>
 
-        <!-- Contenedor del texto -->
-        <div class="relative w-4/5 h-full flex items-center mx-auto">
-            <div class="banner-text flex flex-col text-left text-white">
-            <span class="uppercase tracking-widest text-lg font-medium text-gray-200">
-                Oferta Limitada
-            </span>
-            <strong class="text-4xl leading-tight mt-2 tracking-wide">
-                Recarga desde <br>
-                 <span class="text-white">$10.000</span>
-            </strong>
-            <a href="#" 
-                class="banner-btn w-40 h-10 flex justify-center items-center text-white bg-purple-600 uppercase tracking-wider mt-4 hover:bg-teal-600 transition">
-                Recarga Ahora
-            </a>
+            <!-- Overlay oscuro para resaltar texto -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Contenedor del texto -->
+            <div class="relative w-4/5 h-full flex items-center mx-auto">
+                <div class="banner-text flex flex-col text-left text-white">
+                    <span class="uppercase tracking-widest text-lg font-medium text-gray-200">
+                        Oferta Limitada
+                    </span>
+                    <strong class="text-4xl leading-tight mt-2 tracking-wide">
+                        Recarga desde <br>
+                        <span class="text-white">$10.000</span>
+                    </strong>
+                    <a href="#"
+                        class="banner-btn w-40 h-10 flex justify-center items-center text-white bg-purple-600 uppercase tracking-wider mt-4 hover:bg-teal-600 transition">
+                        Recarga Ahora
+                    </a>
+                </div>
             </div>
         </div>
-        </div>
 
-            
+
 
         <section class="services flex w-11/12 justify-center flex-wrap mx-auto">
-            <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <div
+                class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
                 <i class="fas fa-shipping-fast text-teal-500 text-4xl m-4"></i>
                 <span class="text-gray-700 font-semibold tracking-wider text-base">Free Shipping</span>
                 <p class="text-gray-500 my-0 text-sm">Domicilio en toda la sede de Riwi</p>
             </div>
-            <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <div
+                class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
                 <i class="fas fa-headphones-alt text-teal-500 text-4xl m-4"></i>
                 <span class="text-gray-700 font-semibold tracking-wider text-base">Soporte entre semana</span>
                 <p class="text-gray-500 my-0 text-sm">Brindamos soporte toda la semana</p>
             </div>
-            <div class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
+            <div
+                class="services-box flex flex-col justify-center items-center border border-gray-100 p-5 mx-4 my-4 min-w-[250px] flex-grow-[0.7]">
                 <i class="fas fa-sync text-teal-500 text-4xl m-4"></i>
                 <span class="text-gray-700 font-semibold tracking-wider text-base">-------------</span>
                 <p class="text-gray-500 my-0 text-sm">algooooo</p>
@@ -396,28 +660,39 @@
     </div>
 
     <div id="tecnologia-view" class="main-view hidden main-content-padding">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/tecnologiabanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+            style="background-image: url('./front/images/tecnologiabanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
-                <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font class="text-teal-500 text-black">código promocional</font></strong>
-                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-blue-500 uppercase tracking-wider mt-4">Obtener Ahora</a>
+                <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos
+                    tecnologicos</span>
+                <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con <font
+                        class="text-teal-500 text-black">código promocional</font></strong>
+                <a href="#"
+                    class="w-40 h-10 flex justify-center items-center text-white bg-blue-500 uppercase tracking-wider mt-4">Obtener
+                    Ahora</a>
             </div>
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nueva Llegada en Tecnología</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nueva Llegada en
+                    Tecnología</strong>
                 <p class="text-gray-500 mt-2 text-sm">Los gadgets más recientes para los coders.</p>
             </div>
-            
+
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/audifonos-removebg-preview.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/audifonos-removebg-preview.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -427,14 +702,19 @@
                         <span class="text-xl text-gray-800 font-normal">$60.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="./front/images/tecnologia/camara.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="./front/images/tecnologia/camara.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -444,14 +724,19 @@
                         <span class="text-xl text-gray-800 font-normal">$800.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/mouse.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/mouse.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -461,14 +746,19 @@
                         <span class="text-xl text-gray-800 font-normal">$30.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/torre.png" class="w-full h-full object-contain object-center rounded-4xl" >
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/torre.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -478,14 +768,19 @@
                         <span class="text-xl text-gray-800 font-normal">$400.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/inalambricos.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/inalambricos.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -495,14 +790,19 @@
                         <span class="text-xl text-gray-800 font-normal">$70.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/silla.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/silla.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -512,14 +812,19 @@
                         <span class="text-xl text-gray-800 font-normal">$500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/cfel.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/cfel.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -529,14 +834,19 @@
                         <span class="text-xl text-gray-800 font-normal">$3.500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <a href="#" class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
+                        <a href="#"
+                            class="add-cart absolute top-3 -right-5 w-12 h-12 rounded-full bg-teal-500 text-white flex justify-center items-center shadow-lg hover:bg-red-500 hidden transition-colors duration-200">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <img src="front/images/tecnologia/teclado.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/teclado.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -551,24 +861,33 @@
     </div>
 
     <div id="snacks-view" class="main-view hidden main-content-padding">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/snacksbanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+            style="background-image: url('./front/images/snacksbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en Snacks</span>
-                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font class="text-teal text-orange-700">código promocional</font></strong>
-                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-orange-700 uppercase tracking-wider mt-4">Obtener Ahora</a>
+                <span class="uppercase tracking-widest font-medium text-lg text-gray-800">oferta limitada en
+                    Snacks</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">10% de descuento <br>Con <font
+                        class="text-teal text-orange-700">código promocional</font></strong>
+                <a href="#"
+                    class="w-40 h-10 flex justify-center items-center text-white bg-orange-700 uppercase tracking-wider mt-4">Obtener
+                    Ahora</a>
             </div>
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nuestros Mejores Snacks</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Mejores Snacks</strong>
                 <p class="text-gray-500 mt-2 text-sm">Prueba los mejores bocadillos del mercado.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-1.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/snack-1.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -578,11 +897,15 @@
                         <span class="text-xl text-gray-800 font-normal">$5.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-2.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/snack-2.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -592,11 +915,15 @@
                         <span class="text-xl text-gray-800 font-normal">$3.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/snack-3.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/snack-3.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -611,24 +938,32 @@
     </div>
 
     <div id="servicios-view" class="main-view hidden main-content-padding">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/serviciosbanner.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+            style="background-image: url('./front/images/serviciosbanner.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en servicios</span>
-                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span style="color: #1f4070;">código promocional</span></strong>
-                <a href="#" class="w-40 h-10 flex justify-center items-center text-white uppercase tracking-wider mt-4" style="background-color: #1f4070;">Obtener Ahora</a>
+                <span class="uppercase tracking-widest font-medium text-lg text-white-600">Oferta Limitada en
+                    servicios</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <span
+                        style="color: #1f4070;">código promocional</span></strong>
+                <a href="#" class="w-40 h-10 flex justify-center items-center text-white uppercase tracking-wider mt-4"
+                    style="background-color: #1f4070;">Obtener Ahora</a>
             </div>
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Nuestros Servicios</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Nuestros Servicios</strong>
                 <p class="text-gray-500 mt-2 text-sm">Servicios de alta calidad para tu negocio.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/nube.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/nube.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -638,11 +973,15 @@
                         <span class="text-xl text-gray-800 font-normal">$500.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/audifonos-removebg-preview.png" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/audifonos-removebg-preview.png"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -655,26 +994,35 @@
             </div>
         </section>
     </div>
-  
+
     <div id="varios-view" class="main-view hidden main-content-padding">
-        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center" style="background-image: url('./front/images/varios.png');">
+        <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+            style="background-image: url('./front/images/varios.png');">
             <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
-                <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en producctos varios</span>
-                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <br>con <span style="color: #022c66;">código promocional</span></strong>
-                <a href="#" class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4" style="background-color: #022c66;">Obtener Ahora</a>
+                <span class="uppercase tracking-widest font-medium text-lg text-gray-600">Oferta Limitada en producctos
+                    varios</span>
+                <strong class="text-4xl text-gray-800 leading-tight mt-2 tracking-wide">30% de descuento <br>con <br>con
+                    <span style="color: #022c66;">código promocional</span></strong>
+                <a href="#"
+                    class="w-40 h-10 flex justify-center items-center text-white bg-teal-500 uppercase tracking-wider mt-4"
+                    style="background-color: #022c66;">Obtener Ahora</a>
             </div>
         </div>
         <section class="new-arrival flex flex-col justify-center items-center mt-10">
             <div class="arrival-heading flex flex-col justify-center items-center">
-                <strong class="bg-gray-800 text-white font-medium uppercase px-8 py-2">Productos Varios</strong>
+                <strong class="bg-purple-600 text-white font-medium uppercase px-8 py-2 rounded-full shadow-md">Productos Varios</strong>
                 <p class="text-gray-500 mt-2 text-sm">Explora una variedad de productos únicos.</p>
             </div>
             <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/tairpods.jpg" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/tairpods.jpg"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -684,11 +1032,15 @@
                         <span class="text-xl text-gray-800 font-normal">$10.000</span>
                     </div>
                 </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div
+                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnologia/tauriculares.jpg" class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#" class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
+                        <img src="front/images/tecnologia/tauriculares.jpg"
+                            class="w-full h-full object-contain object-center rounded-4xl">
+                        <div
+                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
+                            <a href="#"
+                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
                                 Ver Producto
                             </a>
                         </div>
@@ -701,6 +1053,19 @@
             </div>
         </section>
     </div>
+
+    <section id="products" class="grid grid-cols-3 gap-6 px-12 mt-40 main-view">
+        <div class="product-box cursor-pointer border rounded-lg p-4 shadow-md hover:shadow-lg transition"
+            data-item-id="1">
+            <img src="./front/images/snacks.jpg" alt="Snacks de Ana" class="w-full h-40 object-contain mb-4">
+            <h3 class="text-lg font-bold">Snacks de Ana</h3>
+            <p class="text-gray-600 text-sm">Deliciosos snacks para toda ocasión.</p>
+            <button class="add-to-cart-btn mt-3 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition">
+                Agregar al carrito
+            </button>
+        </div>
+    </section>
+
     <div id="cart-view" class="main-view hidden mt-40 px-12">
         <div class="flex justify-center items-center mb-10">
             <h2 class="text-3xl text-gray-800 tracking-wide uppercase font-semibold">Tu Carrito de Compras</h2>
@@ -710,13 +1075,18 @@
         </div>
         <div class="w-full max-w-4xl mx-auto mt-6 text-right">
             <p class="text-2xl font-bold">Total: <span id="cart-total">$0.00</span></p>
-            <button class="mt-4 px-8 py-3 bg-teal-500 text-white uppercase rounded-md shadow-md hover:bg-teal-600 transition-colors">Proceder al Pago</button>
+            <button
+                class="mt-4 px-8 py-3 bg-teal-500 text-white uppercase rounded-md shadow-md hover:bg-teal-600 transition-colors">Proceder
+                al Pago</button>
         </div>
     </div>
 
-    <div id="product-modal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div id="modal-content-wrapper" class="bg-white p-8 rounded-lg shadow-lg w-1/2 relative transform scale-95 opacity-0 transition-all duration-300 ease-out">
-            <a href="javascript:void(0);" id="modal-close" class="absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+    <div id="product-modal"
+        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div id="modal-content-wrapper"
+            class="bg-white p-8 rounded-lg shadow-lg w-1/2 relative transform scale-95 opacity-0 transition-all duration-300 ease-out">
+            <a href="javascript:void(0);" id="modal-close"
+                class="absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
             <div id="modal-content" class="flex">
@@ -727,17 +1097,21 @@
                     <h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
                     <p id="modal-description" class="text-gray-600 mb-4"></p>
                     <p class="text-xl font-semibold text-gray-800 mb-2">Precio: <span id="modal-price"></span></p>
-                    <p class="text-lg text-gray-700">O canjéalo por: <span id="modal-token-price" class="font-bold text-teal-500"></span> tokens</p>
-                    <button id="redeem-button" class="mt-4 w-full h-12 bg-teal-500 text-white border-none outline-none uppercase rounded-md shadow-md cursor-pointer hover:bg-teal-600 transition-colors">
+                    <p class="text-lg text-gray-700">O canjéalo por: <span id="modal-token-price"
+                            class="font-bold text-teal-500"></span> tokens</p>
+                    <button id="redeem-button"
+                        class="mt-4 w-full h-12 bg-teal-500 text-white border-none outline-none uppercase rounded-md shadow-md cursor-pointer hover:bg-teal-600 transition-colors">
                         Canjear con Tokens
                     </button>
-                    <button id="modal-add-to-cart-btn"class="mt-2 w-full h-12 bg-green-500 text-white uppercase rounded-md shadow-md cursor-pointer hover:bg-green-600 transition-colors">
+                    <button id="modal-add-to-cart-btn"
+                        class="mt-2 w-full h-12 bg-green-500 text-white uppercase rounded-md shadow-md cursor-pointer hover:bg-green-600 transition-colors">
                         Agregar al Carrito
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
 <!-- Vista del vendedor -->
     <div id="seller-profile-view" class="main-view hidden mt-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">            
@@ -815,7 +1189,7 @@
             <hr class="border-gray-700 my-4">
             <span class="text-gray-500 text-sm">© 2025 RiwiHub, Inc. Todos los derechos reservados.</span>
         </div>
-    </div>
-</footer>
+    </footer>
 </body>
+
 </html>

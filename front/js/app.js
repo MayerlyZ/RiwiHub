@@ -7,7 +7,9 @@ $(document).ready(function() {
         auto: true,
         item: 1,
         slideMargin: 0,
-        loop: true
+        loop: true,
+        pause: 6000, // <-- Cambia la velocidad del carrusel a 6 segundos
+        stop: 4000  
     });
 
     // Inicializa el carrusel de categorías.
@@ -62,6 +64,8 @@ $(document).ready(function() {
         $('.main-view').addClass('hidden'); // Oculta todas las vistas.
         $('#' + sectionId).removeClass('hidden'); // Muestra solo la vista solicitada.
     }
+
+
 
     // =============================================================
     // ================ LÓGICA FUNCIONAL CON API ===================
