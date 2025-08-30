@@ -52,6 +52,10 @@
             </ul>
 
             <div class="flex space-x-4 items-center">
+                <a href="javascript:void(0);" id="metas-icon" class="hidden nav-tab-icon lg:flex items-center gap-2 cursor-pointer relative mr-4">
+                    <i class="fas fa-bullseye text-gray-600 text-xl hover:text-teal-500 transition-colors hidden"></i>
+                </a>
+
                 <a href="javascript:void(0);"
                     class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
                     <i class="fas fa-search"></i>
@@ -231,6 +235,28 @@
             </div>
         </div>
     </div>
+
+    <div id="metas-modal" class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">
+        <div class="login-form w-[420px] max-h-[90vh] overflow-y-auto p-8 bg-white shadow-2xl rounded-3xl flex flex-col items-center relative text-gray border-4 border-white-500">
+            <a href="javascript:void(0);" id="metas-modal-cancel" class="modal-cancel-icon absolute top-2 right-4 text-black-70 text-xl hover:text-teal-500 transition-colors">
+                <i class="fas fa-times"></i>
+            </a>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Mis Metas</h2>
+            <p id="no-metas-message" class="text-center text-gray-500 hidden">Aún no tienes metas. ¡Añade una para empezar!</p>
+            
+            <div id="metas-list" class="w-full space-y-4">
+            </div>
+            
+            <form id="add-meta-form" class="w-full mt-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Añadir Nueva Meta</h3>
+                <input type="text" id="new-meta-text" placeholder="Escribe tu nueva meta..." class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <button type="submit" class="w-full mt-4 p-3 bg-teal-500 text-white rounded-lg font-semibold hover:bg-teal-600 transition-colors">
+                    Añadir Meta
+                </button>
+            </form>
+        </div>
+    </div>
+
 
     <div id="tokens-modal"
         class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center z-50 hidden">

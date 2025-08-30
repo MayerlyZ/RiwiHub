@@ -7,11 +7,8 @@ $(document).ready(function () {
     // Load state from localStorage
     let authToken = localStorage.getItem('userToken') || null;
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-
-    // Ensure the tokens icon is hidden by default if there's no session
-    if (!authToken) {
-        $('#tokens-icon').addClass('hidden');
-    }
+    // Nueva variable para las metas
+    let userGoals = JSON.parse(localStorage.getItem('userGoals')) || [];
 
     // -------------------------------------------------------------------------
     // --------------------- PLUGIN / UI INITIALIZATION ----------------------
@@ -116,15 +113,6 @@ $(document).ready(function () {
         closeModal();
     });
 
-    // Show tokens modal (if authenticated)
-    $(document).on('click', '#tokens-icon', function () {
-        if (authToken) {
-            $('#tokens-modal').removeClass('hidden').addClass('flex');
-        } else {
-            alert('You must be logged in to see your tokens.');
-        }
-    });
-
     // Show the cart
     $('#cart-icon').on('click', function (e) {
         e.preventDefault();
@@ -202,7 +190,17 @@ $(document).ready(function () {
     // ----------------------------- AUTHENTICATION ----------------------------
     // -------------------------------------------------------------------------
 
-    // Update UI related to auth (shows/hides tokens and balance)
+    // Update UI related to auth (shows/hides metas icon)
+    function updateUIBasedOnAuth() {
+        if (authToken && currentUser) {
+            // Muestra el icono de metas si el usuario está autenticado
+            $('#metas-icon').removeClass('hidden');
+        } else {
+            // Oculta el icono de metas si no está autenticado
+            $('#metas-icon').addClass('hidden');
+        }
+    }
+
     function updateUIBasedOnAuth() {
         if (authToken && currentUser) {
             $('#tokens-icon').removeClass('hidden');
@@ -210,7 +208,7 @@ $(document).ready(function () {
             $('#current-tokens').text(`${currentUser.wallet_balance || 0} Tokens`);
         } else {
             $('#tokens-icon').addClass('hidden');
-            // Optionally, clear other user-related UI fields
+        // Optionally, clear other user-related UI fields
         }
     }
 
@@ -234,6 +232,10 @@ $(document).ready(function () {
                 $('#login-modal').addClass('hidden');
                 updateUIBasedOnAuth();
             },
+            error: function (err) {
+                console.error('Login error:', err);
+                alert('Login failed: ' + (err.responseJSON.message || 'Unknown error.'));
+            }
         });
     });
 
@@ -539,6 +541,89 @@ $(document).ready(function () {
         // Initial load of seller products if authenticated
         if (authToken) renderSellerProducts();
     } // end seller-profile-view check
+
+    // -------------------------------------------------------------------------
+    // ----------------------------- METAS / GOALS -----------------------------
+    // -------------------------------------------------------------------------
+
+    // Función para renderizar la lista de metas en el modal
+    function renderGoals() {
+        const $goalsList = $('#metas-list');
+        $goalsList.empty();
+        
+        // Muestra u oculta el mensaje de "no hay metas"
+        if (userGoals.length === 0) {
+            $('#no-metas-message').removeClass('hidden');
+        } else {
+            $('#no-metas-message').addClass('hidden');
+        }
+
+        userGoals.forEach((goal, index) => {
+            const goalHtml = `
+                <div class="meta-item flex justify-between items-center p-4 border rounded-lg transition-colors ${goal.completed ? 'bg-green-100 border-green-400' : 'hover:bg-gray-50'}">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="meta-checkbox form-checkbox h-5 w-5 text-teal-500" data-index="${index}" ${goal.completed ? 'checked' : ''}>
+                        <span class="text-lg font-semibold text-gray-700 ${goal.completed ? 'line-through text-gray-500' : ''}">
+                            ${goal.text}
+                        </span>
+                    </div>
+                    <button class="delete-meta-btn text-red-500 hover:text-red-700" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            $goalsList.append(goalHtml);
+        });
+    }
+
+    // Guarda las metas en el localStorage
+    function saveGoals() {
+        localStorage.setItem('userGoals', JSON.stringify(userGoals));
+    }
+
+    // Manejador para abrir el modal de metas
+    $(document).on('click', '#metas-icon', function () {
+        $('#metas-modal').removeClass('hidden').addClass('flex');
+        renderGoals(); // Renderiza las metas cada vez que se abre el modal
+    });
+
+    // Manejador para cerrar el modal de metas
+    $(document).on('click', '#metas-modal-cancel', function () {
+        $('#metas-modal').addClass('hidden').removeClass('flex');
+    });
+
+    // Manejador del formulario para añadir una nueva meta
+    $('#add-meta-form').on('submit', function (e) {
+        e.preventDefault();
+        const newMetaText = $('#new-meta-text').val().trim();
+        if (newMetaText) {
+            const newGoal = {
+                text: newMetaText,
+                completed: false,
+                created_at: new Date().toISOString()
+            };
+            userGoals.push(newGoal);
+            saveGoals();
+            renderGoals();
+            $('#new-meta-text').val(''); // Limpia el input
+        }
+    });
+
+    // Manejador para marcar una meta como completada (delegación de eventos)
+    $(document).on('change', '.meta-checkbox', function () {
+        const index = $(this).data('index');
+        userGoals[index].completed = this.checked;
+        saveGoals();
+        renderGoals(); // Vuelve a renderizar para actualizar el estilo
+    });
+
+    // Manejador para eliminar una meta (delegación de eventos)
+    $(document).on('click', '.delete-meta-btn', function () {
+        const index = $(this).data('index');
+        userGoals.splice(index, 1);
+        saveGoals();
+        renderGoals();
+    });
 
     // -------------------------------------------------------------------------
     // -------------------- ADDITIONAL LOGIC / UTILS -----------------------
