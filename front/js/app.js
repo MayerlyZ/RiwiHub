@@ -7,14 +7,14 @@ $(document).ready(function () {
     // Load state from localStorage
     let authToken = localStorage.getItem('userToken') || null;
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-    // Nueva variable para las metas
+    // New variable for goals, loaded from localStorage
     let userGoals = JSON.parse(localStorage.getItem('userGoals')) || [];
 
     // -------------------------------------------------------------------------
     // --------------------- PLUGIN / UI INITIALIZATION ----------------------
     // -------------------------------------------------------------------------
 
-    // Initialize sliders (if they exist)
+    // Initializes lightSlider plugin for any existing sliders
     function initSliders() {
         try {
             if ($('#adaptive').length) {
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 });
             }
         } catch (e) {
-            // If lightSlider is not loaded, prevent the app from breaking
+            // Warn if the plugin is not loaded, but don't break the app
             console.warn('lightSlider init failed or not present', e);
         }
     }
@@ -53,7 +53,7 @@ $(document).ready(function () {
         if ($target.length) {
             $target.removeClass('hidden');
 
-            // If it's the home view, re-initialize sliders to prevent glitches
+            // Re-initialize sliders on home view to prevent glitches on resize
             if (sectionId === 'inicio-view' && window.innerWidth >= 768) {
                 initSliders();
             }
@@ -66,14 +66,14 @@ $(document).ready(function () {
         }
     };
 
-    // Show the default section
+    // Show the default section on page load
     showSection('inicio-view', $('.nav-tab').first());
 
     // -------------------------------------------------------------------------
     // -------------------------- UI: EVENT HANDLERS ---------------------------
     // -------------------------------------------------------------------------
 
-    // Search bar
+    // Show/hide search bar
     $(document).on('click', '.search-icon', function () {
         $('.search-bar').removeClass('hidden').addClass('flex');
     });
@@ -81,12 +81,12 @@ $(document).ready(function () {
         $('.search-bar').addClass('hidden').removeClass('flex');
     });
 
-    // Mobile menu toggle
+    // Toggle mobile menu
     $(document).on('click', '.menu-toggle', function () {
         $('.mobile-menu').toggleClass('hidden');
     });
 
-    // Open login modal (from icon or other buttons)
+    // Open login modal
     $(document).on('click', '.user-icon, .already-account-btn', function () {
         $('#login-modal').removeClass('hidden').addClass('flex');
     });
@@ -103,49 +103,67 @@ $(document).ready(function () {
         $('#login-modal').removeClass('hidden').addClass('flex');
     });
 
-    // Close modals (from 'X' button or others)
+    // Close any modal
     $(document).on('click', '.modal-cancel-icon, .form-cancel-icon', function () {
         $(this).closest('.modal-container').addClass('hidden').removeClass('flex');
     });
 
-    // Close product modal (animated)
+    // Close animated product modal
     $('#modal-close').on('click', function () {
         closeModal();
     });
 
-    // Show the cart
+    // Show the cart view
     $('#cart-icon').on('click', function (e) {
         e.preventDefault();
         showCartView();
     });
 
-    // Delegation: clicking on a product card opens the detail modal
+    // Delegate clicks on product cards to open the detail modal
     $('body').on('click', '.product-box', function () {
         const itemId = $(this).data('item-id');
         if (!itemId) return;
         const clickedBox = $(this);
-        // Request to get product details
+        // Request to get product details from the backend
         $.ajax({
             url: `http://localhost:13000/api/items/${itemId}`,
             method: 'GET',
             success: function (productData) {
-                // Populate modal with data
+                // Populate modal with dynamic data
                 const itemImageSrc = clickedBox.find('img').attr('src') || productData.image_url || '';
                 $('#modal-img').attr('src', itemImageSrc);
                 $('#modal-name').text(productData.name || 'No name');
                 $('#modal-description').text(productData.description || 'No description available.');
                 $('#modal-price').text(`$${new Intl.NumberFormat('en-US').format(productData.price || 0)}`);
+
+                // Check for and handle token price logic
                 if (productData.token_price) {
-                    $('#token-section, #redeem-button').show();
+                    $('#token-section').show();
+                    $('#redeem-button').show();
                     $('#modal-token-price').text(productData.token_price);
+
+                    // New logic to check if the user has enough tokens
+                    const userTokens = currentUser ? currentUser.wallet_balance : 0;
+                    const requiredTokens = productData.token_price;
+
+                    if (userTokens >= requiredTokens) {
+                        $('#redeem-button').removeClass('bg-gray-400 cursor-not-allowed').addClass('bg-teal-500 hover:bg-teal-600').prop('disabled', false);
+                        $('#token-message').text('You have enough tokens to redeem this product!');
+                    } else {
+                        $('#redeem-button').addClass('bg-gray-400 cursor-not-allowed').removeClass('bg-teal-500 hover:bg-teal-600').prop('disabled', true);
+                        const neededTokens = requiredTokens - userTokens;
+                        $('#token-message').text(`You need ${neededTokens} more tokens to redeem it.`);
+                    }
                 } else {
-                    $('#token-section, #redeem-button').hide();
+                    $('#token-section').hide();
+                    $('#redeem-button').hide();
                 }
+
                 $('#redeem-button').data('item_id', productData.item_id);
                 $('#modal-add-to-cart-btn').data('item_id', productData.item_id);
-                // Open modal with flex class
+                
+                // Show modal with a slight animation
                 $('#product-modal').removeClass('hidden').addClass('flex');
-                // Small animation
                 setTimeout(() => {
                     $('#modal-content-wrapper').removeClass('scale-95 opacity-0').addClass('scale-100 opacity-100');
                 }, 10);
@@ -156,20 +174,20 @@ $(document).ready(function () {
         });
     });
 
-    // Prevent clicks on inner buttons from triggering the product modal
+    // Stop propagation for nested buttons (e.g., "Add to Cart" inside a product box)
     $('body').on('click', '.add-to-cart-btn', function (e) {
         e.stopPropagation();
         const itemId = $(this).closest('.product-box').data('item-id');
         addItemToCart(itemId);
     });
 
-    // Modal button: add to cart
+    // "Add to Cart" button inside the product modal
     $('#modal-add-to-cart-btn').on('click', function () {
         closeModal();
         addItemToCart($(this).data('item_id'));
     });
 
-    // Redeem placeholder
+    // Placeholder for "Redeem" button functionality
     $('#redeem-button').on('click', function () {
         alert(`Redeem functionality for item ${$(this).data('item_id')} is not yet implemented.`);
         closeModal();
@@ -179,6 +197,7 @@ $(document).ready(function () {
     // -------------------------- MODAL / ANIMATIONS ---------------------------
     // -------------------------------------------------------------------------
 
+    // Function to close the animated product modal
     function closeModal() {
         $('#modal-content-wrapper').removeClass('scale-100 opacity-100').addClass('scale-95 opacity-0');
         setTimeout(() => {
@@ -190,34 +209,20 @@ $(document).ready(function () {
     // ----------------------------- AUTHENTICATION ----------------------------
     // -------------------------------------------------------------------------
 
-    // Update UI related to auth (shows/hides metas icon)
+    // Update UI based on authentication status (shows/hides the metas icon)
     function updateUIBasedOnAuth() {
         if (authToken && currentUser) {
-            // Muestra el icono de metas si el usuario está autenticado
             $('#metas-icon').removeClass('hidden');
         } else {
-            // Oculta el icono de metas si no está autenticado
             $('#metas-icon').addClass('hidden');
         }
     }
 
-    function updateUIBasedOnAuth() {
-        if (authToken && currentUser) {
-            $('#tokens-icon').removeClass('hidden');
-            $('#tokens-icon .text-sm').text(currentUser.wallet_balance || 0);
-            $('#current-tokens').text(`${currentUser.wallet_balance || 0} Tokens`);
-        } else {
-            $('#tokens-icon').addClass('hidden');
-        // Optionally, clear other user-related UI fields
-        }
-    }
-
-    // Login form handler (simulated)
+    // Login form handler
     $('#login-modal form').on('submit', function (e) {
         e.preventDefault();
         const email = $('#login-email').val();
         const password = $('#login-password').val();
-
         $.ajax({
             url: 'http://localhost:13000/api/users/login',
             method: 'POST',
@@ -239,7 +244,7 @@ $(document).ready(function () {
         });
     });
 
-    // Registration form handler (UI only; implement actual request when endpoint is ready)
+    // Registration form handler
     $('#register-modal form').on('submit', function (e) {
         e.preventDefault();
         const name = $('#register-name').val();
@@ -249,7 +254,6 @@ $(document).ready(function () {
         const cargo = $('#register-cargo').val();
         const storeName = $('#register-store-name').val();
         
-        // Basic frontend validation
         if (!name || !email || !password) {
             alert('Name, email, and password are required.');
             return;
@@ -280,7 +284,7 @@ $(document).ready(function () {
         });
     });
 
-    // Show/hide additional fields in registration form based on role
+    // Show/hide additional fields in registration form based on the selected role
     $('#register-role').on('change', function () {
         const role = $(this).val();
         $('#cargo-section').toggleClass('hidden', role !== 'administrador' && role !== 'vendedor');
@@ -291,7 +295,7 @@ $(document).ready(function () {
     // ------------------------------ SHOPPING CART ---------------------------------
     // -------------------------------------------------------------------------
 
-    // Add product to cart (uses backend endpoint)
+    // Add a product to the cart via a backend API call
     function addItemToCart(itemId) {
         if (!authToken) {
             alert('Please log in to add products to the cart.');
@@ -315,7 +319,7 @@ $(document).ready(function () {
         });
     }
 
-    // View cart: fetches items and renders them
+    // Fetch and display the user's shopping cart
     async function showCartView() {
         showSection('cart-view');
         if (!authToken) {
@@ -335,7 +339,7 @@ $(document).ready(function () {
         }
     }
 
-    // Render the cart items
+    // Render the fetched cart items to the UI
     function renderCartItems(items) {
         const container = $('#cart-items-container');
         container.empty();
@@ -371,7 +375,7 @@ $(document).ready(function () {
         $('#cart-item-count').text(totalItems);
     }
 
-    // Remove item from cart (delegated)
+    // Remove an item from the cart
     $('body').on('click', '.remove-from-cart-btn', function () {
         const id = $(this).data('item-id');
         if (!authToken) {
@@ -397,16 +401,15 @@ $(document).ready(function () {
     // ------------------------- SELLER PROFILE ---------------------------
     // -------------------------------------------------------------------------
 
-    // Only run this logic if the seller profile view exists
+    // All seller-specific logic is wrapped to run only if the view exists
     if ($('#seller-profile-view').length > 0) {
-
         const $productGrid = $('#product-grid');
         const $productListContainer = $('#product-list-container');
         const $productFormContainer = $('#product-form-container');
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
 
-        // Load seller's products
+        // Fetch and render the seller's products
         async function renderSellerProducts() {
             $productGrid.empty();
             if (!authToken) {
@@ -445,14 +448,14 @@ $(document).ready(function () {
             }
         }
 
-        // Show a specific section within the seller profile
+        // Helper function to switch between seller profile sub-sections
         function showSellerContent($sectionToShow) {
             $productListContainer.addClass('hidden');
             $productFormContainer.addClass('hidden');
             $sectionToShow.removeClass('hidden');
         }
 
-        // Button: show add product form
+        // Button to show the add product form
         $('#btn-show-add-form').on('click', function () {
             $formTitle.text('Add New Product');
             $productForm[0].reset();
@@ -460,13 +463,13 @@ $(document).ready(function () {
             showSellerContent($productFormContainer);
         });
 
-        // Button: show product list
+        // Button to show the product list
         $('#btn-show-products, #btn-cancel').on('click', function () {
             renderSellerProducts();
             showSellerContent($productListContainer);
         });
 
-        // Submit form: create or update product
+        // Handle form submission for creating or updating a product
         $productForm.on('submit', async function (event) {
             event.preventDefault();
             const id = $('#product-id').val();
@@ -476,7 +479,7 @@ $(document).ready(function () {
                 price: parseFloat($('#product-price').val()),
                 image_url: $('#product-image').val(),
                 type: 'product',
-                category_id: 1 // TODO: make dynamic if needed
+                category_id: 1
             };
             const isUpdating = !!id;
             const url = isUpdating ? `http://localhost:13000/api/items/${id}` : `http://localhost:13000/api/items`;
@@ -498,7 +501,7 @@ $(document).ready(function () {
             }
         });
 
-        // Load product data into form for editing
+        // Load product data into the form for editing
         $productGrid.on('click', '.btn-edit', async function () {
             const productId = $(this).data('id');
             try {
@@ -520,7 +523,7 @@ $(document).ready(function () {
             }
         });
 
-        // Delete product
+        // Delete a product
         $productGrid.on('click', '.btn-delete', async function () {
             const productId = $(this).data('id');
             if (!confirm('Are you sure you want to delete this product?')) return;
@@ -540,24 +543,21 @@ $(document).ready(function () {
 
         // Initial load of seller products if authenticated
         if (authToken) renderSellerProducts();
-    } // end seller-profile-view check
+    }
 
     // -------------------------------------------------------------------------
-    // ----------------------------- METAS / GOALS -----------------------------
+    // ----------------------------- GOALS FUNCTIONALITY -----------------------
     // -------------------------------------------------------------------------
 
-    // Función para renderizar la lista de metas en el modal
+    // Renders the list of goals in the modal
     function renderGoals() {
         const $goalsList = $('#metas-list');
         $goalsList.empty();
-        
-        // Muestra u oculta el mensaje de "no hay metas"
         if (userGoals.length === 0) {
             $('#no-metas-message').removeClass('hidden');
         } else {
             $('#no-metas-message').addClass('hidden');
         }
-
         userGoals.forEach((goal, index) => {
             const goalHtml = `
                 <div class="meta-item flex justify-between items-center p-4 border rounded-lg transition-colors ${goal.completed ? 'bg-green-100 border-green-400' : 'hover:bg-gray-50'}">
@@ -570,29 +570,28 @@ $(document).ready(function () {
                     <button class="delete-meta-btn text-red-500 hover:text-red-700" data-index="${index}">
                         <i class="fas fa-trash"></i>
                     </button>
-                </div>
-            `;
+                </div>`;
             $goalsList.append(goalHtml);
         });
     }
 
-    // Guarda las metas en el localStorage
+    // Saves the goals to localStorage
     function saveGoals() {
         localStorage.setItem('userGoals', JSON.stringify(userGoals));
     }
 
-    // Manejador para abrir el modal de metas
+    // Event handler to open the goals modal
     $(document).on('click', '#metas-icon', function () {
         $('#metas-modal').removeClass('hidden').addClass('flex');
-        renderGoals(); // Renderiza las metas cada vez que se abre el modal
+        renderGoals();
     });
 
-    // Manejador para cerrar el modal de metas
+    // Event handler to close the goals modal
     $(document).on('click', '#metas-modal-cancel', function () {
         $('#metas-modal').addClass('hidden').removeClass('flex');
     });
 
-    // Manejador del formulario para añadir una nueva meta
+    // Handle form submission to add a new goal
     $('#add-meta-form').on('submit', function (e) {
         e.preventDefault();
         const newMetaText = $('#new-meta-text').val().trim();
@@ -605,19 +604,19 @@ $(document).ready(function () {
             userGoals.push(newGoal);
             saveGoals();
             renderGoals();
-            $('#new-meta-text').val(''); // Limpia el input
+            $('#new-meta-text').val('');
         }
     });
 
-    // Manejador para marcar una meta como completada (delegación de eventos)
+    // Handle checkbox change to mark a goal as completed
     $(document).on('change', '.meta-checkbox', function () {
         const index = $(this).data('index');
         userGoals[index].completed = this.checked;
         saveGoals();
-        renderGoals(); // Vuelve a renderizar para actualizar el estilo
+        renderGoals();
     });
 
-    // Manejador para eliminar una meta (delegación de eventos)
+    // Handle button click to delete a goal
     $(document).on('click', '.delete-meta-btn', function () {
         const index = $(this).data('index');
         userGoals.splice(index, 1);
@@ -629,18 +628,18 @@ $(document).ready(function () {
     // -------------------- ADDITIONAL LOGIC / UTILS -----------------------
     // -------------------------------------------------------------------------
 
-    // Logout handler (if you have a dedicated logout button)
+    // Logout handler
     $(document).on('click', '#logout-btn', function () {
-        if (!confirm('Log out?')) return;
+        if (!confirm('Are you sure you want to log out?')) return;
         localStorage.removeItem('userToken');
         localStorage.removeItem('currentUser');
         authToken = null;
         currentUser = null;
         updateUIBasedOnAuth();
-        alert('Logged out.');
+        alert('Logged out successfully.');
         showSection('inicio-view');
     });
 
-    // Final UI update on page load
+    // Final UI update on initial page load
     updateUIBasedOnAuth();
 });
