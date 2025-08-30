@@ -213,6 +213,7 @@ $(document).ready(function () {
     function updateUIBasedOnAuth() {
         if (authToken && currentUser) {
             $('#metas-icon').removeClass('hidden');
+            $('#icon-tokens').removeClass('hidden');
         } else {
             $('#metas-icon').addClass('hidden');
         }
