@@ -239,7 +239,7 @@ $(document).ready(function () {
             },
             error: function (err) {
                 console.error('Login error:', err);
-                alert('Login failed: ' + (err.responseJSON.message || 'Unknown error.'));
+                alert('Login failed: ' + (err.responseJSON.error || 'Unknown error.'));
             }
         });
     });
