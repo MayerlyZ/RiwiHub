@@ -126,7 +126,7 @@ $(document).ready(function () {
         const clickedBox = $(this);
         // Request to get product details from the backend
         $.ajax({
-            url: `http://localhost:13000/api/items/${itemId}`,
+            url: `https://riwihub-back.onrender.com/api/items/${itemId}`,
             method: 'GET',
             success: function (productData) {
                 // Populate modal with dynamic data
@@ -224,7 +224,7 @@ $(document).ready(function () {
         const email = $('#login-email').val();
         const password = $('#login-password').val();
         $.ajax({
-            url: 'http://localhost:13000/api/users/login',
+            url: 'https://riwihub-back.onrender.com/api/users/login',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ email, password }),
@@ -268,7 +268,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: 'http://localhost:13000/api/users/register',
+            url: 'https://riwihub-back.onrender.com/api/users/register',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(payload),
@@ -303,7 +303,7 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-            url: `http://localhost:13000/api/carts/add`,
+            url: `https://riwihub-back.onrender.com/api/carts/add`,
             method: 'POST',
             contentType: 'application/json',
             headers: { 'Authorization': 'Bearer ' + authToken },
@@ -328,7 +328,7 @@ $(document).ready(function () {
         }
         try {
             const cartItems = await $.ajax({
-                url: 'http://localhost:13000/api/carts/',
+                url: 'https://riwihub-back.onrender.com/api/carts/',
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
@@ -384,7 +384,7 @@ $(document).ready(function () {
         }
         if (!confirm('Remove this product from the cart?')) return;
         $.ajax({
-            url: `http://localhost:13000/api/carts/remove/${id}`,
+            url: `https://riwihub-back.onrender.com/api/carts/remove/${id}`,
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + authToken },
             success: function (res) {
@@ -418,7 +418,7 @@ $(document).ready(function () {
             }
             try {
                 const products = await $.ajax({
-                    url: 'http://localhost:13000/api/items',
+                    url: 'https://riwihub-back.onrender.com/api/items',
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
@@ -482,7 +482,7 @@ $(document).ready(function () {
                 category_id: 1
             };
             const isUpdating = !!id;
-            const url = isUpdating ? `http://localhost:13000/api/items/${id}` : `http://localhost:13000/api/items`;
+            const url = isUpdating ? `https://riwihub-back.onrender.com/api/items/${id}` : `https://riwihub-back.onrender.com/api/items`;
             const method = isUpdating ? 'PUT' : 'POST';
             try {
                 await $.ajax({
@@ -506,7 +506,7 @@ $(document).ready(function () {
             const productId = $(this).data('id');
             try {
                 const productToEdit = await $.ajax({
-                    url: `http://localhost:13000/api/items/${productId}`,
+                    url: `https://riwihub-back.onrender.com/api/items/${productId}`,
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
@@ -529,7 +529,7 @@ $(document).ready(function () {
             if (!confirm('Are you sure you want to delete this product?')) return;
             try {
                 await $.ajax({
-                    url: `http://localhost:13000/api/items/${productId}`,
+                    url: `https://riwihub-back.onrender.com/api/items/${productId}`,
                     method: 'DELETE',
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
