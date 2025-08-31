@@ -324,6 +324,7 @@ $(document).ready(function () {
         // Toggles visibility of the 'goals' and 'tokens' icons.
         if (authToken && currentUser) {
             $('#metas-icon').removeClass('hidden');
+            $('#tokens-icon').removeClass('hidden');
         } else {
             $('#metas-icon').addClass('hidden');
             $('#tokens-icon').addClass('hidden');
@@ -349,9 +350,9 @@ $(document).ready(function () {
     // Handles the login form submission.
     $('#login-modal form').on('submit', function (e) {
         e.preventDefault();
-        const email = $('#email').val();
-        const password = $('#password').val();
-        
+        const email = $('#login-email').val();
+        const password = $('#login-password').val();
+
         // Sends a login request to the API.
         $.ajax({
             url: 'https://riwihub-back.onrender.com/api/users/login',
