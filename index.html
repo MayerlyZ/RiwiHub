@@ -56,38 +56,32 @@
                     <i class="fas fa-bullseye text-gray-600 text-xl hover:text-teal-500 transition-colors hidden"></i>
                 </a>
 
-                <a href="javascript:void(0);"
-                    class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="javascript:void(0);"
-                    class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-                    <i class="far fa-user"></i>
-                </a>
-                <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2 hidden">
-                    <i class="fas fa-coins"></i>
-                    <span class="text-sm font-semibold" id="token-balance">5000</span>
-                </a>
+            <a href="javascript:void(0);"
+                class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
+                <i class="fas fa-search"></i>
+            </a>
+            <a href="javascript:void(0);"
+                class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
+                <i class="far fa-user"></i>
+            </a>
+            <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2 hidden">
+                <i class="fas fa-coins"></i>
+                <span class="text-sm font-semibold" id="token-balance">5000</span>
+            </a>
 
-                <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                    <i class="fas fa-shopping-cart">
-                        <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal" id="cart-item-count">0</span>
-                    </i>
-                </a>
+            <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
+                <i class="fas fa-shopping-cart">
+                    <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal" id="cart-item-count">0</span>
+                </i>
+            </a>
 
-                <div class="md:hidden">
-                    <button class="menu-toggle text-xl text-gray-700">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-            
             <div class="md:hidden">
                 <button class="menu-toggle text-xl text-gray-700">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
+    </div>
     </nav>
 
     <div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
@@ -127,13 +121,13 @@
             <h1 class="text-2xl font-bold mb-6 text-black">Sign in to your account</h1>
             <form action="" class="w-full">
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-black mb-1">Email address</label>
-                    <input type="email" id="email" placeholder=""
+                    <label for="login-email" class="block text-sm font-medium text-black mb-1">Email address</label>
+                    <input type="email" id="login-email" placeholder=""
                         class="w-full h-12 px-4 bg-white text-black border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-black mb-1">Password</label>
-                    <input type="password" id="password" placeholder=""
+                    <label for="login-password" class="block text-sm font-medium text-black mb-1">Password</label>
+                    <input type="password" id="login-password" placeholder=""
                         class="w-full h-12 px-4 bg-white text-black border border-[#3C4153] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8C5DFF]">
                 </div>
                 <div class="w-full flex justify-between items-center mb-6">
@@ -1035,11 +1029,11 @@
         </div>
     </div>
 
-    <div id="seller-profile-view" class="main-view hidden mt-40">
+    <div id="seller-profile-view" id="seller-profile-link" class="main-view hidden mt-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Mi Perfil de Vendedor</h1>
-                <p class="mt-4 text-lg text-gray-500">Gestiona tus productos de forma fácil y rápida..</p>
+                <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Mi Perfil</h1>
+                <p class="mt-4 text-lg text-gray-500">Gestión de mis productos...</p>
             </header>
             <section class="flex justify-center gap-4 mb-12">
                 <button id="btn-show-add-form" class="flex items-center bg-teal-500 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-teal-600 transition-colors duration-300">
@@ -1073,8 +1067,10 @@
                                 <input type="number" id="product-price" step="100" min="0" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
                             </div>
                             <div>
-                                <label for="product-image" class="block text-sm font-medium text-gray-700">URL de la Imagen</label>
-                                <input type="url" id="product-image" placeholder="https://via.placeholder.com/300x200" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                                <label for="product-image" class="block text-sm font-medium text-gray-700">
+                                    Imagen del producto
+                                </label>
+                                <input type="file" id="product-image" name="image" accept="image/*" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
                             </div>
                             <div class="flex gap-4">
                                 <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-500 hover:bg-teal-600">Guardar Producto</button>
