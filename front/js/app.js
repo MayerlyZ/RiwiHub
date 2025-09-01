@@ -813,3 +813,44 @@ $(document).ready(function () {
     // Initial UI update on page load to reflect the current user's authentication state.
     updateUIBasedOnAuth();
 });
+
+/* ES: abrir la vista de perfil al hacer click en el icono */
+document.addEventListener("DOMContentLoaded", function () {
+  var profileBtn = document.getElementById("profileIcon");
+  if (profileBtn) {
+    profileBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (window.renderProfileView) {
+        window.renderProfileView();
+      }
+    });
+  }
+});
+
+// ES: muestra/oculta el botón SOLO con base en si existe el token en localStorage
+document.addEventListener("DOMContentLoaded", function () {
+  const TOKEN_KEY = "userToken";   // ES: ajusta si en tu login usas otra clave
+  const logoutBtn = document.getElementById("logout-btn");
+
+  function updateLogoutVisibility() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!logoutBtn) return;
+    logoutBtn.classList.toggle("hidden", !token);
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem("role");
+      localStorage.removeItem("currentUser");
+      logoutBtn.classList.add("hidden");
+      // ES: vuelve a la vista de inicio/abre modal de login si aplica
+      if (typeof showSection === "function") showSection("inicio-view");
+      document.getElementById("login-modal")?.classList.remove("hidden");
+    });
+  }
+
+  updateLogoutVisibility();
+});
+

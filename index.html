@@ -13,6 +13,7 @@
 
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
+    <script src="./front/views/profile.js"></script>
     <script src="./front/js/app.js"></script>
     
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
@@ -61,9 +62,17 @@
                 <i class="fas fa-search"></i>
             </a>
             <a href="javascript:void(0);"
-                class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-                <i class="far fa-user"></i>
+            id="profileIcon"
+            class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
+            <i class="far fa-user"></i>
             </a>
+            <!-- Sign out button (hidden by default) -->
+            <button id="logout-btn"
+            class="hidden px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-100">
+            Cerrar sesión
+            </button>
+
+
             <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2 hidden">
                 <i class="fas fa-coins"></i>
                 <span class="text-sm font-semibold" id="token-balance">5000</span>
@@ -331,7 +340,7 @@
             </li>
             <li class="item-a">
                 <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
-                    style="background-image: url('./front/images/tecnologiabanner.webp');">
+                    style="background-image: url('./front/images/tecnologiabanner.png');">
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                         <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en
                             productos tecnologicos</span>
@@ -515,7 +524,7 @@
                             class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
                             class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                     <div
@@ -534,7 +543,7 @@
                             class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
                             class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                     <div
@@ -553,7 +562,7 @@
                             class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
                             class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                     <div
@@ -572,7 +581,7 @@
                             class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105">
                         <a href="#"
                             class="add-cart absolute top-3 right-3 w-12 h-12 rounded-full bg-purple-600 text-white flex justify-center items-center shadow-md opacity-0 group-hover:opacity-100 transition duration-300 hover:bg-purple-800">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                     <div
@@ -618,7 +627,7 @@
         <ul id="tecnologia-slider" class="cs-hidden">
             <li class="item-a">
                 <div class="full-slider-box h-[65vh] bg-cover bg-no-repeat bg-center flex justify-center items-center"
-                    style="background-image: url('./front/images/tecnologiabanner.webp');">
+                    style="background-image: url('./front/images/tecnologiabanner.png');">
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                         <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                         <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con
@@ -941,7 +950,7 @@
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/tairpods.jpg"
+                        <img src="./front/images/ropaejemplo.jpg"
                             class="w-full h-full object-contain object-center rounded-4xl">
                         <div
                             class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
@@ -952,14 +961,14 @@
                         </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Producto 1</a>
-                        <span class="text-xl text-gray-800 font-normal">$10.000</span>
+                        <a href="#" class="text-gray-700">Pijama mujer</a>
+                        <span class="text-xl text-gray-800 font-normal">$50.000</span>
                     </div>
                 </div>
                 <div
                     class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/tauriculares.jpg"
+                        <img src="./front/images/mugpers.webp"
                             class="w-full h-full object-contain object-center rounded-4xl">
                         <div
                             class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
@@ -970,7 +979,7 @@
                         </div>
                     </div>
                     <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Producto 2</a>
+                        <a href="#" class="text-gray-700">Mugs personalizados</a>
                         <span class="text-xl text-gray-800 font-normal">$25.000</span>
                     </div>
                 </div>
@@ -989,6 +998,14 @@
             </button>
         </div>
     </section>
+    
+    <div id="profile-view" class="main-view hidden main-content-padding mt-40">
+        <section class="max-w-4xl mx-auto p-6">
+            <div id="profile-content" class="text-center text-gray-600">
+                Loading your profile...
+            </div>
+        </section>
+    </div>
 
     <div id="cart-view" class="main-view hidden mt-40 px-12">
         <div class="flex justify-center items-center mb-10">
