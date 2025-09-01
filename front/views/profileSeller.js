@@ -8,7 +8,6 @@ $(document).ready(function () {
     if ($('#seller-profile-view').length > 0) {
         
         // --- JQUERY SELECTORS ---
-        // Cache the jQuery objects for performance and easier access.
         const $productGrid = $('#product-grid');
         const $productListContainer = $('#product-list-container');
         const $productFormContainer = $('#product-form-container');
@@ -16,42 +15,32 @@ $(document).ready(function () {
         const $productForm = $('#product-form');
         const $categorySelect = $('#product-category');
 
-        /**
-         * @description Fetches the seller's products from the API and renders them in the grid.
-         */
         async function loadAndPopulateCategories() {
+            const authToken = localStorage.getItem('userToken');
             try {
-                // Asumiré que tu ruta para obtener todas las categorías es esta. ¡Verifícala!
                 const categories = await $.ajax({
-                    url: 'https://riwihub-back.onrender.com/api/categories', // RUTA DE EJEMPLO
-                    method: 'GET'
+                    url: 'https://riwihub-back.onrender.com/api/categories',
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + authToken } 
                 });
-
-                $categorySelect.empty(); // Limpiar opciones quemadas o viejas
-                $categorySelect.append('<option value="" disabled selected>-- Selecciona una categoría --</option>'); // Opción por defecto
-
-                // Añadir cada categoría de la base de datos al dropdown
+                $categorySelect.empty();
+                $categorySelect.append('<option value="" disabled selected>-- Selecciona una categoría --</option>');
                 categories.forEach(category => {
                     const optionHTML = `<option value="${category.category_id}">${category.name}</option>`;
                     $categorySelect.append(optionHTML);
                 });
-
             } catch (error) {
                 console.error('Error al cargar las categorías:', error);
-                // Si falla, mostrar un error en el dropdown
                 $categorySelect.empty();
                 $categorySelect.append('<option value="" disabled selected>Error al cargar categorías</option>');
             }
         }
 
         async function renderSellerProducts() {
-            // SOLUCIÓN: Obtenemos el token y el usuario justo antes de la llamada a la API.
             const authToken = localStorage.getItem('userToken');
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            $productGrid.empty();
 
-            $productGrid.empty(); // Clear previous content
-
-            // Security check: ensure the user is a logged-in seller.
             if (!authToken || !currentUser || currentUser.role !== 'vendedor') {
                 $productGrid.html('<p class="text-center text-red-500 col-span-full">Debes iniciar sesión como vendedor para ver tus productos.</p>');
                 return;
@@ -70,9 +59,9 @@ $(document).ready(function () {
                 }
 
                 products.forEach(product => {
+                    // Usamos una imagen genérica ya que no manejaremos imágenes por ahora.
                     const productCardHTML = `
                         <div class="bg-white border rounded-lg shadow-md overflow-hidden" data-item-id="${product.item_id}">
-                            <img src="${product.image_url || 'https://via.placeholder.com/300x200'}" alt="${product.name}" class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h3 class="text-lg font-bold">${product.name}</h3>
                                 <p class="text-gray-600 text-sm mt-2">${product.description || ''}</p>
@@ -110,9 +99,11 @@ $(document).ready(function () {
             showSellerContent($productListContainer);
         });
 
+        // =========================================================================
+        // ======================= CAMBIO MÁS IMPORTANTE AQUÍ ======================
+        // =========================================================================
         $productForm.on('submit', async function (event) {
             event.preventDefault();
-            // SOLUCIÓN: Obtenemos el token y el usuario justo antes de la llamada a la API.
             const authToken = localStorage.getItem('userToken');
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -121,27 +112,43 @@ $(document).ready(function () {
                 return;
             }
 
-            const id = $('#product-id').val();
-            const formData = new FormData();
-            formData.append('name', $('#product-name').val());
-            formData.append('description', $('#product-description').val());
-            formData.append('price', parseFloat($('#product-price').val()));
-            formData.append('stock', parseInt($('#product-stock').val()));
-            formData.append('type', $('#product-type').val());
-            formData.append('category_id', parseInt($('#product-category').val()));
-            formData.append('price_token', parseFloat($('#product-token-price').val()));
-            formData.append('seller_id', currentUser.user_id);
-            const fileInput = $('#product-image')[0].files[0];
-            if (fileInput) formData.append('image', fileInput);
+            // 1. Leemos los valores de los campos opcionales
+            const stockValue = $('#product-stock').val();
+            const tokenPriceValue = $('#product-token-price').val();
 
+            // 2. Creamos el objeto de datos, "limpiando" los valores numéricos
+            const productData = {
+                name: $('#product-name').val(),
+                description: $('#product-description').val(),
+                price: parseFloat($('#product-price').val()),
+                type: $('#product-type').val(),
+                category_id: parseInt($('#product-category').val()),
+                seller_id: currentUser.user_id,
+
+                // SOLUCIÓN: Si el campo está vacío, enviamos un valor por defecto válido.
+                // Si 'stockValue' tiene algo, lo convierte a número, si no, envía 0.
+                stock: stockValue ? parseInt(stockValue) : 0, 
+                // Si 'tokenPriceValue' tiene algo, lo convierte a número, si no, envía null.
+                price_token: tokenPriceValue ? parseFloat(tokenPriceValue) : null
+            };
+            
+            // Verificación extra para campos obligatorios que podrían ser NaN si están vacíos
+            if (isNaN(productData.price) || isNaN(productData.category_id)) {
+                alert("Por favor, asegúrate de que los campos 'Precio (COP)' y 'Categoría' estén completos.");
+                return;
+            }
+
+            const id = $('#product-id').val();
             const isUpdating = !!id;
             const url = isUpdating ? `https://riwihub-back.onrender.com/api/items/${id}` : `https://riwihub-back.onrender.com/api/items`;
             const method = isUpdating ? 'PUT' : 'POST';
 
             try {
                 await $.ajax({
-                    url, method, data: formData,
-                    processData: false, contentType: false,
+                    url: url,
+                    method: method,
+                    data: JSON.stringify(productData),
+                    contentType: 'application/json; charset=utf-8', 
                     headers: { 'Authorization': 'Bearer ' + authToken }
                 });
                 alert(`Producto ${isUpdating ? 'actualizado' : 'creado'} exitosamente.`);
@@ -155,7 +162,6 @@ $(document).ready(function () {
         });
 
         $productGrid.on('click', '.btn-edit', async function () {
-            // SOLUCIÓN: Obtenemos el token justo antes de la llamada a la API.
             const authToken = localStorage.getItem('userToken');
             const productId = parseInt($(this).data('id'));
             try {
@@ -181,7 +187,6 @@ $(document).ready(function () {
         });
         
         $productGrid.on('click', '.btn-delete', async function () {
-            // SOLUCIÓN: Obtenemos el token justo antes de la llamada a la API.
             const authToken = localStorage.getItem('userToken');
             const productId = parseInt($(this).data('id'));
             if (!confirm('¿Estás seguro de que quieres eliminar este producto?')) return;
@@ -198,18 +203,29 @@ $(document).ready(function () {
                 alert('Error al eliminar producto.');
             }
         });
-        function initSellerProfile() {
-            // Al iniciar la vista del vendedor, primero cargamos las categorías.
-            loadAndPopulateCategories();
+        
+        // --- INITIALIZATION (NUEVA LÓGICA) ---
+        // Este código observa la vista del vendedor. Cuando se hace visible,
+        // ejecuta la lógica para cargar las categorías y los productos.
+        const sellerViewNode = document.getElementById('seller-profile-view');
+        if (sellerViewNode) {
+            const observer = new MutationObserver(function(mutationsList) {
+                for(const mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const isVisible = !sellerViewNode.classList.contains('hidden');
+                        
+                        // Si la vista se acaba de hacer visible, cargamos los datos.
+                        if (isVisible) {
+                            console.log('Vista del vendedor visible. Cargando datos...');
+                            loadAndPopulateCategories();
+                            renderSellerProducts();
+                        }
+                    }
+                }
+            });
 
-            // Luego, si el usuario es un vendedor, renderizamos sus productos.
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if (localStorage.getItem('userToken') && currentUser && currentUser.role === 'vendedor') {
-                renderSellerProducts();
-            }
+            // Le decimos al observador que vigile los cambios en la clase 'hidden'
+            observer.observe(sellerViewNode, { attributes: true });
         }
-
-        // Llamamos a la función de inicialización.
-        initSellerProfile();
     }
 });
