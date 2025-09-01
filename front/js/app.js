@@ -353,6 +353,30 @@ $(document).ready(function () {
     // ----------------------------- AUTHENTICATION ----------------------------
     // -------------------------------------------------------------------------
 
+    $(document).on('click', '#add-product-icon', function() {
+        showSection('seller-profile-view');
+    });
+
+    // Event handlers for login/register modals
+    $(document).on('click', '.already-account-btn', function() { $('#login-modal').removeClass('hidden').addClass('flex'); });
+    $(document).on('click', '#show-register, .sign-up-btn', function () { $('#login-modal').addClass('hidden'); $('#register-modal').removeClass('hidden').addClass('flex'); });
+    $(document).on('click', '#show-login', function () { $('#register-modal').addClass('hidden'); $('#login-modal').removeClass('hidden').addClass('flex'); });
+    $(document).on('click', '.modal-cancel-icon, .form-cancel-icon', function () { $(this).closest('.modal-container').addClass('hidden').removeClass('flex'); });
+
+    // Handlers for cart and token icons/modals
+    $('#modal-close').on('click', function () { closeModal(); });
+    $('#cart-icon').on('click', function (e) { e.preventDefault(); showCartView(); });
+    $(document).on('click', '#tokens-icon', function () { 
+        if (authToken && currentUser) {
+            $('#tokens-modal').removeClass('hidden').addClass('flex');
+            $('#current-tokens').text(`${currentUser.wallet_balance || 0} Tokens`);
+        } else {
+            alert('Debes iniciar sesión para ver tus tokens.');
+            $('#login-modal').removeClass('hidden').addClass('flex');
+        }
+    });
+    $(document).on('click', '#tokens-modal-cancel', function () { $('#tokens-modal').addClass('hidden').removeClass('flex'); });
+
     /**
      * @description Updates the UI elements based on the user's authentication status and role.
      * Shows/hides icons like goals, tokens, and the seller profile link.
