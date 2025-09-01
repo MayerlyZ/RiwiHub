@@ -14,10 +14,36 @@ $(document).ready(function () {
         const $productFormContainer = $('#product-form-container');
         const $formTitle = $('#form-title');
         const $productForm = $('#product-form');
+        const $categorySelect = $('#product-category');
 
         /**
          * @description Fetches the seller's products from the API and renders them in the grid.
          */
+        async function loadAndPopulateCategories() {
+            try {
+                // Asumiré que tu ruta para obtener todas las categorías es esta. ¡Verifícala!
+                const categories = await $.ajax({
+                    url: 'https://riwihub-back.onrender.com/api/categories', // RUTA DE EJEMPLO
+                    method: 'GET'
+                });
+
+                $categorySelect.empty(); // Limpiar opciones quemadas o viejas
+                $categorySelect.append('<option value="" disabled selected>-- Selecciona una categoría --</option>'); // Opción por defecto
+
+                // Añadir cada categoría de la base de datos al dropdown
+                categories.forEach(category => {
+                    const optionHTML = `<option value="${category.category_id}">${category.name}</option>`;
+                    $categorySelect.append(optionHTML);
+                });
+
+            } catch (error) {
+                console.error('Error al cargar las categorías:', error);
+                // Si falla, mostrar un error en el dropdown
+                $categorySelect.empty();
+                $categorySelect.append('<option value="" disabled selected>Error al cargar categorías</option>');
+            }
+        }
+
         async function renderSellerProducts() {
             // SOLUCIÓN: Obtenemos el token y el usuario justo antes de la llamada a la API.
             const authToken = localStorage.getItem('userToken');
@@ -172,13 +198,18 @@ $(document).ready(function () {
                 alert('Error al eliminar producto.');
             }
         });
-        
-        // --- INITIALIZATION ---
-        // We call renderSellerProducts when the view is shown, not on initial page load.
-        // A listener in app.js can trigger this. For now, let's call it when a seller logs in.
-        // The best practice is to call renderSellerProducts() right after showSection('seller-profile-view') is called in app.js.
-        if (localStorage.getItem('userToken') && JSON.parse(localStorage.getItem('currentUser')).role === 'vendedor') {
-            renderSellerProducts();
+        function initSellerProfile() {
+            // Al iniciar la vista del vendedor, primero cargamos las categorías.
+            loadAndPopulateCategories();
+
+            // Luego, si el usuario es un vendedor, renderizamos sus productos.
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (localStorage.getItem('userToken') && currentUser && currentUser.role === 'vendedor') {
+                renderSellerProducts();
+            }
         }
+
+        // Llamamos a la función de inicialización.
+        initSellerProfile();
     }
 });
