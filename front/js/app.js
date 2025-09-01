@@ -85,12 +85,13 @@ $(document).ready(function () {
             $target.removeClass('hidden');
             // Re-initialize sliders if navigating to the home view on a large screen to prevent layout issues.
             if (sectionId === 'inicio-view' && window.innerWidth >= 768) initSliders();
-            
+
             // Logic to render products when a specific category view is shown.
             if (sectionId === 'tecnologia-view') renderProductsToView('tecnologia-products-container', 'tecnologia');
             else if (sectionId === 'snacks-view') renderProductsToView('snacks-products-container', 'snacks');
             else if (sectionId === 'servicios-view') renderProductsToView('servicios-products-container', 'servicios');
             else if (sectionId === 'varios-view') renderProductsToView('varios-products-container', 'varios');
+            else if (sectionId === 'profile-view') renderUserProfile(); // <-- AÑADE ESTA LÍNEA
         }
         // Update the active state of navigation tabs for visual feedback.
         $('.nav-tab').removeClass('bg-[rgb(112,95,250)] text-white').addClass('text-gray-600');
