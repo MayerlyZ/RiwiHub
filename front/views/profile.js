@@ -1,131 +1,54 @@
-/* front/views/profile.js */
+// /front/views/profile.js
 
-/**
- * renderProfileView
- * - Renderiza la vista del perfil dentro de #profile-view.
- * - Obtiene el usuario autenticado del backend.
- * - ES: ajusta API_BASE_URL, TOKEN_KEY y endpoint según tu backend real.
- */
-window.renderProfileView = async function renderProfileView() {
-  // ES: configura tu backend real aquí
-  const API_BASE_URL = "http://localhost:3000";
-  const TOKEN_KEY = "token";
-  const ENDPOINT = "/api/users/me"; // ES: cambia si tu ruta es distinta
+// Esta función será llamada por showSection en app.js
+function renderUserProfile() {
+  const profileContainer = document.getElementById('profile-content');
 
-  // ES: helper para alternar vistas usando tu misma convención main-view
-  function showOnly(id) {
-    document.querySelectorAll(".main-view").forEach(v => v.classList.add("hidden"));
-    const el = document.getElementById(id);
-    if (el) el.classList.remove("hidden");
-  }
+  // Asegurarnos de que el contenedor existe
+  if (!profileContainer) return;
 
-  const container = document.getElementById("profile-content");
-  showOnly("profile-view");
+  // Verificamos si la variable global 'userData' existe
+  if (typeof userData !== 'undefined' && userData) {
+    
+    // Construimos la tarjeta del perfil con clases de Tailwind CSS
+    profileContainer.innerHTML = `
+      <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md mx-auto border transform transition-all duration-500 ease-in-out scale-100">
+        <div class="flex flex-col items-center">
+          <div class="relative">
+            <img class="w-28 h-28 mb-4 rounded-full shadow-md border-4 border-white" src="./front/images/logopestaña.png" alt="Foto de perfil">
+            <span class="absolute bottom-4 right-0 block h-5 w-5 bg-green-400 border-2 border-white rounded-full"></span>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">${userData.name}</h2>
+          <p class="text-md text-gray-500 mt-1">${userData.email}</p>
+          
+          <div class="mt-8 w-full text-left space-y-4">
+            <div class="flex items-center text-gray-700 p-3 bg-gray-50 rounded-lg">
+              <i class="fas fa-calendar-alt w-6 text-center text-gray-400"></i>
+              <strong class="font-medium ml-4">Miembro desde:</strong> 
+              <span class="ml-auto font-light">${new Date(userData.registrationDate).toLocaleDateString()}</span>
+            </div>
+            <div class="flex items-center text-gray-700 p-3 bg-gray-50 rounded-lg">
+              <i class="fas fa-user-tag w-6 text-center text-gray-400"></i>
+              <strong class="font-medium ml-4">Rol:</strong> 
+              <span class="ml-auto font-light">Cliente</span>
+            </div>
+          </div>
 
-  // ES: loading
-  container.innerHTML = `<p>Loading your profile...</p>`;
-
-  const token = localStorage.getItem(TOKEN_KEY);
-  if (!token) {
-    container.innerHTML = `
-      <h1 class="text-2xl font-bold mb-2">My Profile</h1>
-      <p class="text-gray-700">You are not logged in.</p>
-      <a href="javascript:void(0);" class="text-teal-600 underline" id="open-login">Sign in</a>
-    `;
-    // ES: si tienes un modal de login, dispáralo aquí si aplica
-    const openLogin = document.getElementById("open-login");
-    if (openLogin) openLogin.addEventListener("click", () => {
-      const loginModal = document.getElementById("login-modal");
-      if (loginModal) loginModal.classList.remove("hidden");
-    });
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API_BASE_URL}${ENDPOINT}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      credentials: "include"
-    });
-
-    if (!res.ok) {
-      if (res.status === 401 || res.status === 403) {
-        localStorage.removeItem(TOKEN_KEY);
-        container.innerHTML = `
-          <h1 class="text-2xl font-bold mb-2">My Profile</h1>
-          <p class="text-gray-700">Your session has expired.</p>
-          <a href="javascript:void(0);" class="text-teal-600 underline" id="open-login">Sign in again</a>
-        `;
-        const openLogin = document.getElementById("open-login");
-        if (openLogin) openLogin.addEventListener("click", () => {
-          const loginModal = document.getElementById("login-modal");
-          if (loginModal) loginModal.classList.remove("hidden");
-        });
-        return;
-      }
-      const text = await res.text();
-      throw new Error(text || "Request failed");
-    }
-
-    const user = await res.json();
-
-    // ES: ajusta estos campos según tu respuesta real del backend
-    const {
-      firstName,
-      lastName,
-      email,
-      phone,
-      documentId,
-      address,
-      city,
-      country,
-      avatarUrl
-    } = user;
-
-    container.innerHTML = `
-      <section class="flex items-center gap-4 mb-6">
-        <img src="${avatarUrl || 'https://via.placeholder.com/96'}" alt="Avatar"
-             class="w-24 h-24 rounded-full object-cover">
-        <div>
-          <h1 class="text-2xl font-bold">My Profile</h1>
-          <p class="text-gray-600">${email || ""}</p>
+          <button class="mt-8 w-full py-3 px-4 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+            Editar Perfil
+          </button>
         </div>
-      </section>
+      </div>
+    `;
 
-      <section class="rounded-2xl border p-5 shadow-sm">
-        <h2 class="text-lg font-semibold mb-4">Personal Information</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          ${infoRow("First name", firstName)}
-          ${infoRow("Last name", lastName)}
-          ${infoRow("Email", email)}
-          ${infoRow("Phone", phone)}
-          ${infoRow("Document ID", documentId)}
-          ${infoRow("Address", address)}
-          ${infoRow("City", city)}
-          ${infoRow("Country", country)}
-        </div>
-      </section>
+  } else {
+    // Mensaje de error si no se encuentran los datos
+    profileContainer.innerHTML = `
+      <div class="text-center p-8 bg-red-50 rounded-lg border border-red-200">
+        <p class="text-red-600 font-semibold">No se pudo cargar la información del perfil.</p>
+        <p class="text-gray-600 mt-2">Por favor, asegúrate de haber iniciado sesión.</p>
+      </div>
     `;
-  } catch (err) {
-    container.innerHTML = `
-      <h1 class="text-2xl font-bold mb-2">My Profile</h1>
-      <p class="text-red-600">Error: ${err.message || "Unexpected error"}</p>
-    `;
+    console.error('La variable global "userData" no fue encontrada.');
   }
-};
-
-/**
- * infoRow
- * - Crea un bloque etiqueta/valor estilizado con Tailwind.
- */
-function infoRow(label, value) {
-  return `
-    <div class="flex flex-col">
-      <span class="text-sm text-gray-500">${label}</span>
-      <span class="font-medium">${value || "-"}</span>
-    </div>
-  `;
 }
