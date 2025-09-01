@@ -85,12 +85,13 @@ $(document).ready(function () {
             $target.removeClass('hidden');
             // Re-initialize sliders if navigating to the home view on a large screen to prevent layout issues.
             if (sectionId === 'inicio-view' && window.innerWidth >= 768) initSliders();
-            
+
             // Logic to render products when a specific category view is shown.
             if (sectionId === 'tecnologia-view') renderProductsToView('tecnologia-products-container', 'tecnologia');
             else if (sectionId === 'snacks-view') renderProductsToView('snacks-products-container', 'snacks');
             else if (sectionId === 'servicios-view') renderProductsToView('servicios-products-container', 'servicios');
             else if (sectionId === 'varios-view') renderProductsToView('varios-products-container', 'varios');
+            else if (sectionId === 'profile-view') renderUserProfile(); // <-- AÑADE ESTA LÍNEA
         }
         // Update the active state of navigation tabs for visual feedback.
         $('.nav-tab').removeClass('bg-[rgb(112,95,250)] text-white').addClass('text-gray-600');
@@ -165,7 +166,7 @@ $(document).ready(function () {
             const productData = {
                 item_id: itemId, name: "Local Test Product",
                 description: "This is a fictional product description loaded locally for testing.",
-                price: "99.999", token_price: 150,
+                price: "99.999", price_token: 150,
                 image_url: clickedBox.find('img').attr('src') // Use the image from the clicked box.
             };
             // Populate modal fields with test data.
@@ -173,8 +174,8 @@ $(document).ready(function () {
             $('#modal-name').text(productData.name + " (ID: " + productData.item_id + ")");
             $('#modal-description').text(productData.description);
             $('#modal-price').text(`$${productData.price}`);
-            if (productData.token_price) {
-                $('#modal-token-price').text(productData.token_price);
+            if (productData.price_token) {
+                $('#modal-token-price').text(productData.price_token);
                 $('#redeem-button').show();
             } else {
                 $('#modal-token-price').text('Not redeemable');
