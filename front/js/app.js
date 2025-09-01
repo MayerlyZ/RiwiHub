@@ -52,6 +52,56 @@ $(document).ready(function () {
     // Initialize sliders on page load.
     initSliders();
 
+    // --- Carrito local ---
+let localCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Función para guardar el carrito en localStorage
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(localCart));
+}
+
+// Función para agregar un producto al carrito
+function addItemToCartLocal(product) {
+    // Buscar si ya existe en el carrito
+    const existing = localCart.find(item => item.id === product.id);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        localCart.push({ ...product, quantity: 1 });
+    }
+    saveCart();
+    alert(`${product.name} agregado al carrito.`);
+    showCartView();
+}
+
+// Función para mostrar la vista del carrito
+function showCartView() {
+    const cartContainer = $('#cart-view');
+    cartContainer.empty();
+
+    if (localCart.length === 0) {
+        cartContainer.append('<p>Tu carrito está vacío.</p>');
+        return;
+    }
+
+    localCart.forEach(item => {
+        cartContainer.append(`
+            <div class="cart-item">
+                <p>${item.name} - Cantidad: ${item.quantity}</p>
+                <button onclick="removeItemFromCart(${item.id})">Eliminar</button>
+            </div>
+        `);
+    });
+}
+
+// Función para eliminar un producto del carrito
+function removeItemFromCart(id) {
+    localCart = localCart.filter(item => item.id !== id);
+    saveCart();
+    showCartView();
+}
+
+
     // -------------------------------------------------------------------------
     // --------------------------- NAVIGATION (SPA) ----------------------------
     // -------------------------------------------------------------------------
@@ -404,7 +454,7 @@ $(document).ready(function () {
             method: 'POST',
             contentType: 'application/json',
             headers: { 'Authorization': 'Bearer ' + authToken },
-            data: JSON.stringify({ itemId: itemId, quantity: 1 }),
+            data: JSON.stringify({ item_id: itemId, quantity: 1 }),
             success: function (res) {
                 // Alert text: 'Product added to cart.'
                 alert(res.message || 'Producto añadido al carrito.');
