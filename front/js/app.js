@@ -165,7 +165,7 @@ $(document).ready(function () {
             const productData = {
                 item_id: itemId, name: "Local Test Product",
                 description: "This is a fictional product description loaded locally for testing.",
-                price: "99.999", token_price: 150,
+                price: "99.999", price_token: 150,
                 image_url: clickedBox.find('img').attr('src') // Use the image from the clicked box.
             };
             // Populate modal fields with test data.
@@ -173,8 +173,8 @@ $(document).ready(function () {
             $('#modal-name').text(productData.name + " (ID: " + productData.item_id + ")");
             $('#modal-description').text(productData.description);
             $('#modal-price').text(`$${productData.price}`);
-            if (productData.token_price) {
-                $('#modal-token-price').text(productData.token_price);
+            if (productData.price_token) {
+                $('#modal-token-price').text(productData.price_token);
                 $('#redeem-button').show();
             } else {
                 $('#modal-token-price').text('Not redeemable');
