@@ -1,4 +1,3 @@
-const { NUMBER } = require("sequelize");
 
 $(document).ready(function () {
     // This script runs only after the DOM is fully loaded.
