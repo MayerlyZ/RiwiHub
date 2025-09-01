@@ -7,8 +7,8 @@ $(document).ready(function () {
 
     // Check if the seller profile container exists on the page. If not, do nothing.
     // This prevents this script from running unnecessarily on other views.
-    if ($('#seller-profile-view').length > 0) {
-        
+    if ($('#seller-profile-view').length > 0 || $('#seller-profile-link').length > 0) {
+
         // --- STATE & CONFIGURATION ---
         // Retrieve authentication data from localStorage. This data is expected to be
         // set by the main app.js script during login.
