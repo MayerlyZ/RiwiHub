@@ -369,7 +369,7 @@ $(document).ready(function () {
             $('#logout-btn').removeClass('hidden');
 
             // Now, show icons based on the specific role.
-            if (currentUser.role === 'vendedor' || currentUser.role === 'administrador') {
+            if (currentUser.role === 'seller' || currentUser.role === 'admin') {
                 // For sellers/admins: show the '+' icon and the profile link.
                 $('#add-product-icon').removeClass('hidden');
                 $('#seller-profile-link').removeClass('hidden'); // For mobile menu
