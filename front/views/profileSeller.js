@@ -1,3 +1,5 @@
+const { NUMBER } = require("sequelize");
+
 $(document).ready(function () {
     // This script runs only after the DOM is fully loaded.
 
@@ -108,7 +110,7 @@ $(document).ready(function () {
             formData.append('name', $('#product-name').val());
             formData.append('description', $('#product-description').val());
             formData.append('price', parseFloat($('#product-price').val()));
-            formData.append('price_token', parseFloat($('#product-token-price').val())); // Read new token price field
+            formData.append('price_token', NUMBER($('#product-token-price').val())); // Read new token price field
             formData.append('stock', parseInt($('#product-stock').val()));             // Read new stock field
             formData.append('type', $('#product-type').val());                         // Read new type field
             formData.append('category_id', parseInt($('#product-category').val()));     // Read new category field
