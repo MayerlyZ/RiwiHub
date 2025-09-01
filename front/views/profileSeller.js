@@ -112,11 +112,7 @@ $(document).ready(function () {
                 return;
             }
 
-            // 1. Leemos los valores de los campos opcionales
-            const stockValue = $('#product-stock').val();
-            const tokenPriceValue = $('#product-token-price').val();
-
-            // 2. Creamos el objeto de datos, "limpiando" los valores numéricos
+            // This is the original data structure, which can cause issues with empty optional fields.
             const productData = {
                 name: $('#product-name').val(),
                 description: $('#product-description').val(),
@@ -124,20 +120,10 @@ $(document).ready(function () {
                 type: $('#product-type').val(),
                 category_id: parseInt($('#product-category').val()),
                 seller_id: currentUser.user_id,
-
-                // SOLUCIÓN: Si el campo está vacío, enviamos un valor por defecto válido.
-                // Si 'stockValue' tiene algo, lo convierte a número, si no, envía 0.
-                stock: stockValue ? parseInt(stockValue) : 0, 
-                // Si 'tokenPriceValue' tiene algo, lo convierte a número, si no, envía null.
-                price_token: tokenPriceValue ? parseFloat(tokenPriceValue) : null
+                stock: parseInt($('#product-stock').val()),
+                price_token: parseFloat($('#product-token-price').val())
             };
             
-            // Verificación extra para campos obligatorios que podrían ser NaN si están vacíos
-            if (isNaN(productData.price) || isNaN(productData.category_id)) {
-                alert("Por favor, asegúrate de que los campos 'Precio (COP)' y 'Categoría' estén completos.");
-                return;
-            }
-
             const id = $('#product-id').val();
             const isUpdating = !!id;
             const url = isUpdating ? `https://riwihub-back.onrender.com/api/items/${id}` : `https://riwihub-back.onrender.com/api/items`;
