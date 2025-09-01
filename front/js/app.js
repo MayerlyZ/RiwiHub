@@ -357,32 +357,34 @@ $(document).ready(function () {
      * @description Updates the UI elements based on the user's authentication status and role.
      * Shows/hides icons like goals, tokens, and the seller profile link.
      */
-    function updateUIBasedOnAuth() {
-        // Toggle visibility of icons for logged-in users.
+     function updateUIBasedOnAuth() {
+        // First, hide all role-specific icons for a clean slate.
+        $('#metas-icon, #tokens-icon, #add-product-icon, #logout-btn').addClass('hidden');
+        $('#seller-profile-link').addClass('hidden'); // Also hide the mobile menu link
+
+        // Check if a user is logged in.
         if (authToken && currentUser) {
+            // Show icons common to ALL logged-in users.
             $('#metas-icon').removeClass('hidden');
-            $('#tokens-icon').removeClass('hidden');
-        } else {
-            $('#metas-icon').addClass('hidden');
-            $('#tokens-icon').addClass('hidden');
-        }
-        // Toggle visibility of the seller profile link.
-        if (currentUser && currentUser.role === 'vendedor') {
-            $('#seller-profile-link').removeClass('hidden');
-        } else {
-            $('#seller-profile-link').addClass('hidden');
-        }
-        // Update token counts in the UI.
-        if (currentUser) {
-            $('#tokens-icon .text-sm').text(currentUser.wallet_balance || 0);
+            $('#logout-btn').removeClass('hidden');
+
+            // Now, show icons based on the specific role.
+            if (currentUser.role === 'vendedor' || currentUser.role === 'administrador') {
+                // For sellers/admins: show the '+' icon and the profile link.
+                $('#add-product-icon').removeClass('hidden');
+                $('#seller-profile-link').removeClass('hidden'); // For mobile menu
+            } else {
+                // For clients (or any other role), show the tokens icon.
+                $('#tokens-icon').removeClass('hidden');
+            }
+            
+            // Update token balance text regardless of role.
             $('#current-tokens').text(`${currentUser.wallet_balance || 0} Tokens`);
-        } else {
-            $('#tokens-icon .text-sm').text('0');
-            $('#current-tokens').text('0 Tokens');
+            $('#token-balance').text(currentUser.wallet_balance || 0);
         }
     }
 
-    // Handles the login form submission.
+    // Login form submission handler.
     $('#login-modal form').on('submit', function (e) {
         e.preventDefault();
         const email = $('#login-email').val();
@@ -393,20 +395,20 @@ $(document).ready(function () {
             contentType: 'application/json',
             data: JSON.stringify({ email, password }),
             success: function (res) {
-                // On success, store token and user data.
                 authToken = res.token;
                 currentUser = res.user;
                 localStorage.setItem('userToken', authToken);
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                // Alert text: `Login successful as ${currentUser.name}!`
                 alert(`¡Inicio de sesión exitoso como ${currentUser.name}!`);
                 $('#login-modal').addClass('hidden');
-                updateUIBasedOnAuth(); // Refresh UI elements.
-                showSection('inicio-view', $('.nav-tab').first()); // Navigate to home.
+                
+                // CRITICAL: Update the UI right after successful login.
+                updateUIBasedOnAuth(); 
+                
+                showSection('inicio-view', $('.nav-tab').first());
             },
             error: function (err) {
-                console.error('Login error:', err);
-                // Alert text: 'Login failed: ' + (error message or 'Unknown error.')
+                console.error('Error de inicio de sesión:', err);
                 alert('Falló el inicio de sesión: ' + (err.responseJSON.error || 'Error desconocido.'));
             }
         });
@@ -472,13 +474,11 @@ $(document).ready(function () {
      * @description Adds an item to the user's shopping cart via an API call.
      * @param {number} itemId - The ID of the item to add.
      */
-    function addItemToCart(itemId) {
-        // Check for authentication token before proceeding.
-        if (!authToken) {
-            // Alert text: 'Please log in to add products to the cart.'
-            alert('Por favor, inicia sesión para añadir productos al carrito.');
-            $('.user-icon').click(); // Programmatically open the login modal.
-            return;
+        function addItemToCart(itemId) {
+            if (!authToken) {
+                alert('Por favor, inicia sesión para añadir productos al carrito.');
+                $('.user-icon').click();
+                return;
         }
         $.ajax({
             url: `https://riwihub-back.onrender.com/api/carts/add`,
@@ -617,23 +617,25 @@ $(document).ready(function () {
     // -------------------------------------------------------------------------
 
     // Handles the logout process.
+      // Logout handler.
     $(document).on('click', '#logout-btn', function () {
-        // Confirmation dialog text: 'Are you sure you want to log out?'
         if (!confirm('¿Estás seguro de que quieres cerrar sesión?')) return;
-        // Clear user data from localStorage and state variables.
         localStorage.removeItem('userToken');
         localStorage.removeItem('currentUser');
         authToken = null;
         currentUser = null;
+        
+        // CRITICAL: Update the UI after logout.
         updateUIBasedOnAuth();
-        // Alert text: 'Logged out successfully.'
+        
         alert('Sesión cerrada exitosamente.');
         showSection('inicio-view');
     });
 
-    // Initial UI update on page load to reflect authentication status.
+    // Initial UI update on page load.
     updateUIBasedOnAuth();
 });
+
 
 /**
  * The following code is outside the jQuery `ready` function and uses vanilla JavaScript.
