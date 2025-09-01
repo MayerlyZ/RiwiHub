@@ -19,6 +19,8 @@ $(document).ready(function () {
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
     // Retrieves the user's saved goals. Defaults to an empty array.
     let userGoals = JSON.parse(localStorage.getItem('userGoals')) || [];
+    // --- Carrito local global ---
+    let localCart = JSON.parse(localStorage.getItem('cart')) || [];
     
     // Placeholder for test items, to be populated if needed.
     const testItems = [];
@@ -52,54 +54,6 @@ $(document).ready(function () {
     // Initialize sliders on page load.
     initSliders();
 
-    // --- Carrito local ---
-let localCart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Función para guardar el carrito en localStorage
-function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(localCart));
-}
-
-// Función para agregar un producto al carrito
-function addItemToCartLocal(product) {
-    // Buscar si ya existe en el carrito
-    const existing = localCart.find(item => item.id === product.id);
-    if (existing) {
-        existing.quantity += 1;
-    } else {
-        localCart.push({ ...product, quantity: 1 });
-    }
-    saveCart();
-    alert(`${product.name} agregado al carrito.`);
-    showCartView();
-}
-
-// Función para mostrar la vista del carrito
-function showCartView() {
-    const cartContainer = $('#cart-view');
-    cartContainer.empty();
-
-    if (localCart.length === 0) {
-        cartContainer.append('<p>Tu carrito está vacío.</p>');
-        return;
-    }
-
-    localCart.forEach(item => {
-        cartContainer.append(`
-            <div class="cart-item">
-                <p>${item.name} - Cantidad: ${item.quantity}</p>
-                <button onclick="removeItemFromCart(${item.id})">Eliminar</button>
-            </div>
-        `);
-    });
-}
-
-// Función para eliminar un producto del carrito
-function removeItemFromCart(id) {
-    localCart = localCart.filter(item => item.id !== id);
-    saveCart();
-    showCartView();
-}
 
 
     // -------------------------------------------------------------------------
@@ -301,6 +255,140 @@ function removeItemFromCart(id) {
         alert(`Iniciando proceso de canje para el producto ${$(this).data('item_id')}. (Funcionalidad simulada)`);
         closeModal();
     });
+
+    function saveCart() {
+            saveCart();
+            alert(`${product.name} agregado al carrito.`);
+            showCartView();
+        }
+
+
+        function removeItemFromCart(id) {
+            localCart = localCart.filter(item => item.id !== id);
+            saveCart();
+            showCartView();
+        }
+
+
+        function showCartView() {
+            showSection('cart-view');
+            const container = $('#cart-items-container');
+            container.empty();
+
+
+        if (localCart.length === 0) {
+            container.html('<p class="text-center text-gray-500">Tu carrito está vacío.</p>');
+            $('#cart-total').text('$0');
+            $('#cart-item-count').text('0');
+            return;
+        }
+
+
+        let total = 0;
+        let totalItems = 0;
+
+
+        localCart.forEach(item => {
+        const price = parseFloat(item.price || 0);
+        const subtotal = price * item.quantity;
+        total += subtotal;
+        totalItems += item.quantity;
+
+
+        const itemHtml = `
+            <div class="flex items-center justify-between border-b pb-4 mb-4">
+                <div class="flex items-center">
+                    <img src="${item.image_url || 'https://via.placeholder.com/80'}" class="w-20 h-20 object-cover rounded" alt="${item.name}">
+                    <div class="ml-4">
+                        <p class="font-bold text-lg">${item.name}</p>
+                        <p class="text-gray-600">$${new Intl.NumberFormat('es-CO').format(price)}</p>
+                    </div>
+                </div>
+                <div><p>Cantidad: ${item.quantity}</p></div>
+                    <button class="remove-from-cart-btn text-red-500 hover:text-red-700" data-item-id="${item.id}"><i class="fas fa-trash"></i></button>
+            </div>`;
+            container.append(itemHtml);
+        });
+
+
+        $('#cart-total').text(`$${new Intl.NumberFormat('es-CO').format(total)}`);
+        $('#cart-item-count').text(totalItems);
+        }
+
+
+        // Evento eliminar producto
+        $('body').on('click', '.remove-from-cart-btn', function () {
+        const id = parseInt($(this).data('item-id'));
+        if (!confirm('¿Quitar este producto del carrito?')) return;
+        removeItemFromCart(id);
+        });
+        
+        function saveCart() {
+        saveCart();
+        alert(`${product.name} agregado al carrito.`);
+        showCartView();
+        }
+
+
+        function removeItemFromCart(id) {
+        localCart = localCart.filter(item => item.id !== id);
+        saveCart();
+        showCartView();
+        }
+
+
+        function showCartView() {
+        showSection('cart-view');
+        const container = $('#cart-items-container');
+        container.empty();
+
+
+        if (localCart.length === 0) {
+        container.html('<p class="text-center text-gray-500">Tu carrito está vacío.</p>');
+        $('#cart-total').text('$0');
+        $('#cart-item-count').text('0');
+        return;
+        }
+
+
+        let total = 0;
+        let totalItems = 0;
+
+
+        localCart.forEach(item => {
+        const price = parseFloat(item.price || 0);
+        const subtotal = price * item.quantity;
+        total += subtotal;
+        totalItems += item.quantity;
+
+
+        const itemHtml = `
+        <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <div class="flex items-center">
+        <img src="${item.image_url || 'https://via.placeholder.com/80'}" class="w-20 h-20 object-cover rounded" alt="${item.name}">
+        <div class="ml-4">
+        <p class="font-bold text-lg">${item.name}</p>
+        <p class="text-gray-600">$${new Intl.NumberFormat('es-CO').format(price)}</p>
+        </div>
+        </div>
+        <div><p>Cantidad: ${item.quantity}</p></div>
+        <button class="remove-from-cart-btn text-red-500 hover:text-red-700" data-item-id="${item.id}"><i class="fas fa-trash"></i></button>
+        </div>`;
+        container.append(itemHtml);
+        });
+
+
+        $('#cart-total').text(`$${new Intl.NumberFormat('es-CO').format(total)}`);
+        $('#cart-item-count').text(totalItems);
+        }
+
+
+        // Evento eliminar producto
+        $('body').on('click', '.remove-from-cart-btn', function () {
+        const id = parseInt($(this).data('item-id'));
+        if (!confirm('¿Quitar este producto del carrito?')) return;
+        removeItemFromCart(id);
+        });
 
     // -------------------------------------------------------------------------
     // -------------------------- MODAL / ANIMATIONS ---------------------------
