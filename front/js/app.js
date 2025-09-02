@@ -450,7 +450,7 @@ $(document).ready(function () {
         const name = $('#register-name').val();
         const email = $('#register-email').val();
         const password = $('#register-password').val();
-        const role = $('#register-role').val();
+        const roleFromForm = $('#register-role').val(); // e.g., 'vendedor'
         const cargo = $('#register-cargo').val(); // Position/Job title
         const storeName = $('#register-tienda').val(); // Store name
         
@@ -459,13 +459,30 @@ $(document).ready(function () {
             alert('Nombre, email y contraseña son requeridos.');
             return;
         }
+
+        // ANÁLISIS: El backend espera los roles en inglés ('seller', 'admin', 'buyer'),
+        // pero el formulario envía los valores en español ('vendedor', 'administrador', 'cliente').
+        // Esto causa un error 500 en el servidor porque el valor del rol no es válido para la base de datos.
+        // SOLUCIÓN: Mapeamos los roles del formulario a los que espera la API.
+        const roleMapping = {
+            'cliente': 'buyer',
+            'vendedor': 'seller',
+            'administrador': 'admin'
+        };
+        const roleForApi = roleMapping[roleFromForm];
+
+        if (!roleForApi) {
+            alert('Por favor, selecciona un rol válido.');
+            return;
+        }
+
         // Build the payload with required fields.
-        const payload = { name, email, password, role };
+        const payload = { name, email, password, role: roleForApi };
         // Add optional fields based on selected role.
-        if (role === 'administrador' || role === 'vendedor') {
+        if (roleFromForm === 'administrador' || roleFromForm === 'vendedor') {
             payload.cargo = cargo;
         }
-        if (role === 'vendedor') {
+        if (roleFromForm === 'vendedor') {
             payload.store_name = storeName;
         }
         $.ajax({
