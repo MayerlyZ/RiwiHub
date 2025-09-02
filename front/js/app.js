@@ -107,7 +107,6 @@ $(document).ready(function () {
     // General UI event handlers for search bar, mobile menu, etc.
     $(document).on('click', '.search-icon', function () { $('.search-bar').removeClass('hidden').addClass('flex'); });
     $(document).on('click', '.search-cancel-icon', function () { $('.search-bar').addClass('hidden').removeClass('flex'); });
-    $(document).on('click', '.menu-toggle', function () { $('.mobile-menu').toggleClass('hidden'); });
 
     // This is a KEY handler for user interaction, determining action based on authentication status.
     $(document).on('click', '.user-icon', function () {
@@ -659,6 +658,58 @@ $(document).ready(function () {
 
     // Initial UI update on page load.
     updateUIBasedOnAuth();
+
+    const $body = $('body');
+    const $hamburger = $('#hamburger');
+    const $mobileMenu = $('#mobile-menu');
+    const $backdrop = $('#menu-backdrop');
+
+    function openMobileMenu() {
+    $mobileMenu.removeClass('hidden');
+    $backdrop.removeClass('hidden');
+    $hamburger.attr('aria-expanded', 'true');
+    $hamburger.find('i').removeClass('fa-bars').addClass('fa-times');
+    $body.addClass('overflow-hidden');
+    }
+
+    function closeMobileMenu() {
+    $mobileMenu.addClass('hidden');
+    $backdrop.addClass('hidden');
+    $hamburger.attr('aria-expanded', 'false');
+    $hamburger.find('i').removeClass('fa-times').addClass('fa-bars');
+    $body.removeClass('overflow-hidden');
+    }
+
+    function toggleMobileMenu() {
+    if ($mobileMenu.hasClass('hidden')) openMobileMenu(); else closeMobileMenu();
+    }
+
+    $hamburger.on('click', toggleMobileMenu);
+    $backdrop.on('click', closeMobileMenu);
+    $('#mobile-menu').on('click', 'a', closeMobileMenu);
+    $(document).on('keydown', function (e) { if (e.key === 'Escape') closeMobileMenu(); });
+    $(window).on('resize', function () { if (window.innerWidth >= 768) closeMobileMenu(); });
+
+    function debounce(fn, wait) {
+    let t; return function () { clearTimeout(t); t = setTimeout(() => fn.apply(this, arguments), wait); };
+    }
+    function syncNavHeight() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const h = nav.offsetHeight || 80;
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+    }
+    syncNavHeight();
+    window.addEventListener('resize', debounce(syncNavHeight, 150));
+
+    /* Cierra la búsqueda al cambiar de sección */
+    window.showSection = (function (orig) {
+    return function wrapped(sectionId, element) {
+        const res = orig(sectionId, element);
+        $('.search-bar').addClass('hidden').removeClass('flex');
+        return res;
+    };
+    })(window.showSection);
 });
 
 
