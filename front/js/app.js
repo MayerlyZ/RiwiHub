@@ -135,7 +135,7 @@ $(document).ready(function () {
 
     // Event handlers for main UI elements like cart and token modal.
     $('#modal-close').on('click', function () { closeModal(); });
-    $('#cart-icon').on('click', function (e) { e.preventDefault(); showCartView(); });
+    $('#cart-icon').on('click', function (e) { e.preventDefault(); showCartViewAPI(); });
     $(document).on('click', '#tokens-icon', function () { 
         if (authToken && currentUser) {
             // If logged in, show the tokens modal and display the current balance.
@@ -371,7 +371,7 @@ $(document).ready(function () {
 
     // Handlers for cart and token icons/modals
     $('#modal-close').on('click', function () { closeModal(); });
-    $('#cart-icon').on('click', function (e) { e.preventDefault(); showCartView(); });
+    $('#cart-icon').on('click', function (e) { e.preventDefault(); showCartViewAPI(); });
     $(document).on('click', '#tokens-icon', function () { 
         if (authToken && currentUser) {
             $('#tokens-modal').removeClass('hidden').addClass('flex');
@@ -519,12 +519,16 @@ $(document).ready(function () {
             success: function (res) {
                 // Alert text: 'Product added to cart.'
                 alert(res.message || 'Producto añadido al carrito.');
-                showCartView(); // Refresh the cart view.
+                // CORRECTO: Llamamos a la función que carga el carrito desde la API.
+                showCartViewAPI();
             },
             error: function (err) {
                 console.error('Error adding to cart:', err);
-                // Alert text: 'Error adding to cart, please try again.'
-                alert('Error al añadir al carrito, por favor inténtalo de nuevo.');
+                // MEJORA: Mostrar un error más específico del backend si está disponible.
+                const errorMessage = err.responseJSON && err.responseJSON.message 
+                    ? err.responseJSON.message 
+                    : 'Error al añadir al carrito, por favor inténtalo de nuevo.';
+                alert(errorMessage);
             }
         });
     }
@@ -558,15 +562,123 @@ $(document).ready(function () {
      * @description Renders the items in the shopping cart view and calculates the total.
      * @param {Array} items - An array of cart item objects from the API.
      */
-    function renderCartItemsAPI(items) { // Renamed to avoid conflict
-        // ... (Implementation for rendering API cart items)
+    function renderCartItemsAPI(cart) {
+        const items = cart.items || [];
+        const container = $('#cart-items-container');
+        container.empty();
+
+        if (items.length === 0) {
+            container.html('<p class="text-center text-gray-500">Tu carrito está vacío.</p>');
+            $('#cart-total').text('$0');
+            $('#cart-item-count').text('0');
+            return;
+        }
+
+        let totalItems = 0;
+
+        items.forEach(item => {
+            const product = item.Item;
+            const quantity = item.quantity;
+
+            if (!product) {
+                console.warn("El artículo del carrito no tiene detalles del producto:", item);
+                return; // Omitir este artículo
+            }
+
+            totalItems += quantity;
+
+            const itemHtml = `
+                <div class="cart-item flex items-center justify-between p-4 border-b border-gray-200" data-item-id="${product.item_id}">
+                    <div class="flex items-center gap-4 flex-1">
+                        <img src="${product.image_url || 'front/images/logopestaña.png'}" alt="${product.name}" class="w-16 h-16 object-contain rounded-lg bg-gray-100 p-1">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">${product.name}</h3>
+                            <p class="text-sm text-gray-500">Precio: ${new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(product.price)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-6">
+                        <div class="flex items-center gap-3 border rounded-md p-1">
+                            <button class="quantity-change-api text-gray-600 hover:text-black px-1" data-item-id="${product.item_id}" data-change="-1">-</button>
+                            <span class="font-semibold w-4 text-center">${quantity}</span>
+                            <button class="quantity-change-api text-gray-600 hover:text-black px-1" data-item-id="${product.item_id}" data-change="1">+</button>
+                        </div>
+                        <p class="font-semibold w-20 sm:w-28 text-right text-gray-800">${new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(product.price * quantity)}</p>
+                        <button class="remove-from-cart-btn-api text-red-500 hover:text-red-700" data-item-id="${product.item_id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.append(itemHtml);
+        });
+
+        const total = cart.total || 0;
+        $('#cart-total').text(new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(total));
+        $('#cart-item-count').text(totalItems);
     }
 
     // Event handler for the remove from cart button (API version).
-    $('body').on('click', '.remove-from-cart-btn-api', function () { // Renamed class to avoid conflict
-        // ... (Implementation for removing item via API)
+    $('body').on('click', '.remove-from-cart-btn-api', function () {
+        const itemId = $(this).data('item-id');
+        if (!itemId || !confirm('¿Quitar este producto del carrito?')) return;
+
+        $.ajax({
+            url: `https://riwihub-back.onrender.com/api/carts/remove`,
+            method: 'POST',
+            contentType: 'application/json',
+            headers: { 'Authorization': 'Bearer ' + authToken },
+            data: JSON.stringify({ item_id: itemId }),
+            success: function(res) {
+                alert(res.message || 'Producto eliminado del carrito.');
+                showCartViewAPI(); // Refresh cart
+            },
+            error: function(err) {
+                console.error('Error removing from cart:', err);
+                const errorMessage = err.responseJSON?.message || 'Error al eliminar el producto del carrito.';
+                alert(errorMessage);
+            }
+        });
     });
-    
+
+    // Event handler for changing quantity (API version)
+    $('body').on('click', '.quantity-change-api', function() {
+        const itemId = $(this).data('item-id');
+        const change = parseInt($(this).data('change'));
+        const currentQuantity = parseInt($(this).siblings('span').text());
+        const newQuantity = currentQuantity + change;
+
+        if (newQuantity < 1) {
+            // If quantity becomes 0, trigger the remove action
+            $('.remove-from-cart-btn-api[data-item-id="' + itemId + '"]').click();
+            return;
+        }
+        updateCartItemQuantity(itemId, newQuantity);
+    });
+
+    /**
+     * @description Updates an item's quantity in the cart via API.
+     * @param {number} itemId The ID of the item to update.
+     * @param {number} quantity The new quantity.
+     */
+    function updateCartItemQuantity(itemId, quantity) {
+        $.ajax({
+            url: `https://riwihub-back.onrender.com/api/carts/update`,
+            method: 'PUT',
+            contentType: 'application/json',
+            headers: { 'Authorization': 'Bearer ' + authToken },
+            data: JSON.stringify({ item_id: itemId, quantity: quantity }),
+            success: function() {
+                showCartViewAPI(); // Refresh view on success
+            },
+            error: function(err) {
+                console.error('Error updating cart quantity:', err);
+                const errorMessage = err.responseJSON?.message || 'Error al actualizar la cantidad.';
+                alert(errorMessage);
+                showCartViewAPI(); // Refresh to show server state
+            }
+        });
+    }
+
     // -------------------------------------------------------------------------
     // ----------------------------- GOALS FUNCTIONALITY -----------------------
     // -------------------------------------------------------------------------
