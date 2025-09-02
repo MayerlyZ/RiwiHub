@@ -545,16 +545,40 @@ $(document).ready(function () {
         }
         try {
             // Fetch cart items from the API.
-            const cartItems = await $.ajax({
+            const apiResponse = await $.ajax({
                 url: 'https://riwihub-back.onrender.com/api/carts/',
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + authToken }
             });
-            renderCartItemsAPI(cartItems); // Render the fetched items.
+
+            // ANÁLISIS: La función `renderCartItemsAPI` espera un objeto {items: [...], total: ...}.
+            // Si la API devuelve solo un array de items, la vista del carrito aparecerá vacía.
+            // Este código maneja ambos casos para mayor robustez.
+            if (Array.isArray(apiResponse)) {
+                // Caso 1: La API devolvió solo un array de items.
+                console.warn("La API devolvió un array. Se recomienda que la API devuelva un objeto { items, total } para optimizar.");
+                let calculatedTotal = 0;
+                apiResponse.forEach(item => {
+                    calculatedTotal += (item.Item?.price || 0) * (item.quantity || 0);
+                });
+                renderCartItemsAPI({ items: apiResponse, total: calculatedTotal });
+            } else {
+                // Caso 2: La API devolvió el objeto esperado.
+                renderCartItemsAPI(apiResponse);
+            }
         } catch (error) {
-            console.error('Error loading cart', error);
-            // Display an error message if the fetch fails. (Text: 'Could not load your cart.')
-            $('#cart-items-container').html('<p class="text-center text-red-500">No se pudo cargar tu carrito.</p>');
+            // ANÁLISIS DEL ERROR: El `catch` se activa si la llamada a la API falla.
+            // Un caso común es un 'parsererror' cuando el backend responde con 200 OK pero un cuerpo vacío (para un carrito vacío).
+            // La propiedad `statusText` no es fiable para detectar esto. Es mejor comprobar el `responseText`.
+            if (error.status === 200 && error.responseText === '') {
+                console.warn('API returned 200 OK with an empty body. Assuming empty cart.');
+                // Si la respuesta fue exitosa pero vacía, lo interpretamos como un carrito vacío.
+                renderCartItemsAPI({ items: [], total: 0 });
+            } else {
+                // Para cualquier otro tipo de error, lo mostramos en la consola y en la UI.
+                console.error('Error loading cart', error);
+                $('#cart-items-container').html('<p class="text-center text-red-500">No se pudo cargar tu carrito.</p>');
+            }
         }
     }
 
