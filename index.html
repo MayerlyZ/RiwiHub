@@ -10,6 +10,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./front/css/lightslider.css">
     <link rel="stylesheet" type="text/css" href="./front/css/style.css">
+    <style>
+        /* Altura del navbar para empujar el contenido y posicionar la búsqueda */
+        :root { --nav-h: 5rem; }
+
+        /* Clases utilitarias del proyecto */
+        .main-content-padding { padding-top: calc(var(--nav-h) + 0.5rem); }
+
+        /* Ajustes responsivos agresivos para móvil */
+        @media (max-width: 640px) {
+            /* Banners / sliders más bajos en móvil */
+            .full-slider-box { height: 45vh !important; }
+            /* Tarjetas e imágenes */
+            .product-img { height: 12rem !important; } /* ~h-48 */
+            .product-box img, .sale-box img { max-width: 100%; height: auto; }
+            /* Secciones con anchos fijos */
+            .sale-box { width: 100% !important; }
+            /* Formularios y modales */
+            .login-form { width: 92vw !important; padding: 1rem !important; }
+            /* Contenido con padding lateral grande */
+            #cart-view, #profile-view, #products { padding-left: 1rem !important; padding-right: 1rem !important; }
+        }
+
+        /* Mobile menu: lista táctil cómoda */
+        #mobile-menu a { -webkit-tap-highlight-color: transparent; }
+    </style>
+    <style>
+        @media (max-width: 767.98px){
+            #hamburger{ display:inline-flex !important; }
+            /* oculta tabs desktop por si algún md:flex se cuela */
+            nav ul.md\:flex{ display:none !important; }
+        }
+    </style>
+
+
 
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
@@ -25,66 +59,47 @@
 
 <body class="font-poppins">
 
-    <nav class="w-full shadow-lg z-50 fixed top-0 bg-white">
-        <div class="flex justify-between items-center px-12 h-20 bg-white">
-            <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="logo">
-                <img src="./front/images/logopral.png" alt="Logo" class="h-16 w-auto object-contain">
+    <nav class="w-full shadow-lg z-50 fixed top-0 left-0 bg-white">
+        <div class="flex justify-between items-center h-16 md:h-20 px-4 sm:px-8 md:px-12">
+            <!-- Logo -->
+            <a href="javascript:void(0);" onclick="showSection('inicio-view')" class="logo shrink-0">
+            <img src="./front/images/logopral.png" alt="Logo" class="h-12 md:h-16 w-auto object-contain">
             </a>
 
-            <ul class="flex space-x-2 p-2 rounded-full border border-gray-300 bg-white">
-                <li>
-                    <a href="javascript:void(0);" onclick="showSection('inicio-view', this)"
-                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Inicio</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)"
-                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Tecnología</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" onclick="showSection('snacks-view', this)"
-                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Snacks</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" onclick="showSection('servicios-view', this)"
-                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Servicios</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" onclick="showSection('varios-view', this)"
-                        class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Varios</a>
-                </li>
+            <!-- Tabs desktop -->
+            <ul class="hidden md:flex space-x-2 p-2 rounded-full border border-gray-300 bg-white">
+            <li><a href="javascript:void(0);" onclick="showSection('inicio-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Inicio</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Tecnología</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('snacks-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Snacks</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('servicios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Servicios</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('varios-view', this)" class="nav-tab px-4 py-2 rounded-full text-gray-600 font-medium transition-colors hover:text-black hover:bg-[rgb(112,95,250)]">Varios</a></li>
             </ul>
 
-            <div class="flex space-x-4 items-center">
-                <a href="javascript:void(0);" id="metas-icon" class="hidden nav-tab-icon lg:flex items-center gap-2 cursor-pointer relative mr-4">
-                    <i class="fas fa-bullseye text-gray-600 text-xl hover:text-teal-500 transition-colors"></i>
-                </a>
+            <!-- Acciones derecha -->
+            <div class="flex items-center gap-4">
+            <a href="javascript:void(0);" id="metas-icon" class="hidden nav-tab-icon lg:flex items-center gap-2 cursor-pointer relative mr-1">
+                <i class="fas fa-bullseye text-gray-600 text-xl hover:text-teal-500 transition-colors"></i>
+            </a>
 
-            <a href="javascript:void(0);"
-                class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
+            <a href="javascript:void(0);" class="text-xl text-gray-700 hover:text-teal-500 transition-colors search-icon">
                 <i class="fas fa-search"></i>
             </a>
-            <a href="javascript:void(0);"
-            id="profileIcon"
-            class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
-            <i class="far fa-user"></i>
+
+            <a href="javascript:void(0);" id="profileIcon" class="nav-tab text-xl text-gray-700 hover:text-teal-500 transition-colors user-icon">
+                <i class="far fa-user"></i>
             </a>
-
-
-
-
 
             <a href="javascript:void(0);" id="add-product-icon" class="hidden text-xl text-gray-700 hover:text-teal-500 transition-colors">
                 <i class="fas fa-plus-circle"></i>
             </a>
-            <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-2 hidden">
-                <i class="fas fa-coins"></i>
-                <span class="text-sm font-semibold" id="token-balance">5000</span>
+
+            <a href="javascript:void(0);" id="tokens-icon" class="text-xl text-gray-700 hover:text-teal-500 transition-colors flex items-center gap-1 hidden">
+                <i class="fas fa-coins"></i><span class="text-sm font-semibold" id="token-balance">5000</span>
             </a>
 
             <a href="#" id="cart-icon" class="relative text-xl text-gray-700 hover:text-teal-500 transition-colors">
-                <i class="fas fa-shopping-cart">
-                    <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal" id="cart-item-count">0</span>
-                </i>
+                <i class="fas fa-shopping-cart"></i>
+                <span class="absolute -top-3 -right-3 w-6 h-6 text-xs rounded-full bg-teal-500 text-white flex justify-center items-center font-normal" id="cart-item-count">0</span>
             </a>
 
             <button id="logout-btn"
@@ -98,29 +113,33 @@
                 stroke-width="2">
                 <!-- Marco de la puerta -->
                 <rect x="6" y="3" width="12" height="18" rx="1" ry="1" />
-                <!-- Manija de la puerta -->
                 <circle cx="14" cy="12" r="0.8" fill="currentColor"/>
-                <!-- Flecha de salida (para dar idea de "salir") -->
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h6m0 0l-2-2m2 2l-2 2" />
-            </svg>
+                </svg>
             </button>
 
-            <div class="md:hidden">
-                <button class="menu-toggle text-xl text-gray-700">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <!-- Hamburguesa -->
+            <button id="hamburger" class="md:hidden p-2 rounded-md border border-gray-300 text-xl text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-500" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
             </div>
         </div>
-    </div>
 
-                <div class="md:hidden">
-                    <button class="menu-toggle text-xl text-gray-700">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-            
+        <!-- Menú móvil (pegado al navbar) -->
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white shadow-md md:hidden hidden border-t">
+            <ul class="flex flex-col py-2">
+            <li><a href="javascript:void(0);" onclick="showSection('inicio-view', this)" class="nav-tab block px-6 py-3 text-gray-700 hover:bg-gray-100">Inicio</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('tecnologia-view', this)" class="nav-tab block px-6 py-3 text-gray-700 hover:bg-gray-100">Tecnología</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('snacks-view', this)" class="nav-tab block px-6 py-3 text-gray-700 hover:bg-gray-100">Snacks</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('servicios-view', this)" class="nav-tab block px-6 py-3 text-gray-700 hover:bg-gray-100">Servicios</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('varios-view', this)" class="nav-tab block px-6 py-3 text-gray-700 hover:bg-gray-100">Varios</a></li>
+            </ul>
+        </div>
     </nav>
+
+<!-- Backdrop del menú móvil -->
+<div id="menu-backdrop" class="fixed inset-0 bg-black/40 hidden md:hidden z-40"></div>
+
 
     <div class="mobile-menu hidden md:hidden absolute top-20 left-0 w-full bg-white shadow-md z-40">
         <ul class="flex flex-col">
@@ -139,11 +158,13 @@
     </div>
     
     <div
-        class="search-bar fixed top-24 right-8 w-96 h-16 bg-white shadow-xl rounded-lg flex items-center px-4 z-50 hidden transition-all duration-300 ease-in-out">
-        <input type="text" placeholder="Buscar producto" name="search"
-            class="flex-1 border-none outline-none text-lg px-2 placeholder-gray-400 bg-transparent" />
-        <a href="javascript:void(0);"
-            class="search-cancel-icon text-gray-700 text-2xl ml-3 hover:text-teal-500 transition-colors">
+        class="search-bar fixed z-50 hidden transition-all duration-300 ease-in-out
+                    h-14 md:h-16 bg-white shadow-xl rounded-lg items-center px-4
+                    left-4 right-4 md:left-auto md:right-8 w-[calc(100%-2rem)] md:w-96"
+        style="top: calc(var(--nav-h) + 0.5rem);">
+        <input type="text" name="search" placeholder="Buscar producto"
+                class="flex-1 border-none outline-none text-base md:text-lg px-2 placeholder-gray-400 bg-transparent" />
+        <a href="javascript:void(0);" class="search-cancel-icon text-gray-700 text-2xl ml-3 hover:text-teal-500 transition-colors">
             <i class="fas fa-times"></i>
         </a>
     </div>
@@ -798,36 +819,37 @@
     </div>
 
     <div id="product-modal"
-        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+            class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div id="modal-content-wrapper"
-            class="bg-white p-8 rounded-lg shadow-lg w-1/2 relative transform scale-95 opacity-0 transition-all duration-300 ease-out">
+            class="bg-white p-4 md:p-8 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 relative transform scale-95 opacity-0 transition-all duration-300 ease-out">
             <a href="javascript:void(0);" id="modal-close"
-                class="absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
-                <i class="fas fa-times"></i>
+            class="absolute top-2 right-4 text-gray-500 text-xl hover:text-teal-500 transition-colors">
+            <i class="fas fa-times"></i>
             </a>
-            <div id="modal-content" class="flex">
-                <div class="w-1/2">
+            <div id="modal-content" class="flex flex-col md:flex-row gap-4 md:gap-8">
+                <div class="md:w-1/2 w-full">
                     <img id="modal-img" src="" alt="Producto" class="w-full h-auto object-contain rounded-lg">
                 </div>
-                <div class="w-1/2 pl-8">
-                    <h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
-                    <p id="modal-description" class="text-gray-600 mb-4"></p>
-                    <p class="text-xl font-semibold text-gray-800 mb-2">Precio: <span id="modal-price"></span></p>
-                    <p class="text-lg text-gray-700">O canjéalo por: <span id="modal-token-price"
-                            class="font-bold text-teal-500"></span> tokens</p>
-                            <p id="token-message" class="text-sm mt-2 font-medium text-gray-600"></p>
+                <div class="md:w-1/2 w-full">
+                    <h2 id="modal-name" class="text-xl md:text-2xl font-bold mb-2"></h2>
+                    <p id="modal-description" class="text-gray-600 mb-4 text-sm md:text-base"></p>
+                    <p class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Precio: <span id="modal-price"></span></p>
+                    <p class="text-base md:text-lg text-gray-700">O canjéalo por: <span id="modal-token-price" class="font-bold text-teal-500"></span> tokens</p>
+                    <p id="token-message" class="text-xs md:text-sm mt-2 font-medium text-gray-600"></p>
+
                     <button id="redeem-button"
-                        class="mt-4 w-full h-12 bg-teal-500 text-white border-none outline-none uppercase rounded-md shadow-md cursor-pointer hover:bg-teal-600 transition-colors">
-                        Canjear con Tokens
+                            class="mt-4 w-full h-11 md:h-12 bg-teal-500 text-white border-none outline-none uppercase rounded-md shadow-md cursor-pointer hover:bg-teal-600 transition-colors">
+                    Canjear con Tokens
                     </button>
                     <button id="modal-add-to-cart-btn"
-                        class="mt-2 w-full h-12 bg-green-500 text-white uppercase rounded-md shadow-md cursor-pointer hover:bg-green-600 transition-colors">
-                        Agregar al Carrito
+                            class="mt-2 w-full h-11 md:h-12 bg-green-500 text-white uppercase rounded-md shadow-md cursor-pointer hover:bg-green-600 transition-colors">
+                    Agregar al Carrito
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 <!-- Seller Profile View -->
