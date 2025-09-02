@@ -13,9 +13,10 @@
 
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/lightslider.js"></script>
-    <script src="./front/views/profileSeller.js"></script>
+    <script type="module" src="./front/views/profileSeller.js"></script>
     <script src="./front/views/profile.js"></script>
     <script src="./front/js/app.js"></script>
+    <script type="module" src="./front/js/items.js"></script>
     
     <link rel="shortcut icon" href="./front/images/logopestaña.png">
 
@@ -654,8 +655,6 @@
 
                     style="background-image: url('./front/images/tecnologiabanner.jpg');">
 
-                
-
                     <div class="w-4/5 h-[90%] flex flex-col items-center justify-center text-center">
                         <span class="uppercase tracking-widest font-medium text-lg text-white">Oferta Limitada en productos tecnologicos</span>
                         <strong class="text-4xl text-white leading-tight mt-2 tracking-wide">30% de descuento <br>Con
@@ -676,135 +675,8 @@
                 </h2>
                 <p class="text-gray-500 mt-2 text-sm">Los gadgets más recientes para los coders.</p>
             </div>
-            <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/audifonos-removebg-preview.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Diadema</a>
-                        <span class="text-xl text-gray-800 font-normal">$60.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="./front/images/tecnology/camara.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Camara</a>
-                        <span class="text-xl text-gray-800 font-normal">$800.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/mouse.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Mouse</a>
-                        <span class="text-xl text-gray-800 font-normal">$30.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/torre.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Chasis Negra</a>
-                        <span class="text-xl text-gray-800 font-normal">$400.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/inalambricos.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Airpods Negros</a>
-                        <span class="text-xl text-gray-800 font-normal">$70.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/silla.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Silla Gamer Roja</a>
-                        <span class="text-xl text-gray-800 font-normal">$500.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/cfel.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Iphone 14 Pro Max</a>
-                        <span class="text-xl text-gray-800 font-normal">$3.500.000</span>
-                    </div>
-                </div>
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/teclado.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Teclado Mecanico</a>
-                        <span class="text-xl text-gray-800 font-normal">$90.000</span>
-                    </div>
-                </div>
+
+            <div id="container-tech-products" class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
             </div>
         </section>
     </div>
@@ -831,61 +703,7 @@
                 <p class="text-gray-500 mt-2 text-sm">Prueba los mejores bocadillos del mercado.</p>
             </div>
             
-            <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/snacks/galletas.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Galletas</a>
-                        <span class="text-xl text-gray-800 font-normal">$5.000</span>
-                    </div>
-                </div>
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/snacks/chocolatina.webp"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Chocolatina</a>
-                        <span class="text-xl text-gray-800 font-normal">$3.000</span>
-                    </div>
-                </div>
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/snacks/gomitas.webp"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Gomitas</a>
-                        <span class="text-xl text-gray-800 font-normal">$2.000</span>
-                    </div>
-                </div>
+            <div id="container-snacks-products" class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
             </div>
         </section>
     </div>
@@ -912,43 +730,8 @@
 
                 <p class="text-gray-500 mt-2 text-sm">Servicios de alta calidad para tu negocio.</p>
             </div>
-            <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/nube.jpg"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Diseño Web</a>
-                        <span class="text-xl text-gray-800 font-normal">$500.000</span>
-                    </div>
-                </div>
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="front/images/tecnology/audifonos-removebg-preview.png"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Desarrollo Móvil</a>
-                        <span class="text-xl text-gray-800 font-normal">$800.000</span>
-                    </div>
-                </div>
+
+            <div id="container-services" class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
             </div>
         </section>
     </div>
@@ -974,43 +757,7 @@
                 </h2>
                 <p class="text-gray-500 mt-2 text-sm">Explora una variedad de productos únicos.</p>
             </div>
-            <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5">
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="./front/images/ropaejemplo.jpg"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Pijama mujer</a>
-                        <span class="text-xl text-gray-800 font-normal">$50.000</span>
-                    </div>
-                </div>
-                <div
-                    class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
-                    <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
-                        <img src="./front/images/mugpers.webp"
-                            class="w-full h-full object-contain object-center rounded-4xl">
-                        <div
-                            class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
-                            <a href="#"
-                                class="view-product-btn text-white text-sm bg-teal-500 px-4 py-2 rounded-full font-bold hover:bg-teal-600 transition-colors">
-                                Ver Producto
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details flex flex-col items-center w-full p-5 border-t border-gray-100">
-                        <a href="#" class="text-gray-700">Mugs personalizados</a>
-                        <span class="text-xl text-gray-800 font-normal">$25.000</span>
-                    </div>
-                </div>
+            <div class="product-container w-11/12 flex flex-wrap justify-center items-center mt-5" id="container-varios-view">
             </div>
         </section>
     </div>
@@ -1136,6 +883,7 @@
                             </select>
                         </div>
                         <div>
+                            <label for="product-category" class="block text-sm font-medium text-gray-700">Categoría</label>
                             <select id="product-category" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
                                 <!-- El JavaScript llenará estas opciones dinámicamente -->
                             </select>
