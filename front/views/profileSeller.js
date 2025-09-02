@@ -74,11 +74,6 @@ $(document).ready(function () {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             $productGrid.empty();
 
-            if (!authToken || !currentUser || currentUser.role !== 'seller') {
-                $productGrid.html('<p class="text-center text-red-500 col-span-full">Debes iniciar sesión como vendedor para ver tus productos.</p>');
-                return;
-            }
-
             try {
                 const products = await $.ajax({
                     url: 'https://riwihub-back.onrender.com/api/items',
