@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var allCategories = [];
     // This script runs only after the DOM is fully loaded.
 
     // -------------------------------------------------------------------------
@@ -21,14 +22,12 @@ $(document).ready(function () {
                 const categories = await $.ajax({
                     url: 'https://riwihub-back.onrender.com/api/categories',
                     method: 'GET',
-                    headers: { 'Authorization': 'Bearer ' + authToken } 
+                    headers: { 'Authorization': 'Bearer ' + authToken }
                 });
-                $categorySelect.empty();
-                $categorySelect.append('<option value="" disabled selected>-- Selecciona una categoría --</option>');
-                categories.forEach(category => {
-                    const optionHTML = `<option value="${category.category_id}">${category.name}</option>`;
-                    $categorySelect.append(optionHTML);
-                });
+
+                allCategories = categories; // Store all categories in the global variable
+                filterByCategory(null);
+
             } catch (error) {
                 console.error('Error al cargar las categorías:', error);
                 $categorySelect.empty();
@@ -36,15 +35,44 @@ $(document).ready(function () {
             }
         }
 
+        /**
+         * Filtra las categorías según el tipo seleccionado.
+         * @returns {Array} - Un array de categorías filtradas.
+         */
+        function filterByCategory(typeID) {
+            const result = allCategories.filter(category => category.parent_id === typeID);
+            setCategoryOptions(result);
+        }
+
+        /**
+         * Hace el set de las opciones del campo categoría.
+         * @param {*} categories Opciones de la categoría.
+         */
+        function setCategoryOptions(categories) {
+            $categorySelect.empty();
+            $categorySelect.append('<option value="" disabled selected>-- Selecciona una categoría --</option>');
+            categories.forEach(category => {
+                const optionHTML = `<option value="${category.category_id}">${category.name}</option>`;
+                $categorySelect.append(optionHTML);
+            });
+        }
+
+        /**
+         * Listen for changes in the product type select element
+         */
+        $('#product-type').on('change', function () {
+            const selectedType = $(this).val();
+            const typeId = {
+                service: 1,
+                product: null
+            };
+            filterByCategory(typeId[selectedType]);
+        });
+
         async function renderSellerProducts() {
             const authToken = localStorage.getItem('userToken');
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             $productGrid.empty();
-
-            if (!authToken || !currentUser || currentUser.role !== 'vendedor') {
-                $productGrid.html('<p class="text-center text-red-500 col-span-full">Debes iniciar sesión como vendedor para ver tus productos.</p>');
-                return;
-            }
 
             try {
                 const products = await $.ajax({
@@ -66,6 +94,7 @@ $(document).ready(function () {
                                 <h3 class="text-lg font-bold">${product.name}</h3>
                                 <p class="text-gray-600 text-sm mt-2">${product.description || ''}</p>
                                 <p class="text-xl font-semibold text-teal-600 mt-4">$${new Intl.NumberFormat('es-CO').format(product.price || 0)}</p>
+                                <p class="text-xl font-semibold text-teal-600 mt-4">$${product.price_token}</p>
                             </div>
                             <div class="bg-gray-50 p-3 flex justify-end gap-2">
                                 <button class="btn-edit text-sm font-medium text-white bg-yellow-500 py-1 px-3 rounded hover:bg-yellow-600" data-id="${product.item_id}">✏️ Editar</button>
@@ -112,11 +141,7 @@ $(document).ready(function () {
                 return;
             }
 
-            // 1. Leemos los valores de los campos opcionales
-            const stockValue = $('#product-stock').val();
-            const tokenPriceValue = $('#product-token-price').val();
-
-            // 2. Creamos el objeto de datos, "limpiando" los valores numéricos
+            // This is the original data structure, which can cause issues with empty optional fields.
             const productData = {
                 name: $('#product-name').val(),
                 description: $('#product-description').val(),
@@ -124,20 +149,10 @@ $(document).ready(function () {
                 type: $('#product-type').val(),
                 category_id: parseInt($('#product-category').val()),
                 seller_id: currentUser.user_id,
-
-                // SOLUCIÓN: Si el campo está vacío, enviamos un valor por defecto válido.
-                // Si 'stockValue' tiene algo, lo convierte a número, si no, envía 0.
-                stock: stockValue ? parseInt(stockValue) : 0, 
-                // Si 'tokenPriceValue' tiene algo, lo convierte a número, si no, envía null.
-                price_token: tokenPriceValue ? parseFloat(tokenPriceValue) : null
+                stock: parseInt($('#product-stock').val()),
+                price_token: parseFloat($('#product-token-price').val())
             };
             
-            // Verificación extra para campos obligatorios que podrían ser NaN si están vacíos
-            if (isNaN(productData.price) || isNaN(productData.category_id)) {
-                alert("Por favor, asegúrate de que los campos 'Precio (COP)' y 'Categoría' estén completos.");
-                return;
-            }
-
             const id = $('#product-id').val();
             const isUpdating = !!id;
             const url = isUpdating ? `https://riwihub-back.onrender.com/api/items/${id}` : `https://riwihub-back.onrender.com/api/items`;

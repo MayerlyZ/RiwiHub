@@ -15,7 +15,7 @@
         pauseOnHover: false,
         loop: false,
         slideEndAnimation: true,
-        pause: 2000,
+        pause: 4000,
         keyPress: false,
         controls: true,
         prevHtml: '',

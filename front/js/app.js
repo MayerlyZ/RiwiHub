@@ -6,7 +6,7 @@ $(document).ready(function () {
     // 🚨 --- Set to 'true' to use local placeholder data for the modal. -- 🚨
     // 🚨 --- Set to 'false' to have the modal fetch data from the live API. -- 🚨
     // 🚨 ===================================================================== 🚨
-    const USE_TEST_DATA_FOR_MODAL = true;
+    const USE_TEST_DATA_FOR_MODAL = false;
 
     // -------------------------------------------------------------------------
     // ---------------------------- CONFIG / STATE -----------------------------
@@ -155,8 +155,14 @@ $(document).ready(function () {
     // Event handler for clicking on any product box. Uses event delegation.
     $('body').on('click', '.product-box', function () {
         // Get the item ID from the data attribute, or generate a random one for testing.
-        const itemId = $(this).data('item-id') || Math.floor(Math.random() * 100) + 1;
+        const itemId = $(this).data('item-id');
         const clickedBox = $(this);
+
+        // If the product card is missing an ID, log an error and do nothing.
+        if (!itemId) {
+            console.error("Clicked product is missing a 'data-item-id'. Cannot open modal.");
+            return;
+        }
 
         // Check the control variable to decide whether to use local test data or the API.
         if (USE_TEST_DATA_FOR_MODAL) {
@@ -203,11 +209,11 @@ $(document).ready(function () {
                     $('#modal-price').text(`$${new Intl.NumberFormat('es-CO').format(productData.price || 0)}`);
                     
                     // Logic for the redeem with tokens button.
-                    if (productData.token_price) {
+                    if (productData.price_token) {
                         $('#redeem-button').show();
-                        $('#modal-token-price').text(productData.token_price);
+                        $('#modal-token-price').text(productData.price_token);
                         const userTokens = currentUser ? currentUser.wallet_balance : 0;
-                        const requiredTokens = productData.token_price;
+                        const requiredTokens = productData.price_token;
                         // Check if the user has enough tokens.
                         if (userTokens >= requiredTokens) {
                             // Enable the redeem button.
