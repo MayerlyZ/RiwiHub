@@ -73,7 +73,7 @@ $(document).ready(function () {
         $productGrid.empty();
         filteredProducts.forEach(product => {
             const productElement = $(`
-                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group">
+                <div class="product-box flex flex-col items-center border border-gray-100 rounded-lg mx-5 my-5 flex-grow-[0.5] transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 group" data-item-id="${product.item_id}">
                     <div class="product-img w-52 h-52 m-5 relative cursor-pointer">
                         <img src="front/images/snacks/galletas.png" class="w-full h-full object-contain object-center rounded-4xl">
                         <div class="view-product-btn-container absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden group-hover:flex transition-opacity duration-300">
