@@ -664,8 +664,8 @@ $(document).ready(function () {
         if (!itemId || !confirm('¿Quitar este producto del carrito?')) return;
 
         $.ajax({
-            url: `https://riwihub-back.onrender.com/api/carts/remove`,
-            method: 'POST',
+            url: `https://riwihub-back.onrender.com/api/carts/remove/${itemId}`,
+            method: 'DELETE',
             contentType: 'application/json',
             headers: { 'Authorization': 'Bearer ' + authToken },
             data: JSON.stringify({ item_id: itemId }),
